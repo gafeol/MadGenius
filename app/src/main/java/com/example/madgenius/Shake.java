@@ -1,0 +1,97 @@
+package com.example.madgenius;
+
+import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
+import android.util.Log;
+import android.widget.Toast;
+
+/** Class that retrieves shaking events.
+ *
+ */
+public class Shake implements SensorEventListener {
+    private SensorManager sensorManager;
+    private Sensor sensor;
+    private long lstUpdate;
+    private float[] lstAcc = new float[3];
+    private static final int SHAKE_THRESHOLD = 10000;
+    private static final float SHAKE_THRESHOLD_GRAVITY = 4.0F;
+    private Context context;
+    public boolean isShaking = false;
+
+    public Shake(Context ctxt, SensorManager systemService){
+        lstUpdate = 0;
+        for(int i=0;i<3;i++)
+            lstAcc[i] = 0;
+        sensorManager = systemService;
+        if (sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null){
+            sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        }
+        sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_GAME);
+        context = ctxt;
+    }
+
+    public void setValue( boolean value )
+    {
+        if (value != isShaking)
+        {
+            isShaking = value;
+            signalChanged();
+        }
+    }
+
+    public interface VariableChangeListener
+    {
+        public void onVariableChanged(boolean variableThatHasChanged);
+    }
+
+    private VariableChangeListener variableChangeListener;
+    public void setVariableChangeListener(VariableChangeListener variableChangeListener)
+    {
+        this.variableChangeListener = variableChangeListener;
+    }
+
+    private void signalChanged()
+    {
+        if (variableChangeListener != null)
+            variableChangeListener.onVariableChanged(isShaking);
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        long curTime = System.currentTimeMillis();
+        // only allow one update every 100ms.
+        if ((curTime - lstUpdate) > 100) {
+            long diffTime = (curTime - lstUpdate);
+
+            float[] acc = new float[3];
+            for(int axis=0;axis<3;axis++){
+                //acc[axis] = event.values[axis];
+                acc[axis] = event.values[axis]/SensorManager.GRAVITY_EARTH;
+            }
+            //float speed = Math.abs(acc[0]+acc[1]+acc[2] - lstAcc[0] - lstAcc[1] - lstAcc[2]) / diffTime * 10000;
+            float gForce = (float)Math.sqrt(acc[0] * acc[0] + acc[1] * acc[1] + acc[2] * acc[2]);
+
+            //if (speed > SHAKE_THRESHOLD) {
+            if(gForce > SHAKE_THRESHOLD_GRAVITY){
+                //Log.d("sensor", "shake detected w/ speed: " + speed);
+                Log.d("sensor", "shake detected w/ gForce: " + gForce);
+                //Toast.makeText(context, "shake detected w/ speed: " + speed, Toast.LENGTH_SHORT).show();
+                setValue(true);
+            }
+            else
+                setValue(false);
+            for(int axis=0;axis<3;axis++)
+                lstAcc[axis] = acc[axis];
+            lstUpdate = curTime;
+        }
+    }
+
+
+    @Override
+    public final void onAccuracyChanged(Sensor sensor, int accuracy) {
+        // Do something here if sensor accuracy changes.
+    }
+}
