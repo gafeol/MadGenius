@@ -22,7 +22,9 @@ public class MainActivity extends AppCompatActivity {
      */
     private void setShaker() {
         SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        Shake shake = new Shake(getBaseContext(), sensorManager);
+        Shake shake = new Shake(sensorManager);
+        // Passando o contexto atual (getBaseContext()) permite que a classe Shake crie toasts
+        //Shake shake = new Shake(getBaseContext(), sensorManager);
 
         // Defining the action wanted when shaking is detected.
         final TextView textView = findViewById(R.id.shakeText);
