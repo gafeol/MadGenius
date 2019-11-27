@@ -14,11 +14,27 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Setting the shake detector
         setShaker();
+        setUpsideDown();
     }
 
+    private void setUpsideDown() {
+        SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        UpsideDown upsideDown = new UpsideDown(sensorManager);
+        final TextView textView = findViewById(R.id.shakeText);
+        upsideDown.setVariableChangeListener(new UpsideDown.VariableChangeListener() {
+            @Override
+            public void onVariableChanged(boolean isUpsideDown) {
+                if (isUpsideDown)
+                    textView.setText("UPSIDE!");
+                else
+                    textView.setText("NOP");
+            }
+        });
+    }
     /** Function that sets up a shaker listener.
-     *
      */
     private void setShaker() {
         SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
