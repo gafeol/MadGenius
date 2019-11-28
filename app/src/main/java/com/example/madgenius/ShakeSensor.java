@@ -8,18 +8,23 @@ import android.hardware.SensorManager;
 import android.util.Log;
 import android.widget.Toast;
 
-import static java.lang.Math.abs;
-
-public class UpsideDown implements SensorEventListener {
+/** Class that retrieves shaking events.
+ *
+ */
+public class ShakeSensor implements SensorEventListener {
     private SensorManager sensorManager;
     private Sensor sensor;
     private long lstUpdate;
+    private float[] lstAcc = new float[3];
+    private static final float SHAKE_THRESHOLD_GRAVITY = 4.0F;
     private Context context = null;
-    public boolean isUpsideDown = false;
+    public boolean isShaking = false;
 
 
-    public UpsideDown(SensorManager systemService){
+    public ShakeSensor(SensorManager systemService){
         lstUpdate = 0;
+        for(int i=0;i<3;i++)
+            lstAcc[i] = 0;
         sensorManager = systemService;
         if (sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null){
             sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -27,14 +32,14 @@ public class UpsideDown implements SensorEventListener {
         sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_GAME);
     }
 
-    public UpsideDown(Context ctxt, SensorManager systemService){
+    public ShakeSensor(Context ctxt, SensorManager systemService){
         this(systemService);
         context = ctxt;
     }
 
     public void setValue( boolean value ) {
-        if (value != isUpsideDown) {
-            isUpsideDown = value;
+        if (value != isShaking) {
+            isShaking = value;
             signalChanged();
         }
     }
@@ -50,7 +55,7 @@ public class UpsideDown implements SensorEventListener {
 
     private void signalChanged() {
         if (variableChangeListener != null)
-            variableChangeListener.onVariableChanged(isUpsideDown);
+            variableChangeListener.onVariableChanged(isShaking);
     }
 
     @Override
@@ -58,18 +63,23 @@ public class UpsideDown implements SensorEventListener {
         long curTime = System.currentTimeMillis();
         // only allow one update every 100ms.
         if ((curTime - lstUpdate) > 100) {
-            float x = event.values[0]/SensorManager.GRAVITY_EARTH;
-            float y = event.values[1]/SensorManager.GRAVITY_EARTH;
-            float z = event.values[2]/SensorManager.GRAVITY_EARTH;
-            // Uses the values of x and z to differentiate between shaking and upside down
-            //Log.d("sensor", "Test x " + x + " y "+y+" z "+z);
-            if(y < -0.80 && abs(x) < 0.7 && abs(z) < 0.7) {
-                if (context != null)
-                    Toast.makeText(context, "Upside down with y "+y, Toast.LENGTH_SHORT).show();
+            float[] acc = new float[3];
+
+            for(int axis=0;axis<3;axis++){
+                acc[axis] = event.values[axis]/SensorManager.GRAVITY_EARTH;
+            }
+            float gForce = (float)Math.sqrt(acc[0] * acc[0] + acc[1] * acc[1] + acc[2] * acc[2]);
+
+            if(gForce > SHAKE_THRESHOLD_GRAVITY){
+                Log.d("sensor", "shake detected w/ gForce: " + gForce);
+                if(context != null)
+                    Toast.makeText(context, "shake detected w/ gForce: " + gForce, Toast.LENGTH_SHORT).show();
                 setValue(true);
             }
             else
                 setValue(false);
+            for(int axis=0;axis<3;axis++)
+                lstAcc[axis] = acc[axis];
             lstUpdate = curTime;
         }
     }
