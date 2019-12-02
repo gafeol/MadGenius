@@ -3,8 +3,10 @@ package com.example.madgenius;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 
@@ -19,6 +21,11 @@ public class MainActivity extends AppCompatActivity {
         setShaker();
         setUpsideDown();
         setProximity();
+    }
+
+    public void goToScoreboard(View view){
+        Intent intent = new Intent(this, Scoreboard.class);
+        startActivity(intent);
     }
 
     private void setProximity() {
