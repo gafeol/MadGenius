@@ -1,6 +1,7 @@
 package com.example.madgenius;
 
 import android.content.Context;
+import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 import androidx.room.Database;
@@ -8,18 +9,12 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 // When you modify the database schema, you'll need to update the version number and define a migration strategy
 @Database(entities = {Score.class}, version=1, exportSchema = false)
 public abstract class ScoreRoomDatabase extends RoomDatabase {
     public abstract ScoreDao scoreDao();
 
     private static volatile ScoreRoomDatabase INSTANCE;
-    private static final int NUMBER_OF_THREADS = 4;
-    static final ExecutorService databaseWriteExecutor =
-            Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
     static ScoreRoomDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
@@ -27,6 +22,7 @@ public abstract class ScoreRoomDatabase extends RoomDatabase {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             ScoreRoomDatabase.class, "score_database")
+                            .fallbackToDestructiveMigration()
                             .addCallback(sRoomDatabaseCallback)
                             .build();
                 }
@@ -35,26 +31,40 @@ public abstract class ScoreRoomDatabase extends RoomDatabase {
         return INSTANCE;
     }
 
-    private static RoomDatabase.Callback sRoomDatabaseCallback = new RoomDatabase.Callback() {
-        @Override
-        public void onOpen(@NonNull SupportSQLiteDatabase db) {
-            super.onOpen(db);
+    /**
+     * Populate the database in the background.
+     */
+    private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
 
-            // If you want to keep data through app restarts,
-            // comment out the following block
-            databaseWriteExecutor.execute(() -> {
-                // Populate the database in the background.
-                // If you want to start with more words, just add them.
-                ScoreDao dao = INSTANCE.scoreDao();
-                dao.deleteAll();
+        private final ScoreDao mDao;
+        String[] usernames = {"dolphin", "crocodile", "cobra", "cobra"};
+        double[] points = {0.12, 13.4, -123.2, 2};
 
-                Score score = new Score("Pedro", 1.313);
-                dao.insert(score);
-                score = new Score("Gabriel", -1.3);
-                dao.insert(score);
-                score = new Score("Ivan", 2.3);
-                dao.insert(score);
-            });
+        PopulateDbAsync(ScoreRoomDatabase db) {
+            mDao = db.scoreDao();
         }
-    };
+
+        /** If the db has entries, load them.
+         * Otherwise insert the pre-defined user scores above.
+         */
+        @Override
+        protected Void doInBackground(final Void... params) {
+            if(mDao.getAnyScore().length == 0){
+                for (int i = 0; i <= usernames.length - 1; i++) {
+                    Score score = new Score(usernames[i], points[i]);
+                    mDao.insert(score);
+                }
+            }
+            return null;
+        }
+    }
+
+    private static RoomDatabase.Callback sRoomDatabaseCallback =
+            new RoomDatabase.Callback() {
+                @Override
+                public void onOpen(@NonNull SupportSQLiteDatabase db) {
+                    super.onOpen(db);
+                    new PopulateDbAsync(INSTANCE).execute();
+                }
+            };
 }
