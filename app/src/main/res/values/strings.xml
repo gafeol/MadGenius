@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">MadGenius</string>
+    <string name="logo">MAD GENIUS</string>
+    <string name="agility_mode">AGILITY MODE</string>
+    <string name="stats">STATS</string>
+    <string name="memory_mode">MEMORY MODE</string>
 </resources>
