@@ -18,4 +18,9 @@ public class Menu extends AppCompatActivity {
         Intent intent = new Intent(Menu.this, GameplayAgility.class);
         startActivity(intent);
     }
+
+    public void scoreboard_onClick(View view) {
+        Intent intent = new Intent(Menu.this, Scoreboard.class);
+        startActivity(intent);
+    }
 }
