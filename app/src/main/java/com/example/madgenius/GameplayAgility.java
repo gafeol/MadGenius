@@ -5,6 +5,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 public class GameplayAgility extends AppCompatActivity implements RedButtonFragment.OnFragmentInteractionListener,
@@ -16,6 +18,19 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
         setContentView(R.layout.activity_gameplay_agility);
         displayFragment();
         displaySwitchFragment();
+        ProgressBar time = findViewById(R.id.pgb_time);
+
+        new CountDownTimer(20000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+
+                time.incrementProgressBy(1);
+            }
+
+            public void onFinish() {
+            }
+        }.start();
+
     }
 
     public void displayFragment() {
