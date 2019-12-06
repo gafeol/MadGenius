@@ -1,24 +1,32 @@
 package com.example.madgenius;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.widget.Toast;
 
-public class GameplayAgility extends AppCompatActivity implements RedButtonFragment.OnFragmentInteractionListener {
+public class GameplayAgility extends AppCompatActivity implements RedButtonFragment.OnFragmentInteractionListener,
+                                                                    SwitchFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gameplay_agility);
         displayFragment();
+        displaySwitchFragment();
     }
 
     public void displayFragment() {
+        SwitchFragment switchFragment = SwitchFragment.newInstance();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.fragment_switch_container, switchFragment)
+                .addToBackStack(null).commit();
+    }
+
+    public void displaySwitchFragment() {
         RedButtonFragment redButtonFragment = RedButtonFragment.newInstance();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -44,5 +52,10 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
     @Override
     public void onButtonClick() {
         Toast.makeText(this, "Clicou no vermelho!", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onSwitch(Boolean val) {
+        Toast.makeText(this, "Switchou  com "+val, Toast.LENGTH_SHORT).show();
     }
 }

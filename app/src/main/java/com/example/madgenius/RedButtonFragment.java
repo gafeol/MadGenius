@@ -24,6 +24,19 @@ public class RedButtonFragment extends Fragment {
         // Required empty public constructor
     }
 
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+
+        final View rootView = inflater.inflate(R.layout.fragment_red_button, container, false);
+        button = rootView.findViewById(R.id.redButton);
+        // When button is clicked, listener activates
+        button.setOnClickListener(view -> mListener.onButtonClick());
+        return rootView;
+    }
+
     interface OnFragmentInteractionListener {
         void onButtonClick();
     }
@@ -44,18 +57,12 @@ public class RedButtonFragment extends Fragment {
         }
     }
 
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-
-        final View rootView = inflater.inflate(R.layout.fragment_red_button, container, false);
-        button = rootView.findViewById(R.id.redButton);
-        // When button is clicked, listener activates
-        button.setOnClickListener(v -> mListener.onButtonClick());
-        return rootView;
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
     }
+
 
     public static RedButtonFragment newInstance() {
         return new RedButtonFragment();
