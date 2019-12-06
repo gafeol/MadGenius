@@ -1,6 +1,7 @@
 package com.example.madgenius;
 
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -17,10 +18,30 @@ import android.widget.Button;
 public class RedButtonFragment extends Fragment {
 
     private Button button;
-
+    OnFragmentInteractionListener mListener;
 
     public RedButtonFragment() {
         // Required empty public constructor
+    }
+
+    interface OnFragmentInteractionListener {
+        void onButtonClick();
+    }
+
+    /**
+     * Runs as soon as the fragment is attached to the main activity.
+     * This function makes sure the main activity has implemented the listener function.
+     * @param context
+     */
+    @Override
+    public void onAttach(Context context){
+        super.onAttach(context);
+        if(context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new ClassCastException(context.toString()
+                + getResources().getString(R.string.exception_message));
+        }
     }
 
 
@@ -31,6 +52,8 @@ public class RedButtonFragment extends Fragment {
 
         final View rootView = inflater.inflate(R.layout.fragment_red_button, container, false);
         button = rootView.findViewById(R.id.redButton);
+        // When button is clicked, listener activates
+        button.setOnClickListener(v -> mListener.onButtonClick());
         return rootView;
     }
 
