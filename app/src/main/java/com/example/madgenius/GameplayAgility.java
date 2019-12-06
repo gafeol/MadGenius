@@ -9,20 +9,12 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.widget.Toast;
 
-import java.util.Random;
-
 public class GameplayAgility extends AppCompatActivity implements RedButtonFragment.OnFragmentInteractionListener {
-
-    private boolean isFragmentDisplayed = false;
-    static final String STATE_FRAGMENT = "state_of_fragment";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gameplay_agility);
-        if(savedInstanceState != null)
-            isFragmentDisplayed = savedInstanceState.getBoolean(STATE_FRAGMENT);
-
         displayFragment();
     }
 
@@ -32,7 +24,6 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.fragment_container, redButtonFragment)
                 .addToBackStack(null).commit();
-        isFragmentDisplayed = true;
     }
 
     public void closeFragment() {
@@ -48,13 +39,6 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
             fragmentTransaction.remove(redButtonFragment).commit();
         }
         // Set boolean flag to indicate fragment is closed.
-        isFragmentDisplayed = false;
-    }
-
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
-        outState.putBoolean(STATE_FRAGMENT, isFragmentDisplayed);
-        super.onSaveInstanceState(outState, outPersistentState);
     }
 
     @Override
