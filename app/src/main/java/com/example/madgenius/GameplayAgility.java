@@ -4,11 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class Gameplay extends AppCompatActivity {
+public class GameplayAgility extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gameplay);
+        setContentView(R.layout.activity_gameplay_agility);
     }
 }
