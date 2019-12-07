@@ -40,9 +40,6 @@ public class SeekBarFragment extends Fragment {
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                Log.d("Seek", "progress "+progress);
-                textView.setText(Integer.toString(progress));
-                mListener.onSeekBarUpdate(progress);
             }
 
             @Override
@@ -51,6 +48,9 @@ public class SeekBarFragment extends Fragment {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
+                int progress = seekBar.getProgress();
+                textView.setText(Integer.toString(progress));
+                mListener.onSeekBarUpdate(progress);
             }
         });
         return rootView;
