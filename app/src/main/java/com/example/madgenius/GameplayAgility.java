@@ -14,20 +14,19 @@ import android.widget.Toast;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class GameplayAgility extends AppCompatActivity implements RedButtonFragment.OnFragmentInteractionListener,
-                                                                    SwitchFragment.OnFragmentInteractionListener {
+                                                                    SwitchFragment.OnFragmentInteractionListener,  BlueButtonFragment.OnFragmentInteractionListener {
     private Boolean gameStatus = true;
     private String[] commands = {"Press the red button", "Press the yellow button", "Shake the phone", "Turn your phone upside down"};
     private int[] times = {3, 4, 5, 8};
-                                                                    SwitchFragment.OnFragmentInteractionListener,
-                                                                    BlueButtonFragment.OnFragmentInteractionListener {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gameplay_agility);
-        displayFragment();
-        displaySwitchFragment();
 
+        displayFragments();
         getNewCommand();
         Context context = getApplicationContext();
         CharSequence text = "It's really asyncronous!";
@@ -37,14 +36,6 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
         toast.show();
     }
 
-
-    public void displayFragment() {
-        SwitchFragment switchFragment = SwitchFragment.newInstance();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.fragment_switch_container, switchFragment)
-                .addToBackStack(null).commit();
-    }
 
     public void getNewCommand(){
         int randomNum = ThreadLocalRandom.current().nextInt(0, this.commands.length);
@@ -58,11 +49,6 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
         time.setProgress(maxTime);
         timeController clock = new timeController(maxTime);
 
-        displayFragments();
-
-        ProgressBar time = findViewById(R.id.pgb_time);
-        time.setMax(30);
-        timeController clock = new timeController(30);
         clock.setTimeIncrementListener(new timeController.ProgressBarListener() {
             @Override
             public void onTimeIncrement() {
@@ -106,8 +92,6 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
     }
 
     public void display(String[] className, int[] frameLayouts) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-    public void displaySwitchFragment() {
-        RedButtonFragment redButtonFragment = RedButtonFragment.newInstance();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         for(int i=0;i<className.length;i++){
