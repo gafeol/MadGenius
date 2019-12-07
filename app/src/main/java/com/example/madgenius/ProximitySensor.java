@@ -1,13 +1,10 @@
 package com.example.madgenius;
 
-import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 public class ProximitySensor  implements SensorEventListener {
     private SensorManager sensorManager;
