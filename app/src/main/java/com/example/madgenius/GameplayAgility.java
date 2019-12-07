@@ -14,7 +14,9 @@ import android.widget.Toast;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class GameplayAgility extends AppCompatActivity implements RedButtonFragment.OnFragmentInteractionListener,
-                                                                    SwitchFragment.OnFragmentInteractionListener,  BlueButtonFragment.OnFragmentInteractionListener {
+                                                                    SwitchFragment.OnFragmentInteractionListener,
+                                                                    BlueButtonFragment.OnFragmentInteractionListener,
+                                                                    SeekBarFragment.OnFragmentInteractionListener {
     private Boolean gameStatus = true;
     private String[] commands = {"Press the red button", "Press the yellow button", "Shake the phone", "Turn your phone upside down"};
     private int[] times = {3, 4, 5, 8};
@@ -31,7 +33,6 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
         Context context = getApplicationContext();
         CharSequence text = "It's really asyncronous!";
         int duration = Toast.LENGTH_SHORT;
-
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
     }
@@ -69,8 +70,8 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
     }
 
     private void displayFragments(){
-        String[] fragClasses = new String[]{"RedButtonFragment", "SwitchFragment", "BlueButtonFragment"};
-        int[] fragLayouts = new int[]{R.id.fragment_container_1, R.id.fragment_container_2, R.id.fragment_container_3};
+        String[] fragClasses = new String[]{"RedButtonFragment", "SwitchFragment", "BlueButtonFragment", "SeekBarFragment"};
+        int[] fragLayouts = new int[]{R.id.fragment_container_1, R.id.fragment_container_2, R.id.fragment_container_3, R.id.fragment_container_5};
         try {
             display(fragClasses, fragLayouts);
         } catch (ClassNotFoundException e) {
@@ -116,6 +117,11 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
     @Override
     public void onRedButtonClick() {
         Toast.makeText(this, "Clicou no vermelho!", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onSeekBarUpdate(int val) {
+        Toast.makeText(this, "Seek bar updated to "+val, Toast.LENGTH_SHORT).show();
     }
 
     /* Example of closing fragment
