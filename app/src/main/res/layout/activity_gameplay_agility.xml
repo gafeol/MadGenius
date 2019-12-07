@@ -73,13 +73,15 @@
 
     <TextView
         android:id="@+id/txtCommands"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:background="#fcbf4a"
         android:fontFamily="@font/anton"
         android:text="command placeholder"
-        android:textColor="#fcbf4a"
-        android:textSize="18sp"
+        android:textAlignment="center"
+        android:textColor="#2d406a"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
