@@ -19,6 +19,10 @@ public class ScoreRepository {
         return scoreDao.getScores();
     }
 
+    LiveData<List<Score>> getAllScores(String username){
+        return scoreDao.getScores(username);
+    }
+
     void insert(Score score) {
         new insertAsyncTask(scoreDao).execute(score);
     }

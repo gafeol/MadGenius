@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:fontFamily="@font/anton"
-        android:text="MAD GENIUS"
+        android:text="@string/logo"
         android:textColor="#fcbf4a"
         android:textSize="50sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,32 +21,34 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_agility"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#0097a7"
-        android:text="MEMORY MODE"
-        android:textColor="#FFFFFF"
+        android:text="@string/agility_mode"
+        android:onClick="agility_onClick"
+        app:layout_constraintBottom_toTopOf="@+id/btn_scoreboards"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_logo" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_memory"
+        />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btn_scoreboards"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="AGILITY MODE"
-        app:layout_constraintBottom_toTopOf="@+id/button3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="STATS"
+        android:text="@string/scoreboard"
+        android:onClick="scoreboard_onClick"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_memory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/memory_mode"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_logo" />
 </androidx.constraintlayout.widget.ConstraintLayout>

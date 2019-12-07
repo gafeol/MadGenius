@@ -17,7 +17,8 @@ public class ScoreViewModel extends AndroidViewModel {
         allScores = repository.getAllScores();
     }
 
-    LiveData<List<Score>> getAllScores() { return allScores; }
+    public LiveData<List<Score>> getAllScores() { return allScores; }
+    public LiveData<List<Score>> getAllScores(String username) { return repository.getAllScores(username); }
     public void insert(Score score) { repository.insert(score); }
     public void deleteAll() { repository.deleteAll(); }
     public Score getHighestScore() { return repository.getHighestScore(); }

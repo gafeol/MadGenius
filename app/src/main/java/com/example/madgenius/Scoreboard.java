@@ -25,6 +25,9 @@ public class Scoreboard extends AppCompatActivity {
             adapter.setScores(words);
         });
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9e10435b5ff0a3e8736273f806ac8374b51c661f
     }
 }
