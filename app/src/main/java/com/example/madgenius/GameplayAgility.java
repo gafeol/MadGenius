@@ -14,7 +14,6 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
                                                                     SwitchFragment.OnFragmentInteractionListener,
                                                                     BlueButtonFragment.OnFragmentInteractionListener {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
