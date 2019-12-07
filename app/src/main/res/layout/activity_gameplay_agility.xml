@@ -43,11 +43,11 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <FrameLayout
-                android:id="@+id/fragment_container"
+                android:id="@+id/fragment_container_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <FrameLayout
-                android:id="@+id/fragment_switch_container"
+                android:id="@+id/fragment_container_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
@@ -56,7 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <FrameLayout
-                android:id="@+id/fragment_3"
+                android:id="@+id/fragment_container_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>

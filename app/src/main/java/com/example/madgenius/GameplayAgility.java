@@ -7,33 +7,22 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.CountDownTimer;
-import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-import com.example.madgenius.BlueButtonFragment;
 
 public class GameplayAgility extends AppCompatActivity implements RedButtonFragment.OnFragmentInteractionListener,
                                                                     SwitchFragment.OnFragmentInteractionListener,
                                                                     BlueButtonFragment.OnFragmentInteractionListener {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gameplay_agility);
-        displayRedButtonFragment();
-        displaySwitchFragment();
-        try {
-            display("BlueButtonFragment");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
-        ProgressBar time = findViewById(R.id.pgb_time);
 
+        displayFragments();
+
+        ProgressBar time = findViewById(R.id.pgb_time);
         time.setMax(30);
         timeController clock = new timeController(30);
         clock.setTimeIncrementListener(new timeController.ProgressBarListener() {
@@ -54,29 +43,39 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
         clock.init();
     }
 
-    public void display(String className) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+    private void displayFragments(){
+        String[] fragClasses = new String[]{"RedButtonFragment", "SwitchFragment", "BlueButtonFragment"};
+        int[] fragLayouts = new int[]{R.id.fragment_container_1, R.id.fragment_container_2, R.id.fragment_container_3};
+        try {
+            display(fragClasses, fragLayouts);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void display(String className, int frameLayout) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
         String fullClassName = "com.example.madgenius."+className;
         Class fragClass = Class.forName(fullClassName);
         Object fragment = fragClass.newInstance();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.fragment_3, (Fragment)fragment).addToBackStack(null).commit();
+        fragmentTransaction.add(frameLayout, (Fragment)fragment).commit();
     }
 
-    public void displayRedButtonFragment() {
-        SwitchFragment switchFragment = SwitchFragment.newInstance();
+    public void display(String[] className, int[] frameLayouts) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.fragment_switch_container, switchFragment)
-                .addToBackStack(null).commit();
-    }
-
-    public void displaySwitchFragment() {
-        RedButtonFragment redButtonFragment = RedButtonFragment.newInstance();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.fragment_container, redButtonFragment)
-                .addToBackStack(null).commit();
+        for(int i=0;i<className.length;i++){
+            String fullClassName = "com.example.madgenius."+className[i];
+            Class fragClass = Class.forName(fullClassName);
+            Object fragment = fragClass.newInstance();
+            fragmentTransaction.add(frameLayouts[i], (Fragment)fragment);
+        }
+        fragmentTransaction.commit();
     }
 
     @Override
