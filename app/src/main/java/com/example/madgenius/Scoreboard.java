@@ -24,5 +24,7 @@ public class Scoreboard extends AppCompatActivity {
             // Update the cached copy of the words in the adapter.
             adapter.setScores(words);
         });
+
+
     }
 }
