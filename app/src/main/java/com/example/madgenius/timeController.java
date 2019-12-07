@@ -4,39 +4,35 @@ import android.os.AsyncTask;
 import android.os.CountDownTimer;
 import android.widget.ProgressBar;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.madgenius.R;
-
 public class timeController extends AsyncTask<Void, Void, Void> {
     private int max_time;
     private int elapsed_time;
     CountDownTimer countdown;
-    //private ProgressBar bar;
+    private ProgressBarListener incrementListener;
+    private ProgressBarListener stopListener;
+    private ProgressBar pauseListener;
+
+
 
     // Maxtime should be in seconds
     public timeController(int maxtime){
         max_time = maxtime;
         //bar = findViewById(R.id.pgb_time);
-        /*
+
         countdown = new CountDownTimer(maxtime*1000, 1000) {
-
             public void onTick(long millisUntilFinished) {
-                ProgressBarIncrementListener.onProgressBarIncrement();
-
+                incrementListener.onTimeIncrement();
             }
 
             public void onFinish() {
-                mTextField.setText("done!");
+                incrementListener.onTimeUp();
             }
         };
-        */
 
     }
 
     public void init(){
-
-
+        countdown.start();
     }
 
     public void pause(){
@@ -47,10 +43,17 @@ public class timeController extends AsyncTask<Void, Void, Void> {
 
     }
 
-    public interface ProgressBarIncrementListener{
-        default void onProgressBarIncrement() {
+    public interface ProgressBarListener {
+        void onTimeIncrement();
+        void onTimeUp();
+    }
 
-        }
+    public void setTimeIncrementListener(ProgressBarListener incrementListener) {
+        this.incrementListener = incrementListener;
+    }
+
+    public void setTimeUpListener(ProgressBarListener stopListener) {
+        this.stopListener = stopListener;
     }
 
     @Override
