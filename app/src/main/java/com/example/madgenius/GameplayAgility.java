@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -29,6 +30,9 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
         setContentView(R.layout.activity_gameplay_agility);
 
         displayFragments();
+        setProximity();
+        setShaker();
+        setUpsideDown();
         getNewCommand();
         Context context = getApplicationContext();
         CharSequence text = "It's really asyncronous!";
@@ -122,6 +126,49 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
     @Override
     public void onSeekBarUpdate(int val) {
         Toast.makeText(this, "Seek bar updated to "+val, Toast.LENGTH_SHORT).show();
+    }
+
+    private void setProximity() {
+        SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        ProximitySensor proximitySensor = new ProximitySensor(sensorManager);
+        proximitySensor.setVariableChangeListener(new ProximitySensor.VariableChangeListener() {
+            @Override
+            public void onVariableChanged(boolean isClose){
+                if(isClose)
+                    Toast.makeText(getApplicationContext(), "Close!!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void setUpsideDown() {
+        SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        UpsideDownSensor upsideDownSensor = new UpsideDownSensor(sensorManager);
+        upsideDownSensor.setVariableChangeListener(new UpsideDownSensor.VariableChangeListener() {
+            @Override
+            public void onVariableChanged(boolean isUpsideDown) {
+                if(isUpsideDown) {
+                    Toast.makeText(getApplicationContext(), "Upside down", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+    /** Function that sets up a shaker listener.
+     */
+    private void setShaker() {
+        SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        ShakeSensor shake = new ShakeSensor(sensorManager);
+        // Passando o contexto atual (getBaseContext()) permite que a classe ShakeSensor crie toasts
+        //ShakeSensor shake = new ShakeSensor(getBaseContext(), sensorManager);
+
+        // Defining the action wanted when shaking is detected.
+        final TextView textView = findViewById(R.id.shakeText);
+        shake.setVariableChangeListener(new ShakeSensor.VariableChangeListener() {
+            @Override
+            public void onVariableChanged(boolean isShaking) {
+                if(isShaking)
+                    Toast.makeText(getApplicationContext(), "shanking", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     /* Example of closing fragment
