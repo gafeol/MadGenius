@@ -5,20 +5,15 @@ import android.os.CountDownTimer;
 import android.widget.ProgressBar;
 
 public class timeController extends AsyncTask<Void, Void, Void> {
-    private int max_time;
-    private int elapsed_time;
+    private int maxTime;
     CountDownTimer countdown;
     private ProgressBarListener incrementListener;
     private ProgressBarListener stopListener;
     private ProgressBar pauseListener;
 
-
-
     // Maxtime should be in seconds
     public timeController(int maxtime){
-        max_time = maxtime;
-        //bar = findViewById(R.id.pgb_time);
-
+        maxTime = maxtime;
         countdown = new CountDownTimer(maxtime*1000, 1000) {
             public void onTick(long millisUntilFinished) {
                 incrementListener.onTimeIncrement();
@@ -28,19 +23,10 @@ public class timeController extends AsyncTask<Void, Void, Void> {
                 incrementListener.onTimeUp();
             }
         };
-
     }
 
     public void init(){
         countdown.start();
-    }
-
-    public void pause(){
-
-    }
-
-    public void stop(){
-
     }
 
     public interface ProgressBarListener {
@@ -56,15 +42,13 @@ public class timeController extends AsyncTask<Void, Void, Void> {
         this.stopListener = stopListener;
     }
 
+    public void setMaxtime(int maxTime){
+        this.maxTime = maxTime;
+    }
+
     @Override
     protected Void doInBackground(Void... voids) {
         return null;
-    }
-
-
-
-    public interface TimeStoppedListenner {
-        void onTimeStop(boolean isTimeUp);
     }
 }
 

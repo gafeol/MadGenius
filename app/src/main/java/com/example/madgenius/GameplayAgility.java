@@ -8,9 +8,16 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class GameplayAgility extends AppCompatActivity implements RedButtonFragment.OnFragmentInteractionListener,
+                                                                    SwitchFragment.OnFragmentInteractionListener {
+    private Boolean gameStatus = true;
+    private String[] commands = {"Press the red button", "Press the yellow button", "Shake the phone", "Turn your phone upside down"};
+    private int[] times = {3, 4, 5, 8};
                                                                     SwitchFragment.OnFragmentInteractionListener,
                                                                     BlueButtonFragment.OnFragmentInteractionListener {
 
@@ -18,6 +25,38 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gameplay_agility);
+        displayFragment();
+        displaySwitchFragment();
+
+        getNewCommand();
+        Context context = getApplicationContext();
+        CharSequence text = "It's really asyncronous!";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+    }
+
+
+    public void displayFragment() {
+        SwitchFragment switchFragment = SwitchFragment.newInstance();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.fragment_switch_container, switchFragment)
+                .addToBackStack(null).commit();
+    }
+
+    public void getNewCommand(){
+        int randomNum = ThreadLocalRandom.current().nextInt(0, this.commands.length);
+        TextView commandDisplay = findViewById(R.id.txtCommands);
+        commandDisplay.setText(this.commands[randomNum]);
+
+        ProgressBar time = findViewById(R.id.pgbTime);
+
+        int maxTime = this.times[randomNum];
+        time.setMax(maxTime);
+        time.setProgress(maxTime);
+        timeController clock = new timeController(maxTime);
 
         displayFragments();
 
@@ -32,11 +71,12 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
             @Override
             public void onTimeUp(){
                 Context context = getApplicationContext();
-                CharSequence text = "Time's up";
+                CharSequence text = "Time's up!";
                 int duration = Toast.LENGTH_SHORT;
 
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
+                getNewCommand();
             }
         });
         clock.init();
@@ -66,6 +106,8 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
     }
 
     public void display(String[] className, int[] frameLayouts) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public void displaySwitchFragment() {
+        RedButtonFragment redButtonFragment = RedButtonFragment.newInstance();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         for(int i=0;i<className.length;i++){

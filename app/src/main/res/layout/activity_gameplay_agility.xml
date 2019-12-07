@@ -8,7 +8,7 @@
     tools:context=".GameplayAgility">
 
     <ProgressBar
-        android:id="@+id/pgb_time"
+        android:id="@+id/pgbTime"
         style="@android:style/Widget.ProgressBar.Horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,12 +32,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:gravity="center"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/pgb_time">
+        app:layout_constraintTop_toBottomOf="@+id/pgbTime">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -67,4 +68,18 @@
                 android:layout_height="wrap_content" />
         </LinearLayout>
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtCommands"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/anton"
+        android:text="command placeholder"
+        android:textColor="#fcbf4a"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 </androidx.constraintlayout.widget.ConstraintLayout>
