@@ -66,7 +66,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center">
+            android:gravity="center"
+            android:layout_margin="8dp">
             <FrameLayout
                 android:id="@+id/fragment_container_5"
                 android:layout_width="match_parent"

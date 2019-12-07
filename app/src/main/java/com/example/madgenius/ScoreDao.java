@@ -19,6 +19,9 @@ public interface ScoreDao {
     @Query("SELECT * FROM score_table ORDER BY points DESC")
     LiveData<List<Score>> getScores();
 
+    @Query("SELECT * FROM score_table WHERE username = :username ORDER BY points DESC")
+    LiveData<List<Score>> getScores(String username);
+
     @Query("SELECT * FROM score_table ORDER BY points DESC LIMIT 1")
     Score getHighestScore();
 
