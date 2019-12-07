@@ -1,23 +1,37 @@
 package com.example.madgenius;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+import com.example.madgenius.BlueButtonFragment;
 
 public class GameplayAgility extends AppCompatActivity implements RedButtonFragment.OnFragmentInteractionListener,
-                                                                    SwitchFragment.OnFragmentInteractionListener {
+                                                                    SwitchFragment.OnFragmentInteractionListener,
+                                                                    BlueButtonFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gameplay_agility);
-        displayFragment();
+        displayRedButtonFragment();
         displaySwitchFragment();
+        try {
+            display("BlueButtonFragment");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
         ProgressBar time = findViewById(R.id.pgb_time);
 
         time.setMax(30);
@@ -40,7 +54,16 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
         clock.init();
     }
 
-    public void displayFragment() {
+    public void display(String className) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+        String fullClassName = "com.example.madgenius."+className;
+        Class fragClass = Class.forName(fullClassName);
+        Object fragment = fragClass.newInstance();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.fragment_3, (Fragment)fragment).addToBackStack(null).commit();
+    }
+
+    public void displayRedButtonFragment() {
         SwitchFragment switchFragment = SwitchFragment.newInstance();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -56,6 +79,22 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
                 .addToBackStack(null).commit();
     }
 
+    @Override
+    public void onSwitch(Boolean val) {
+        Toast.makeText(this, "Switchou  com "+val, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onBlueButtonClick() {
+        Toast.makeText(this, "Clicou no azul!", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onRedButtonClick() {
+        Toast.makeText(this, "Clicou no vermelho!", Toast.LENGTH_SHORT).show();
+    }
+
+    /* Example of closing fragment
     public void closeFragment() {
         // Get the FragmentManager.
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -70,14 +109,5 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
         }
         // Set boolean flag to indicate fragment is closed.
     }
-
-    @Override
-    public void onButtonClick() {
-        Toast.makeText(this, "Clicou no vermelho!", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onSwitch(Boolean val) {
-        Toast.makeText(this, "Switchou  com "+val, Toast.LENGTH_SHORT).show();
-    }
+     */
 }

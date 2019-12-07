@@ -33,12 +33,12 @@ public class RedButtonFragment extends Fragment {
         final View rootView = inflater.inflate(R.layout.fragment_red_button, container, false);
         button = rootView.findViewById(R.id.redButton);
         // When button is clicked, listener activates
-        button.setOnClickListener(view -> mListener.onButtonClick());
+        button.setOnClickListener(view -> mListener.onRedButtonClick());
         return rootView;
     }
 
     interface OnFragmentInteractionListener {
-        void onButtonClick();
+        void onRedButtonClick();
     }
 
     /**
