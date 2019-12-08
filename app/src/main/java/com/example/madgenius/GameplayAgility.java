@@ -50,7 +50,7 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
         int randomNum = rand.nextInt(this.commands.length);
         requiredAction = this.codes[randomNum];
         String actionMessage = this.commands[randomNum];
-        if(requiredAction == "SEEK"){
+        if(requiredAction == "SEEK"){ // TODO: make a better randomization, see issue #3 on github
             final int SEEKBAR_MAX = 10;
             int randomVal = rand.nextInt(SEEKBAR_MAX+1);
             requiredAction += randomVal;
