@@ -7,7 +7,11 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
 import android.hardware.SensorManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
+import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,8 +23,10 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
                                                                     BlueButtonFragment.OnFragmentInteractionListener,
                                                                     SeekBarFragment.OnFragmentInteractionListener {
     private Boolean gameStatus = true;
-    private String[] commands = {"Press the red button", "Press the yellow button", "Shake the phone", "Turn your phone upside down"};
-    private int[] times = {3, 4, 5, 8};
+    private String[] commands = {"Press the red button", "Press the blue button", "Shake the phone", "Turn your phone upside down", "Tap the front of your phone", "Set bar to 6", "Switch the toggle"};
+    private String[] codes = {"RED", "BLUE", "SHAKE", "UPSIDE", "PROXIMITY", "SEEK", "SwITCH"};
+    private String requiredAction;
+    private int[] times = {3, 4, 5, 8, 4, 4, 4};
 
 
 
@@ -34,11 +40,6 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
         setShaker();
         setUpsideDown();
         getNewCommand();
-        Context context = getApplicationContext();
-        CharSequence text = "It's really asyncronous!";
-        int duration = Toast.LENGTH_SHORT;
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
     }
 
 
@@ -46,6 +47,7 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
         int randomNum = ThreadLocalRandom.current().nextInt(0, this.commands.length);
         TextView commandDisplay = findViewById(R.id.txtCommands);
         commandDisplay.setText(this.commands[randomNum]);
+        requiredAction = this.codes[randomNum];
 
         ProgressBar time = findViewById(R.id.pgbTime);
 
@@ -61,12 +63,6 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
             }
             @Override
             public void onTimeUp(){
-                Context context = getApplicationContext();
-                CharSequence text = "Time's up!";
-                int duration = Toast.LENGTH_SHORT;
-
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
                 getNewCommand();
             }
         });
@@ -111,45 +107,43 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
     @Override
     public void onSwitch(Boolean val) {
         Toast.makeText(this, "Switchou  com "+val, Toast.LENGTH_SHORT).show();
+        executeAction("SWITCH");
+
     }
 
     @Override
     public void onBlueButtonClick() {
         Toast.makeText(this, "Clicou no azul!", Toast.LENGTH_SHORT).show();
+        executeAction("BLUE");
     }
 
     @Override
     public void onRedButtonClick() {
         Toast.makeText(this, "Clicou no vermelho!", Toast.LENGTH_SHORT).show();
+        executeAction("RED");
     }
 
     @Override
     public void onSeekBarUpdate(int val) {
         Toast.makeText(this, "Seek bar updated to "+val, Toast.LENGTH_SHORT).show();
+        executeAction("SEEK");
     }
 
     private void setProximity() {
         SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         ProximitySensor proximitySensor = new ProximitySensor(sensorManager);
-        proximitySensor.setVariableChangeListener(new ProximitySensor.VariableChangeListener() {
-            @Override
-            public void onVariableChanged(boolean isClose){
-                if(isClose)
-                    Toast.makeText(getApplicationContext(), "Close!!", Toast.LENGTH_SHORT).show();
-            }
+        proximitySensor.setVariableChangeListener(isClose -> {
+            if(isClose)
+                executeAction("PROXIMITY");
         });
     }
 
     private void setUpsideDown() {
         SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         UpsideDownSensor upsideDownSensor = new UpsideDownSensor(sensorManager);
-        upsideDownSensor.setVariableChangeListener(new UpsideDownSensor.VariableChangeListener() {
-            @Override
-            public void onVariableChanged(boolean isUpsideDown) {
-                if(isUpsideDown) {
-                    Toast.makeText(getApplicationContext(), "Upside down", Toast.LENGTH_SHORT).show();
-                }
-            }
+        upsideDownSensor.setVariableChangeListener(isUpsideDown -> {
+            if(isUpsideDown)
+                executeAction("UPSIDE");
         });
     }
     /** Function that sets up a shaker listener.
@@ -159,16 +153,29 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
         ShakeSensor shake = new ShakeSensor(sensorManager);
         // Passando o contexto atual (getBaseContext()) permite que a classe ShakeSensor crie toasts
         //ShakeSensor shake = new ShakeSensor(getBaseContext(), sensorManager);
-
         // Defining the action wanted when shaking is detected.
         final TextView textView = findViewById(R.id.shakeText);
-        shake.setVariableChangeListener(new ShakeSensor.VariableChangeListener() {
-            @Override
-            public void onVariableChanged(boolean isShaking) {
-                if(isShaking)
-                    Toast.makeText(getApplicationContext(), "shanking", Toast.LENGTH_SHORT).show();
-            }
+        shake.setVariableChangeListener(isShaking -> {
+            if(isShaking)
+                executeAction("SHAKING");
         });
+    }
+
+    private void executeAction(String code){
+        if(code == requiredAction){
+            getNewCommand();
+        }
+        else{
+            Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                Log.d("VIBRA", "pumped");
+                v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
+            }
+            else {
+                v.vibrate(500);
+            }
+
+        }
     }
 
     /* Example of closing fragment
