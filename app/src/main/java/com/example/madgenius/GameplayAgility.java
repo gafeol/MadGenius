@@ -13,9 +13,10 @@ import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.util.Log;
 import android.widget.ProgressBar;
+import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class GameplayAgility extends AppCompatActivity implements RedButtonFragment.OnFragmentInteractionListener,
@@ -23,7 +24,7 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
                                                                     BlueButtonFragment.OnFragmentInteractionListener,
                                                                     SeekBarFragment.OnFragmentInteractionListener {
     private Boolean gameStatus = true;
-    private String[] commands = {"Press the red button", "Press the blue button", "Shake the phone", "Turn your phone upside down", "Tap the front of your phone", "Set bar to 6", "Switch the toggle"};
+    private String[] commands = {"Press the red button", "Press the blue button", "Shake the phone", "Turn your phone upside down", "Tap the front of your phone", "Set bar to ", "Switch the toggle"};
     private String[] codes = {"RED", "BLUE", "SHAKE", "UPSIDE", "PROXIMITY", "SEEK", "SwITCH"};
     private String requiredAction;
     private timeController clock;
@@ -45,10 +46,18 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
 
 
     public void getNewCommand(){
-        int randomNum = ThreadLocalRandom.current().nextInt(0, this.commands.length);
-        TextView commandDisplay = findViewById(R.id.txtCommands);
-        commandDisplay.setText(this.commands[randomNum]);
+        Random rand = new Random();
+        int randomNum = rand.nextInt(this.commands.length);
         requiredAction = this.codes[randomNum];
+        String actionMessage = this.commands[randomNum];
+        if(requiredAction == "SEEK"){
+            final int SEEKBAR_MAX = 10;
+            int randomVal = rand.nextInt(SEEKBAR_MAX+1);
+            requiredAction += randomVal;
+            actionMessage += randomVal;
+        }
+        TextView commandDisplay = findViewById(R.id.txtCommands);
+        commandDisplay.setText(actionMessage);
 
         ProgressBar time = findViewById(R.id.pgbTime);
 
@@ -108,27 +117,23 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
 
     @Override
     public void onSwitch(Boolean val) {
-        Toast.makeText(this, "Switchou  com "+val, Toast.LENGTH_SHORT).show();
         executeAction("SWITCH");
 
     }
 
     @Override
     public void onBlueButtonClick() {
-        Toast.makeText(this, "Clicou no azul!", Toast.LENGTH_SHORT).show();
         executeAction("BLUE");
     }
 
     @Override
     public void onRedButtonClick() {
-        Toast.makeText(this, "Clicou no vermelho!", Toast.LENGTH_SHORT).show();
         executeAction("RED");
     }
 
     @Override
     public void onSeekBarUpdate(int val) {
-        Toast.makeText(this, "Seek bar updated to "+val, Toast.LENGTH_SHORT).show();
-        executeAction("SEEK");
+        executeAction("SEEK"+val);
     }
 
     private void setProximity() {
@@ -165,13 +170,12 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
 
     private void executeAction(String code){
         this.clock.cancel(true);
-        if(code == requiredAction){
+        if(code.equals(requiredAction)){
             getNewCommand();
         }
         else{
             Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                Log.d("VIBRA", "pumped");
                 v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
             }
             else {
