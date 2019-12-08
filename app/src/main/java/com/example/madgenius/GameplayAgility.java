@@ -97,7 +97,7 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
             final int SEEKBAR_MAX = 10;
             do {
                 randomVal = rand.nextInt(SEEKBAR_MAX + 1);
-            } while (previousValue == randomNum);
+            } while (previousValue == randomVal);
             requiredAction += randomVal;
             actionMessage += randomVal;
         }

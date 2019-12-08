@@ -144,8 +144,13 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
             String requiredAction = codes[randNum];
             String actionMessage = commands[randNum];
             if(requiredAction == "SEEK"){
+                SeekBarFragment sbFrag = new SeekBarFragment();
+                int previousValue = sbFrag.seekBarValue;
                 final int SEEKBAR_MAX = 10;
-                int randomVal = rand.nextInt(SEEKBAR_MAX+1);
+                int randomVal = 0;
+                do {
+                    randomVal = rand.nextInt(SEEKBAR_MAX + 1);
+                } while (previousValue == randomVal);
                 requiredAction += randomVal;
                 actionMessage += randomVal;
             }
