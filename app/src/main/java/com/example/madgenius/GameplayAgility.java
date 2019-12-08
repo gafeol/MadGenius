@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Context;
 import android.hardware.SensorManager;
@@ -33,10 +34,12 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
     private Boolean gameStatus = true;
     private boolean fragmentsDisplayed = false;
     private final String FRAG_DISPLAY_TAG = "fragments_displayed";
+    private final String POINTS_TAG = "points";
     private String[] commands = {"Press the red button", "Press the blue button", "Shake the phone", "Turn your phone upside down", "Tap the front of your phone", "Set bar to ", "Switch the toggle"};
     private String[] codes = {"RED", "BLUE", "SHAKE", "UPSIDE", "PROXIMITY", "SEEK", "SWITCH"};
     private String requiredAction;
     private int[] times = {4, 4, 4, 4, 4, 4, 4};
+    private int points;
 
 
 
@@ -47,8 +50,10 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
         time = findViewById(R.id.pgbTime);
         displayFragments();
 
+        points = 0;
         if(savedInstanceState != null){
             fragmentsDisplayed = savedInstanceState.getBoolean(FRAG_DISPLAY_TAG);
+            points = savedInstanceState.getInt(POINTS_TAG);
         }
         if(!fragmentsDisplayed) {
             displayFragments();
@@ -203,6 +208,7 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
         this.countdown.cancel();
         Log.d("ACTION", "required " + requiredAction + " action executed " + code);
         if(code.equals(requiredAction)){
+            points++;
             getNewCommand();
         }
         else{
@@ -228,6 +234,9 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(GameplayAgility.this);
         View messageView = getLayoutInflater().inflate(R.layout.dialog_save_score, null);
         EditText usernameEditText = messageView.findViewById(R.id.usernameEditText);
+        TextView pointsMessage = messageView.findViewById(R.id.scoreTextView);
+        pointsMessage.setText("You got " + points + " points!");
+
         Button saveButton = messageView.findViewById(R.id.saveButton);
         Button cancelButton = messageView.findViewById(R.id.cancelButton);
 
@@ -241,6 +250,8 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
             }
             else {
                 Log.d("MSG", "Salva resultado pro usuario "+username);
+                ScoreViewModel scoreViewModel = ViewModelProviders.of(this).get(ScoreViewModel.class);
+                scoreViewModel.insert(new Score(username, points, false));
                 dialog.dismiss();
                 finish();
             }
