@@ -14,6 +14,11 @@ public class Menu extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
     }
 
+    public void memory_onClick(View view){
+        Intent intent = new Intent(Menu.this, GameplayMemory.class);
+        startActivity(intent);
+    }
+
     public void agility_onClick(View view) {
         Intent intent = new Intent(Menu.this, GameplayAgility.class);
         startActivity(intent);
