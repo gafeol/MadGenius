@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Context;
 import android.hardware.SensorManager;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.VibrationEffect;
@@ -269,15 +270,27 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
 
 
     @Override
-    public void onSwitch(Boolean val) { executeAction("SWITCH"); }
+    public void onSwitch(Boolean val) {
+        final MediaPlayer mp = MediaPlayer.create(this, R.raw.click);
+        mp.start();
+        executeAction("SWITCH");
+    }
     @Override
     public void onBlueButtonClick() {
+        final MediaPlayer mp = MediaPlayer.create(this, R.raw.click);
+        mp.start();
         executeAction("BLUE");
     }
     @Override
-    public void onRedButtonClick() { executeAction("RED"); }
+    public void onRedButtonClick() {
+        final MediaPlayer mp = MediaPlayer.create(this, R.raw.click);
+        mp.start();
+        executeAction("RED");
+    }
     @Override
     public void onSeekBarUpdate(int val) {
+        final MediaPlayer mp = MediaPlayer.create(this, R.raw.click);
+        mp.start();
         executeAction("SEEK"+val);
     }
 
