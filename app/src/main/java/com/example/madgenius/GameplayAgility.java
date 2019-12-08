@@ -31,14 +31,12 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
         SeekBarFragment.OnFragmentInteractionListener {
     private CountDownTimer countdown;
     private ProgressBar time;
-    private Boolean gameStatus = true;
     private boolean fragmentsDisplayed = false;
     private final String FRAG_DISPLAY_TAG = "fragments_displayed";
     private final String POINTS_TAG = "points";
     private String[] commands = {"Press the red button", "Press the blue button", "Shake the phone", "Turn your phone upside down", "Tap the front of your phone", "Set bar to ", "Switch the toggle"};
     private String[] codes = {"RED", "BLUE", "SHAKE", "UPSIDE", "PROXIMITY", "SEEK", "SWITCH"};
     private String requiredAction;
-    private int[] times = {4, 4, 4, 4, 4, 4, 4};
     private int points;
 
 
@@ -47,9 +45,9 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gameplay_agility);
         time = findViewById(R.id.pgbTime);
-        displayFragments();
 
         points = 0;
+        fragmentsDisplayed = false;
         if(savedInstanceState != null){
             fragmentsDisplayed = savedInstanceState.getBoolean(FRAG_DISPLAY_TAG);
             points = savedInstanceState.getInt(POINTS_TAG);
@@ -97,7 +95,7 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
         TextView commandDisplay = findViewById(R.id.txtCommands);
         commandDisplay.setText(actionMessage);
 
-        int maxTime = this.times[randomNum];
+        int maxTime = 4;
         time.setMax(maxTime);
         time.setProgress(maxTime);
 
@@ -157,11 +155,7 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
     }
 
     @Override
-    public void onSwitch(Boolean val) {
-        executeAction("SWITCH");
-
-    }
-
+    public void onSwitch(Boolean val) { executeAction("SWITCH"); }
     @Override
     public void onBlueButtonClick() {
         executeAction("BLUE");
@@ -201,10 +195,6 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
     private void setShaker() {
         SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         ShakeSensor shake = new ShakeSensor(sensorManager);
-        // Passando o contexto atual (getBaseContext()) permite que a classe ShakeSensor crie toasts
-        //ShakeSensor shake = new ShakeSensor(getBaseContext(), sensorManager);
-        // Defining the action wanted when shaking is detected.
-        final TextView textView = findViewById(R.id.shakeText);
         shake.setVariableChangeListener(isShaking -> {
             if(isShaking)
                 executeAction("SHAKE");
@@ -213,14 +203,14 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
 
     private void executeAction(String code) {
         this.countdown.cancel();
+        if(requiredAction == null || requiredAction.isEmpty())
+            return;
         Log.d("ACTION", "required " + requiredAction + " action executed " + code);
         if(code.equals(requiredAction)){
             points++;
             getNewCommand();
-        } else {
-            //#########################################################
-            //REMOVER ISSO AQUI E TROCAR PELO METODO QUE TERMINA O JOGO
-            // #########################################################
+        }
+        else{
             Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
@@ -232,6 +222,7 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
     }
 
     private void finishGame(){
+        requiredAction = "";
         scoreMessage();
     }
 
@@ -254,7 +245,6 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
                 Toast.makeText(GameplayAgility.this, "Please fill your username", Toast.LENGTH_SHORT).show();
             }
             else {
-                Log.d("MSG", "Salva resultado pro usuario "+username);
                 ScoreViewModel scoreViewModel = ViewModelProviders.of(this).get(ScoreViewModel.class);
                 scoreViewModel.insert(new Score(username, points, false));
                 dialog.dismiss();
@@ -263,7 +253,6 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
         });
 
         cancelButton.setOnClickListener(view -> {
-            Log.d("MSG", "cancela");
             dialog.dismiss();
             finish();
 
