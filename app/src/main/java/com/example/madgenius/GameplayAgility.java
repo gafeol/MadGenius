@@ -9,6 +9,7 @@ import android.content.Context;
 import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.util.Log;
@@ -22,11 +23,12 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
                                                                     SwitchFragment.OnFragmentInteractionListener,
                                                                     BlueButtonFragment.OnFragmentInteractionListener,
                                                                     SeekBarFragment.OnFragmentInteractionListener {
+    private CountDownTimer countdown;
     private Boolean gameStatus = true;
+    private ProgressBar time;
     private String[] commands = {"Press the red button", "Press the blue button", "Shake the phone", "Turn your phone upside down", "Tap the front of your phone", "Set bar to 6", "Switch the toggle"};
     private String[] codes = {"RED", "BLUE", "SHAKE", "UPSIDE", "PROXIMITY", "SEEK", "SwITCH"};
     private String requiredAction;
-    private timeController clock;
     private int[] times = {3, 4, 5, 8, 4, 4, 4};
 
 
@@ -35,14 +37,28 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gameplay_agility);
-
+        time = findViewById(R.id.pgbTime);
         displayFragments();
         setProximity();
         setShaker();
         setUpsideDown();
         getNewCommand();
+
+        Context context = getApplicationContext();
+        CharSequence text = "eh async mesmo?!";
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
     }
 
+
+    private void onTimeIncrement(){
+        time.setProgress(time.getProgress()-1);
+    }
+
+    private void onTimeUp(){
+        getNewCommand();
+    }
 
     public void getNewCommand(){
         int randomNum = ThreadLocalRandom.current().nextInt(0, this.commands.length);
@@ -50,25 +66,20 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
         commandDisplay.setText(this.commands[randomNum]);
         requiredAction = this.codes[randomNum];
 
-        ProgressBar time = findViewById(R.id.pgbTime);
-
         int maxTime = this.times[randomNum];
         time.setMax(maxTime);
         time.setProgress(maxTime);
 
-        clock = new timeController(maxTime);
+        countdown = new CountDownTimer(maxTime * 1000, 1000) {
+            public void onTick(long millisUntilFinished) {
+                onTimeIncrement();
+            }
+            public void onFinish() {
+                onTimeUp();
+            }
+        };
 
-        clock.setTimeIncrementListener(new timeController.ProgressBarListener() {
-            @Override
-            public void onTimeIncrement() {
-                time.setProgress(time.getProgress()-1);
-            }
-            @Override
-            public void onTimeUp(){
-                getNewCommand();
-            }
-        });
-        clock.init();
+        countdown.start();
     }
 
     private void displayFragments(){
@@ -164,11 +175,15 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
     }
 
     private void executeAction(String code){
-        this.clock.cancel(true);
+        this.countdown.cancel();
         if(code == requiredAction){
             getNewCommand();
         }
         else{
+            //#########################################################
+            //REMOVER ISSO AQUI E TROCAR PELO METODO QUE TERMINA O JOGO
+            // #########################################################
+            getNewCommand();
             Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 Log.d("VIBRA", "pumped");
