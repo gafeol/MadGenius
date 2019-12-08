@@ -6,6 +6,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Scoreboard extends AppCompatActivity {
 
@@ -20,9 +24,17 @@ public class Scoreboard extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         scoreViewModel = ViewModelProviders.of(this).get(ScoreViewModel.class);
-        scoreViewModel.getAllScores().observe(this, words -> {
-            // Update the cached copy of the words in the adapter.
-            adapter.setScores(words);
+        scoreViewModel.getAllScores().observe(this, scores -> {
+            adapter.setScores(scores);
         });
+
+        List<Double> listScores = new ArrayList<Double>();
+        scoreViewModel.getAllScores("cobra", true).observe(this, scores -> {
+            listScores.addAll(scores);
+            for(int i=0;i<listScores.size();i++){
+                Log.d("SCORES", "Score "+listScores.get(i));
+            }
+        });
+
     }
 }

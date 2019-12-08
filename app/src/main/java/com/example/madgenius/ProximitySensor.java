@@ -43,7 +43,6 @@ public class ProximitySensor  implements SensorEventListener {
     @Override
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_PROXIMITY) {
-            Log.d("prox", "Sensor value " + event.values[0]);
             if (event.values[0] >= -SENSOR_SENSITIVITY && event.values[0] <= SENSOR_SENSITIVITY) {
                 //near
                 setValue(true);

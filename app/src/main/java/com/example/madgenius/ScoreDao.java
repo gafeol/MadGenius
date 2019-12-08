@@ -16,17 +16,32 @@ public interface ScoreDao {
     @Query("DELETE FROM score_table")
     void deleteAll();
 
-    @Query("SELECT * FROM score_table ORDER BY points DESC")
+    @Query("SELECT * FROM score_table")
     LiveData<List<Score>> getScores();
 
-    @Query("SELECT * FROM score_table WHERE username = :username ORDER BY points DESC")
+    @Query("SELECT * FROM score_table ORDER BY points DESC")
+    LiveData<List<Score>> getOrderedScores();
+
+    @Query("SELECT * FROM score_table WHERE username = :username")
     LiveData<List<Score>> getScores(String username);
+
+    @Query("SELECT * FROM score_table WHERE username = :username ORDER BY points DESC")
+    LiveData<List<Score>> getOrderedScores(String username);
+
+    @Query("SELECT points FROM score_table WHERE username = :username AND gameType = :gameType")
+    LiveData<List<Double>> getScores(String username, boolean gameType);
+
+    @Query("SELECT points FROM score_table WHERE username = :username AND gameType = :gameType ORDER BY points DESC")
+    LiveData<List<Double>> getOrderedScores(String username, boolean gameType);
 
     @Query("SELECT * FROM score_table ORDER BY points DESC LIMIT 1")
     Score getHighestScore();
 
     @Query("SELECT * FROM score_table WHERE username = :username ORDER BY points DESC LIMIT 1")
     Score getHighestScore(String username);
+
+    @Query("SELECT points FROM score_table WHERE username = :username AND gameType = :gameType ORDER BY points DESC LIMIT 1")
+    Double getHighestScore(String username, boolean gameType);
 
     /** Used to check if there is any entry on the db
      * If length = 0, the db is empty, otherwise, it has entries
