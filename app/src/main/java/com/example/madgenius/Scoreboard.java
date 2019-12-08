@@ -7,28 +7,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-import java.util.ArrayList;
-import com.github.mikephil.charting.charts.LineChart;
-
-import com.github.mikephil.charting.components.Description;
-import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-
-import java.util.List;
-
 public class Scoreboard extends AppCompatActivity {
-
-
-
     @Override
     protected  void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +27,14 @@ public class Scoreboard extends AppCompatActivity {
                 }
             }
         });
-
+        RecyclerView recyclerView = findViewById(R.id.recyclerview);
+        final ScoreListAdapter adapter = new ScoreListAdapter(this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        ScoreViewModel scoreViewModel = ViewModelProviders.of(this).get(ScoreViewModel.class);
+        scoreViewModel.getAllScores().observe(this, scores -> {
+            adapter.setScores(scores);
+        });
     }
 }
 
