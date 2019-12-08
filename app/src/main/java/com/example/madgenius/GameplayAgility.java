@@ -1,6 +1,7 @@
 package com.example.madgenius;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -13,6 +14,10 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -211,8 +216,44 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
             else {
                 v.vibrate(500);
             }
-
+            finishGame();
         }
+    }
+
+    private void finishGame(){
+        scoreMessage();
+    }
+
+    private void scoreMessage(){
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(GameplayAgility.this);
+        View messageView = getLayoutInflater().inflate(R.layout.dialog_save_score, null);
+        EditText usernameEditText = messageView.findViewById(R.id.usernameEditText);
+        Button saveButton = messageView.findViewById(R.id.saveButton);
+        Button cancelButton = messageView.findViewById(R.id.cancelButton);
+
+        mBuilder.setView(messageView);
+        AlertDialog dialog = mBuilder.create();
+
+        saveButton.setOnClickListener(view -> {
+            String username = usernameEditText.getText().toString();
+            if(username.isEmpty()){
+                Toast.makeText(GameplayAgility.this, "Please fill your username", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                Log.d("MSG", "Salva resultado pro usuario "+username);
+                dialog.dismiss();
+                finish();
+            }
+        });
+
+        cancelButton.setOnClickListener(view -> {
+            Log.d("MSG", "cancela");
+            dialog.dismiss();
+            finish();
+
+        });
+
+        dialog.show();
     }
 
     /* Example of closing fragment
