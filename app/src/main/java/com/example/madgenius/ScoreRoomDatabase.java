@@ -41,6 +41,7 @@ public abstract class ScoreRoomDatabase extends RoomDatabase {
         double[] points = {0.12, 13.4, -123.2, 2};
         boolean[] gameTypes = {false, false, true, true};
 
+
         PopulateDbAsync(ScoreRoomDatabase db) {
             mDao = db.scoreDao();
         }
@@ -50,6 +51,7 @@ public abstract class ScoreRoomDatabase extends RoomDatabase {
          */
         @Override
         protected Void doInBackground(final Void... params) {
+            mDao.deleteAll();
             if(mDao.getAnyScore().length == 0){
                 for (int i = 0; i <= usernames.length - 1; i++) {
                     Score score = new Score(usernames[i], points[i], gameTypes[i]);
