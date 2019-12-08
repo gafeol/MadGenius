@@ -26,6 +26,7 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
     private String[] commands = {"Press the red button", "Press the blue button", "Shake the phone", "Turn your phone upside down", "Tap the front of your phone", "Set bar to 6", "Switch the toggle"};
     private String[] codes = {"RED", "BLUE", "SHAKE", "UPSIDE", "PROXIMITY", "SEEK", "SwITCH"};
     private String requiredAction;
+    private timeController clock;
     private int[] times = {3, 4, 5, 8, 4, 4, 4};
 
 
@@ -54,7 +55,8 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
         int maxTime = this.times[randomNum];
         time.setMax(maxTime);
         time.setProgress(maxTime);
-        timeController clock = new timeController(maxTime);
+
+        clock = new timeController(maxTime);
 
         clock.setTimeIncrementListener(new timeController.ProgressBarListener() {
             @Override
@@ -162,6 +164,7 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
     }
 
     private void executeAction(String code){
+        this.clock.cancel(true);
         if(code == requiredAction){
             getNewCommand();
         }
