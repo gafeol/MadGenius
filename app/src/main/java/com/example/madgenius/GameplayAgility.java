@@ -213,9 +213,9 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
         else{
             Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
+                v.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE));
             } else {
-                v.vibrate(500);
+                v.vibrate(200);
             }
             finishGame();
         }
