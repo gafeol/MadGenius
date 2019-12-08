@@ -38,7 +38,7 @@ public abstract class ScoreRoomDatabase extends RoomDatabase {
 
         private final ScoreDao mDao;
         String[] usernames = {"dolphin", "crocodile", "cobra", "cobra"};
-        double[] points = {0.12, 13.4, -123.2, 2};
+        double[] points = {0.12, 13, 4, 2};
         boolean[] gameTypes = {false, false, true, true};
 
 
