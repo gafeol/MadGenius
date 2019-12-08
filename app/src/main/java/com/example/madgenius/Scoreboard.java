@@ -45,13 +45,8 @@ public class Scoreboard extends AppCompatActivity {
         scoreViewModel.getAllScores("cobra", true).observe(this, scores -> {
             listScores.clear();
             listScores.addAll(scores);
-
-
             plot(listScores);
-
         });
-
-
 
     }
 
@@ -100,9 +95,6 @@ public class Scoreboard extends AppCompatActivity {
 
         Description description = scoreChart.getDescription();
         description.setEnabled(false);
-
-
-
 
         List<ILineDataSet> dataSets = new ArrayList<>();
         dataSets.add(lineData);

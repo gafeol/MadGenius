@@ -92,11 +92,11 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
     }
 
     private void resetUI() {
-        // TODO: Implementar o reset de UI, limpando valores da seekbar e do toggle.
+        displayFragments();
+        steps.setMax(numActions);
     }
 
     private void teachCommands() {
-        resetUI();
         isUserRepeating = true;
         steps.setProgress(numActions);
         trainActions.addAll(requiredActions);
@@ -216,6 +216,7 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
                 requiredActions.remove();
                 if (requiredActions.isEmpty()) {
                     numActions++;
+                    resetUI();
                     getNewCommands();
                 }
                 else
