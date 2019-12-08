@@ -36,6 +36,8 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
     private final String POINTS_TAG = "points";
     private String[] commands = {"Press the red button", "Press the blue button", "Shake the phone", "Turn your phone upside down", "Tap the front of your phone", "Set bar to ", "Switch the toggle"};
     private String[] codes = {"RED", "BLUE", "SHAKE", "UPSIDE", "PROXIMITY", "SEEK", "SWITCH"};
+    String[] fragClasses = new String[]{"RedButtonFragment", "SwitchFragment", "BlueButtonFragment", "SeekBarFragment"};
+    int[] fragLayouts = new int[]{R.id.fragment_container_1, R.id.fragment_container_2, R.id.fragment_container_3, R.id.fragment_container_5};
     private String requiredAction;
     private int points;
 
@@ -53,6 +55,7 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
             points = savedInstanceState.getInt(POINTS_TAG);
         }
         if (!fragmentsDisplayed) {
+            shuffle(fragLayouts, fragLayouts.length-1);
             displayFragments();
         }
         setProximity();
@@ -73,7 +76,13 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
     }
 
     private void onTimeUp() {
-        getNewCommand();
+        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            v.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE));
+        } else {
+            v.vibrate(200);
+        }
+        finishGame();
     }
 
     public void getNewCommand() {
@@ -112,9 +121,17 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
         countdown.start();
     }
 
+    private void shuffle(int[] values, int maxPosition){
+        Random rnd = new Random();
+        for(int i=0;i<maxPosition;i++){
+            int index = rnd.nextInt(i+1);
+            int aux = values[i];
+            values[i] = values[index];
+            values[index] = aux;
+        }
+    }
+
     private void displayFragments() {
-        String[] fragClasses = new String[]{"RedButtonFragment", "SwitchFragment", "BlueButtonFragment", "SeekBarFragment"};
-        int[] fragLayouts = new int[]{R.id.fragment_container_1, R.id.fragment_container_2, R.id.fragment_container_3, R.id.fragment_container_5};
         try {
             display(fragClasses, fragLayouts);
             fragmentsDisplayed = true;
@@ -231,7 +248,7 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
         View messageView = getLayoutInflater().inflate(R.layout.dialog_save_score, null);
         EditText usernameEditText = messageView.findViewById(R.id.usernameEditText);
         TextView pointsMessage = messageView.findViewById(R.id.scoreTextView);
-        pointsMessage.setText("You got " + points + " points!");
+        pointsMessage.setText("You solved " + points + " actions!");
 
         Button saveButton = messageView.findViewById(R.id.saveButton);
         Button cancelButton = messageView.findViewById(R.id.cancelButton);
@@ -259,21 +276,4 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
         });
         dialog.show();
     }
-
-    /* Example of closing fragment
-    public void closeFragment() {
-        // Get the FragmentManager.
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        // Check to see if the fragment is already showing.
-        RedButtonFragment redButtonFragment = (RedButtonFragment) fragmentManager
-                .findFragmentById(R.id.fragment_container);
-        if (redButtonFragment != null) {
-            // Create and commit the transaction to remove the fragment.
-            FragmentTransaction fragmentTransaction =
-                    fragmentManager.beginTransaction();
-            fragmentTransaction.remove(redButtonFragment).commit();
-        }
-        // Set boolean flag to indicate fragment is closed.
-    }
-     */
 }

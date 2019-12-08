@@ -18,7 +18,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +36,8 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
     private ProgressBar steps;
     private String[] commands = {"Press the red button", "Press the blue button", "Shake the phone", "Turn your phone upside down", "Tap the front of your phone", "Set bar to ", "Switch the toggle"};
     private String[] codes = {"RED", "BLUE", "SHAKE", "UPSIDE", "PROXIMITY", "SEEK", "SWITCH"};
+    String[] fragClasses = new String[]{"RedButtonFragment", "SwitchFragment", "BlueButtonFragment", "SeekBarFragment"};
+    int[] fragLayouts = new int[]{R.id.fragment_container_1, R.id.fragment_container_2, R.id.fragment_container_3, R.id.fragment_container_5};
     private Queue<String> requiredActions, trainActions;
     private Queue<String> trainMessages;
 
@@ -53,6 +54,7 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
             fragmentsDisplayed = savedInstanceState.getBoolean(FRAG_DISPLAY_TAG);
         }
         if(!fragmentsDisplayed) {
+            shuffle(fragLayouts, fragLayouts.length-1);
             displayFragments();
         }
         setProximity();
@@ -64,9 +66,19 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
         getNewCommands(); // Talvez isso tambem tenha que ser verificado no saveInstanceState
     }
 
+
+    private void shuffle(int[] values, int maxPosition){
+        Random rnd = new Random();
+        for(int i=0;i<maxPosition;i++){
+            int index = rnd.nextInt(i+1);
+            int aux = values[i];
+            values[i] = values[index];
+            values[index] = aux;
+        }
+    }
+
+
     private void displayFragments(){
-        String[] fragClasses = new String[]{"RedButtonFragment", "SwitchFragment", "BlueButtonFragment", "SeekBarFragment"};
-        int[] fragLayouts = new int[]{R.id.fragment_container_1, R.id.fragment_container_2, R.id.fragment_container_3, R.id.fragment_container_5};
         try {
             display(fragClasses, fragLayouts);
             fragmentsDisplayed = true;
@@ -124,8 +136,6 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
     }
 
     private void getNewCommands() {
-        Toast.makeText(this, "Novos comandos", Toast.LENGTH_SHORT).show();
-        //Generate commands
         Random rand = new Random();
         requiredActions.clear();
         trainMessages.clear();
@@ -156,7 +166,7 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
         EditText usernameEditText = messageView.findViewById(R.id.usernameEditText);
         TextView pointsMessage = messageView.findViewById(R.id.scoreTextView);
         int points = numActions-1;
-        pointsMessage.setText("You got " + points + " points!");
+        pointsMessage.setText("You memorized up to " + points + " instructions!");
 
         Button saveButton = messageView.findViewById(R.id.saveButton);
         Button cancelButton = messageView.findViewById(R.id.cancelButton);
@@ -170,7 +180,6 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
                 Toast.makeText(GameplayMemory.this, "Please fill your username", Toast.LENGTH_SHORT).show();
             }
             else {
-                Log.d("MSG", "Salva resultado pro usuario "+username);
                 ScoreViewModel scoreViewModel = ViewModelProviders.of(this).get(ScoreViewModel.class);
                 scoreViewModel.insert(new Score(username, points, true));
                 dialog.dismiss();
@@ -179,7 +188,6 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
         });
 
         cancelButton.setOnClickListener(view -> {
-            Log.d("MSG", "cancela");
             dialog.dismiss();
             finish();
 
@@ -191,7 +199,6 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
         if(isUserRepeating){
             if(trainActions.isEmpty())
                 return;
-            Log.d("ACTION", "TRAIN required " + requiredActions.peek() + " action executed " + code);
             if (code.equals(trainActions.peek())) {
                 trainActions.remove();
                 trainMessages.remove();
@@ -268,9 +275,7 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
         executeAction("BLUE");
     }
     @Override
-    public void onRedButtonClick() {
-        executeAction("RED");
-    }
+    public void onRedButtonClick() { executeAction("RED"); }
     @Override
     public void onSeekBarUpdate(int val) {
         executeAction("SEEK"+val);
