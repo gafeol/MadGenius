@@ -61,12 +61,11 @@ public class ShakeSensor implements SensorEventListener {
     @Override
     public void onSensorChanged(SensorEvent event) {
         long curTime = System.currentTimeMillis();
-        if ((curTime - lstUpdate) > 500) {
+        if ((curTime - lstUpdate) > 200) {
             float[] acc = new float[3];
 
-            for(int axis=0;axis<3;axis++){
+            for(int axis=0;axis<3;axis++)
                 acc[axis] = event.values[axis]/SensorManager.GRAVITY_EARTH;
-            }
             float gForce = (float)Math.sqrt(acc[0] * acc[0] + acc[1] * acc[1] + acc[2] * acc[2]);
 
             if(gForce > SHAKE_THRESHOLD_GRAVITY){
