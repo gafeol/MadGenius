@@ -8,4 +8,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="memory_text">Memory</string>
+    <string name="agility_text">Agility</string>
+    <string name="best_memory">Best of Memory Mode:</string>
+    <string name="best_agility">Best of Agility Mode:</string>
 </resources>
