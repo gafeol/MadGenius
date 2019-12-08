@@ -20,9 +20,9 @@ import android.widget.Toast;
 import java.util.Random;
 
 public class GameplayAgility extends AppCompatActivity implements RedButtonFragment.OnFragmentInteractionListener,
-                                                                    SwitchFragment.OnFragmentInteractionListener,
-                                                                    BlueButtonFragment.OnFragmentInteractionListener,
-                                                                    SeekBarFragment.OnFragmentInteractionListener {
+        SwitchFragment.OnFragmentInteractionListener,
+        BlueButtonFragment.OnFragmentInteractionListener,
+        SeekBarFragment.OnFragmentInteractionListener {
     private CountDownTimer countdown;
     private ProgressBar time;
     private Boolean gameStatus = true;
@@ -34,7 +34,6 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
     private int[] times = {4, 4, 4, 4, 4, 4, 4};
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,10 +41,10 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
         time = findViewById(R.id.pgbTime);
         displayFragments();
 
-        if(savedInstanceState != null){
+        if (savedInstanceState != null) {
             fragmentsDisplayed = savedInstanceState.getBoolean(FRAG_DISPLAY_TAG);
         }
-        if(!fragmentsDisplayed) {
+        if (!fragmentsDisplayed) {
             displayFragments();
         }
         setProximity();
@@ -61,22 +60,27 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
     }
 
 
-    private void onTimeIncrement(){
-        time.setProgress(time.getProgress()-1);
+    private void onTimeIncrement() {
+        time.setProgress(time.getProgress() - 1);
     }
 
-    private void onTimeUp(){
+    private void onTimeUp() {
         getNewCommand();
     }
 
-    public void getNewCommand(){
+    public void getNewCommand() {
         Random rand = new Random();
         int randomNum = rand.nextInt(this.commands.length);
         requiredAction = this.codes[randomNum];
         String actionMessage = this.commands[randomNum];
-        if(requiredAction == "SEEK"){ // TODO: make a better randomization, see issue #3 on github
+        if (requiredAction == "SEEK") {
+            SeekBarFragment sbFrag = new SeekBarFragment();
+            int previousValue = sbFrag.seekBarValue;
+            int randomVal = 0;
             final int SEEKBAR_MAX = 10;
-            int randomVal = rand.nextInt(SEEKBAR_MAX+1);
+            do {
+                randomVal = rand.nextInt(SEEKBAR_MAX + 1);
+            } while (previousValue == randomNum);
             requiredAction += randomVal;
             actionMessage += randomVal;
         }
@@ -91,6 +95,7 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
             public void onTick(long millisUntilFinished) {
                 onTimeIncrement();
             }
+
             public void onFinish() {
                 onTimeUp();
             }
@@ -99,7 +104,7 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
         countdown.start();
     }
 
-    private void displayFragments(){
+    private void displayFragments() {
         String[] fragClasses = new String[]{"RedButtonFragment", "SwitchFragment", "BlueButtonFragment", "SeekBarFragment"};
         int[] fragLayouts = new int[]{R.id.fragment_container_1, R.id.fragment_container_2, R.id.fragment_container_3, R.id.fragment_container_5};
         try {
@@ -121,22 +126,22 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
     }
 
     private void display(String className, int frameLayout) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-        String fullClassName = "com.example.madgenius."+className;
+        String fullClassName = "com.example.madgenius." + className;
         Class fragClass = Class.forName(fullClassName);
         Object fragment = fragClass.newInstance();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(frameLayout, (Fragment)fragment).commit();
+        fragmentTransaction.replace(frameLayout, (Fragment) fragment).commit();
     }
 
     public void display(String[] className, int[] frameLayouts) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        for(int i=0;i<className.length;i++){
-            String fullClassName = "com.example.madgenius."+className[i];
+        for (int i = 0; i < className.length; i++) {
+            String fullClassName = "com.example.madgenius." + className[i];
             Class fragClass = Class.forName(fullClassName);
             Object fragment = fragClass.newInstance();
-            fragmentTransaction.replace(frameLayouts[i], (Fragment)fragment);
+            fragmentTransaction.replace(frameLayouts[i], (Fragment) fragment);
         }
         fragmentTransaction.commit();
     }
@@ -159,14 +164,14 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
 
     @Override
     public void onSeekBarUpdate(int val) {
-        executeAction("SEEK"+val);
+        executeAction("SEEK" + val);
     }
 
     private void setProximity() {
         SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         ProximitySensor proximitySensor = new ProximitySensor(sensorManager);
         proximitySensor.setVariableChangeListener(isClose -> {
-            if(isClose)
+            if (isClose)
                 executeAction("PROXIMITY");
         });
     }
@@ -175,11 +180,13 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
         SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         UpsideDownSensor upsideDownSensor = new UpsideDownSensor(sensorManager);
         upsideDownSensor.setVariableChangeListener(isUpsideDown -> {
-            if(isUpsideDown)
+            if (isUpsideDown)
                 executeAction("UPSIDE");
         });
     }
-    /** Function that sets up a shaker listener.
+
+    /**
+     * Function that sets up a shaker listener.
      */
     private void setShaker() {
         SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
@@ -189,17 +196,16 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
         // Defining the action wanted when shaking is detected.
         final TextView textView = findViewById(R.id.shakeText);
         shake.setVariableChangeListener(isShaking -> {
-            if(isShaking)
+            if (isShaking)
                 executeAction("SHAKING");
         });
     }
 
-    private void executeAction(String code){
+    private void executeAction(String code) {
         this.countdown.cancel();
-        if(code.equals(requiredAction)){
+        if (code.equals(requiredAction)) {
             getNewCommand();
-        }
-        else{
+        } else {
             //#########################################################
             //REMOVER ISSO AQUI E TROCAR PELO METODO QUE TERMINA O JOGO
             // #########################################################
@@ -207,8 +213,7 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
             Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
-            }
-            else {
+            } else {
                 v.vibrate(500);
             }
 

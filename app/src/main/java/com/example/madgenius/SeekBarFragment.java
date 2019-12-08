@@ -24,6 +24,7 @@ public class SeekBarFragment extends Fragment {
 
     private SeekBar seekBar;
     private TextView textView;
+    public static int seekBarValue;
     private OnFragmentInteractionListener mListener;
 
     public SeekBarFragment() {
@@ -50,6 +51,7 @@ public class SeekBarFragment extends Fragment {
             public void onStopTrackingTouch(SeekBar seekBar) {
                 int progress = seekBar.getProgress();
                 textView.setText(Integer.toString(progress));
+                seekBarValue = Integer.parseInt(textView.getText().toString());
                 mListener.onSeekBarUpdate(progress);
             }
         });
