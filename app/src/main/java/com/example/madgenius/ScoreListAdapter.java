@@ -35,7 +35,7 @@ public class ScoreListAdapter extends RecyclerView.Adapter<ScoreListAdapter.Scor
     public void onBindViewHolder(ScoreViewHolder holder, int position) {
         if (mScores != null) {
             Score current = mScores.get(position);
-            holder.scoreItemView.setText(current.getUsername() + " " + current.getPoints());
+            holder.scoreItemView.setText(current.getUsername() + " " + current.getPoints() + " " + (current.getGameType() ? "Memory" : "Agility"));
         } else {
             // Covers the case of data not being ready yet.
             holder.scoreItemView.setText("No Score");

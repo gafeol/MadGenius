@@ -15,21 +15,20 @@ public class ScoreRepository {
         scoreDao = db.scoreDao();
     }
 
-    LiveData<List<Score>> getAllScores() {
-        return scoreDao.getScores();
-    }
+    void insert(Score score) { new insertAsyncTask(scoreDao).execute(score); }
+    void deleteAll() { new deleteAllAsyncTask(scoreDao).execute(); }
 
-    LiveData<List<Score>> getAllScores(String username){
-        return scoreDao.getScores(username);
-    }
+    LiveData<List<Score>> getAllScores() { return scoreDao.getScores(); }
+    LiveData<List<Score>> getAllScoresOrdered() { return scoreDao.getOrderedScores(); }
+    LiveData<List<Score>> getAllScores(String username){ return scoreDao.getScores(username); }
+    LiveData<List<Score>> getAllScoresOrdered(String username){ return scoreDao.getOrderedScores(username); }
+    LiveData<List<Double>> getAllScores(String username, boolean gameType) { return scoreDao.getScores(username, gameType);}
+    LiveData<List<Double>> getAllScoresOrdered(String username, boolean gameType) { return scoreDao.getOrderedScores(username, gameType);}
 
-    void insert(Score score) {
-        new insertAsyncTask(scoreDao).execute(score);
-    }
 
-    void deleteAll() {
-        new deleteAllAsyncTask(scoreDao).execute();
-    }
+    Score getHighestScore() { return scoreDao.getHighestScore(); }
+    Score getHighestScore(String username){ return scoreDao.getHighestScore(username); }
+    Double getHighestScore(String username, boolean gameType) { return scoreDao.getHighestScore(username, gameType); }
 
     private static class deleteAllAsyncTask extends AsyncTask<Void, Void, Void> {
         private ScoreDao mAsyncTaskDao;
@@ -54,13 +53,5 @@ public class ScoreRepository {
             mAsyncTaskDao.insert(params[0]);
             return null;
         }
-    }
-
-    Score getHighestScore() {
-        return scoreDao.getHighestScore();
-    }
-
-    Score getHighestScore(String username){
-        return scoreDao.getHighestScore(username);
     }
 }

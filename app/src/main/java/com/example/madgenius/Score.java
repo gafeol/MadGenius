@@ -18,17 +18,22 @@ public class Score {
     @NonNull
     @ColumnInfo(name = "points")
     private double points;
+    @NonNull
+    @ColumnInfo(name="gameType")
+    private boolean gameType;
 
-    public Score(@NonNull String username, @NonNull double points){
+    public Score(@NonNull String username, @NonNull double points, @NonNull boolean gameType){
         this.username = username;
         this.points = points;
+        this.gameType = gameType;
     }
 
     @Ignore
-    public Score(int id, @NonNull String username, @NonNull double points){
+    public Score(int id, @NonNull String username, @NonNull double points, @NonNull boolean gameType){
         this.id = id;
         this.username = username;
         this.points = points;
+        this.gameType = gameType;
     }
 
     public int getId() { return this.id; }
@@ -41,5 +46,7 @@ public class Score {
     public double getPoints() {
         return this.points;
     }
+
+    public boolean getGameType() { return this.gameType; }
 }
 
