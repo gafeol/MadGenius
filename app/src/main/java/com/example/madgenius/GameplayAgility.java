@@ -195,12 +195,13 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
         final TextView textView = findViewById(R.id.shakeText);
         shake.setVariableChangeListener(isShaking -> {
             if(isShaking)
-                executeAction("SHAKING");
+                executeAction("SHAKE");
         });
     }
 
     private void executeAction(String code){
         this.countdown.cancel();
+        Log.d("ACTION", "required " + requiredAction + " action executed " + code);
         if(code.equals(requiredAction)){
             getNewCommand();
         }
@@ -208,7 +209,6 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
             //#########################################################
             //REMOVER ISSO AQUI E TROCAR PELO METODO QUE TERMINA O JOGO
             // #########################################################
-            getNewCommand();
             Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
@@ -252,7 +252,6 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
             finish();
 
         });
-
         dialog.show();
     }
 

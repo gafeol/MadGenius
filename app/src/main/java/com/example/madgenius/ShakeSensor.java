@@ -61,8 +61,7 @@ public class ShakeSensor implements SensorEventListener {
     @Override
     public void onSensorChanged(SensorEvent event) {
         long curTime = System.currentTimeMillis();
-        // only allow one update every 100ms.
-        if ((curTime - lstUpdate) > 100) {
+        if ((curTime - lstUpdate) > 500) {
             float[] acc = new float[3];
 
             for(int axis=0;axis<3;axis++){
