@@ -61,7 +61,6 @@ public class UpsideDownSensor implements SensorEventListener {
             float y = event.values[1]/SensorManager.GRAVITY_EARTH;
             float z = event.values[2]/SensorManager.GRAVITY_EARTH;
             // Uses the values of x and z to differentiate between shaking and upside down
-            //Log.d("sensor", "Test x " + x + " y "+y+" z "+z);
             if(y < -0.80 && abs(x) < 0.7 && abs(z) < 0.7) {
                 if (context != null)
                     Toast.makeText(context, "Upside down with y "+y, Toast.LENGTH_SHORT).show();

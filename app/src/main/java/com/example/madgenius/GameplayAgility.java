@@ -1,5 +1,6 @@
 package com.example.madgenius;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -11,24 +12,22 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
-import android.util.Log;
 import android.widget.ProgressBar;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
 import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class GameplayAgility extends AppCompatActivity implements RedButtonFragment.OnFragmentInteractionListener,
                                                                     SwitchFragment.OnFragmentInteractionListener,
                                                                     BlueButtonFragment.OnFragmentInteractionListener,
                                                                     SeekBarFragment.OnFragmentInteractionListener {
-    private Boolean gameStatus = true;
+    private boolean fragmentsDisplayed = false;
+    private final String FRAG_DISPLAY_TAG = "fragments_displayed";
     private String[] commands = {"Press the red button", "Press the blue button", "Shake the phone", "Turn your phone upside down", "Tap the front of your phone", "Set bar to ", "Switch the toggle"};
-    private String[] codes = {"RED", "BLUE", "SHAKE", "UPSIDE", "PROXIMITY", "SEEK", "SwITCH"};
+    private String[] codes = {"RED", "BLUE", "SHAKE", "UPSIDE", "PROXIMITY", "SEEK", "SWITCH"};
     private String requiredAction;
     private timeController clock;
-    private int[] times = {3, 4, 5, 8, 4, 4, 4};
+    private int[] times = {4, 4, 4, 4, 4, 4, 4};
 
 
 
@@ -37,7 +36,12 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gameplay_agility);
 
-        displayFragments();
+        if(savedInstanceState != null){
+            fragmentsDisplayed = savedInstanceState.getBoolean(FRAG_DISPLAY_TAG);
+        }
+        if(!fragmentsDisplayed) {
+            displayFragments();
+        }
         setProximity();
         setShaker();
         setUpsideDown();
@@ -85,6 +89,7 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
         int[] fragLayouts = new int[]{R.id.fragment_container_1, R.id.fragment_container_2, R.id.fragment_container_3, R.id.fragment_container_5};
         try {
             display(fragClasses, fragLayouts);
+            fragmentsDisplayed = true;
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (InstantiationException e) {
@@ -94,13 +99,19 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
         }
     }
 
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putBoolean(FRAG_DISPLAY_TAG, fragmentsDisplayed);
+        super.onSaveInstanceState(outState);
+    }
+
     private void display(String className, int frameLayout) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
         String fullClassName = "com.example.madgenius."+className;
         Class fragClass = Class.forName(fullClassName);
         Object fragment = fragClass.newInstance();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(frameLayout, (Fragment)fragment).commit();
+        fragmentTransaction.replace(frameLayout, (Fragment)fragment).commit();
     }
 
     public void display(String[] className, int[] frameLayouts) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
@@ -110,7 +121,7 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
             String fullClassName = "com.example.madgenius."+className[i];
             Class fragClass = Class.forName(fullClassName);
             Object fragment = fragClass.newInstance();
-            fragmentTransaction.add(frameLayouts[i], (Fragment)fragment);
+            fragmentTransaction.replace(frameLayouts[i], (Fragment)fragment);
         }
         fragmentTransaction.commit();
     }

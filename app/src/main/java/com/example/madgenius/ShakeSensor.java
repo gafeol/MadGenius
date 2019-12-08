@@ -71,7 +71,6 @@ public class ShakeSensor implements SensorEventListener {
             float gForce = (float)Math.sqrt(acc[0] * acc[0] + acc[1] * acc[1] + acc[2] * acc[2]);
 
             if(gForce > SHAKE_THRESHOLD_GRAVITY){
-                Log.d("sensor", "shake detected w/ gForce: " + gForce);
                 if(context != null)
                     Toast.makeText(context, "shake detected w/ gForce: " + gForce, Toast.LENGTH_SHORT).show();
                 setValue(true);
