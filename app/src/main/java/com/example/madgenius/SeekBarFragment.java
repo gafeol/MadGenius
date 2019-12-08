@@ -38,6 +38,7 @@ public class SeekBarFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_seek_bar, container, false);
         seekBar = rootView.findViewById(R.id.seekBar);
         textView = rootView.findViewById(R.id.seekTextView);
+        textView.setText("0");
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {

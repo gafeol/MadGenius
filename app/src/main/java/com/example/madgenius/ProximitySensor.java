@@ -4,15 +4,16 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.util.Log;
 
 public class ProximitySensor  implements SensorEventListener {
     private SensorManager sensorManager;
     private Sensor sensor;
     private boolean isClose = false;
     private static final int SENSOR_SENSITIVITY = 4;
+    private long lstUpdate;
 
     public ProximitySensor(SensorManager systemService){
+        lstUpdate = 0;
         sensorManager = systemService;
         if(sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY) != null)
             sensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
@@ -42,7 +43,8 @@ public class ProximitySensor  implements SensorEventListener {
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        if (event.sensor.getType() == Sensor.TYPE_PROXIMITY) {
+        long curTime = System.currentTimeMillis();
+        if ((curTime - lstUpdate) > 500 && event.sensor.getType() == Sensor.TYPE_PROXIMITY) {
             if (event.values[0] >= -SENSOR_SENSITIVITY && event.values[0] <= SENSOR_SENSITIVITY) {
                 //near
                 setValue(true);
