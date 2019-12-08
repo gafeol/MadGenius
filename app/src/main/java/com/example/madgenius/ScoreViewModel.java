@@ -22,6 +22,8 @@ public class ScoreViewModel extends AndroidViewModel {
     public LiveData<List<Score>> getAllScoresOrdered() { return repository.getAllScoresOrdered(); }
     public LiveData<List<Score>> getAllScores(String username) { return repository.getAllScores(username); }
     public LiveData<List<Score>> getAllScoresOrdered(String username) { return repository.getAllScoresOrdered(username); }
+    public LiveData<List<Score>> getAllScores(boolean gameType) { return repository.getAllScores(gameType); }
+    public LiveData<List<Score>> getAllScoresOrdered(boolean gameType) { return repository.getAllScoresOrdered(gameType); }
     public LiveData<List<Double>> getAllScores(String username, boolean gameType) { return repository.getAllScores(username, gameType); }
     public LiveData<List<Double>> getAllScoresOrdered(String username, boolean gameType) { return repository.getAllScoresOrdered(username, gameType); }
 

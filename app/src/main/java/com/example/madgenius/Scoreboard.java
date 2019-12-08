@@ -18,8 +18,16 @@ public class Scoreboard extends AppCompatActivity {
         setContentView(R.layout.activity_newscoreboard);
         final TextView text = (TextView)findViewById(R.id.bestof);
         final ToggleButton toggle = (ToggleButton)findViewById(R.id.toggleButton);
+        RecyclerView recyclerView = findViewById(R.id.recyclerview);
+        final ScoreListAdapter adapter = new ScoreListAdapter(this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        ScoreViewModel scoreViewModel = ViewModelProviders.of(this).get(ScoreViewModel.class);
         toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                scoreViewModel.getAllScoresOrdered(isChecked).observe(Scoreboard.this, scores -> {
+                    adapter.setScores(scores);
+                });
                 if (isChecked) {
                     text.setText(R.string.best_memory);
                 } else {
@@ -27,12 +35,7 @@ public class Scoreboard extends AppCompatActivity {
                 }
             }
         });
-        RecyclerView recyclerView = findViewById(R.id.recyclerview);
-        final ScoreListAdapter adapter = new ScoreListAdapter(this);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        ScoreViewModel scoreViewModel = ViewModelProviders.of(this).get(ScoreViewModel.class);
-        scoreViewModel.getAllScores().observe(this, scores -> {
+        scoreViewModel.getAllScoresOrdered(true).observe(Scoreboard.this, scores -> {
             adapter.setScores(scores);
         });
     }

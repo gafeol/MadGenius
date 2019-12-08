@@ -11,11 +11,12 @@ import java.util.List;
 
 public class ScoreListAdapter extends RecyclerView.Adapter<ScoreListAdapter.ScoreViewHolder> {
     class ScoreViewHolder extends RecyclerView.ViewHolder {
-        private final TextView scoreItemView;
+        private final TextView usernameTextView, scoreTextView;
 
         private ScoreViewHolder(View itemView) {
             super(itemView);
-            scoreItemView = itemView.findViewById(R.id.textView);
+            usernameTextView = itemView.findViewById(R.id.usernameTextView);
+            scoreTextView = itemView.findViewById(R.id.scoreTextView);
         }
     }
 
@@ -34,10 +35,11 @@ public class ScoreListAdapter extends RecyclerView.Adapter<ScoreListAdapter.Scor
     public void onBindViewHolder(ScoreViewHolder holder, int position) {
         if (mScores != null) {
             Score current = mScores.get(position);
-            holder.scoreItemView.setText(current.getUsername() + " " + current.getPoints() + " " + (current.getGameType() ? "Memory" : "Agility"));
+            holder.usernameTextView.setText(current.getUsername());
+            holder.scoreTextView.setText(Double.toString(current.getPoints()));
         } else {
             // Covers the case of data not being ready yet.
-            holder.scoreItemView.setText("No Score");
+            holder.usernameTextView.setText("No Score");
         }
     }
 

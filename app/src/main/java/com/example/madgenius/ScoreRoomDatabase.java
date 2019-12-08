@@ -37,9 +37,9 @@ public abstract class ScoreRoomDatabase extends RoomDatabase {
     private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
 
         private final ScoreDao mDao;
-        String[] usernames = {"dolphin", "crocodile", "cobra", "cobra"};
-        double[] points = {0.12, 13, 4, 2};
-        boolean[] gameTypes = {false, false, true, true};
+        String[] usernames = {"dolphin", "crocodile", "cobra", "cobra", "asdlaksj", "asd", "12lkj"};
+        double[] points = {0.12, 13, 4, 2, 4.1, 1, 1};
+        boolean[] gameTypes = {false, false, true, true, true, true, true};
 
 
         PopulateDbAsync(ScoreRoomDatabase db) {
