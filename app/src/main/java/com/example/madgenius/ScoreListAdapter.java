@@ -1,8 +1,10 @@
 package com.example.madgenius;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,11 +14,14 @@ import java.util.List;
 public class ScoreListAdapter extends RecyclerView.Adapter<ScoreListAdapter.ScoreViewHolder> {
     class ScoreViewHolder extends RecyclerView.ViewHolder {
         private final TextView usernameTextView, scoreTextView;
+        private ImageView imgView;
 
         private ScoreViewHolder(View itemView) {
             super(itemView);
+
             usernameTextView = itemView.findViewById(R.id.usernameTextView);
             scoreTextView = itemView.findViewById(R.id.scoreTextView);
+            imgView = itemView.findViewById(R.id.imgView);
         }
     }
 
@@ -37,6 +42,15 @@ public class ScoreListAdapter extends RecyclerView.Adapter<ScoreListAdapter.Scor
             Score current = mScores.get(position);
             holder.usernameTextView.setText(current.getUsername());
             holder.scoreTextView.setText(Double.toString(current.getPoints()));
+            if(position== 0){
+                holder.imgView.setImageResource(R.drawable.first);
+            }
+            else if(position == 1){
+                holder.imgView.setImageResource(R.drawable.second);
+            }
+            else if(position == 2){
+                holder.imgView.setImageResource(R.drawable.third);
+            }
         } else {
             // Covers the case of data not being ready yet.
             holder.usernameTextView.setText("No Score");
