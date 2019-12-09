@@ -7,7 +7,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.hardware.SensorManager;
 import android.media.MediaPlayer;
 import android.os.Build;
@@ -229,6 +231,9 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
                 requiredActions.remove();
                 if (requiredActions.isEmpty()) {
                     numActions++;
+                    nextEpisodeFragment dialog = new nextEpisodeFragment();
+                    dialog.setNumActions(numActions);
+                    dialog.show(getSupportFragmentManager(), "test");
                     resetUI();
                     getNewCommands();
                 }
