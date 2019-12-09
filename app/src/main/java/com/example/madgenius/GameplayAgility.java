@@ -63,12 +63,6 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
         setShaker();
         setUpsideDown();
         getNewCommand();
-
-        Context context = getApplicationContext();
-        CharSequence text = "eh async mesmo?!";
-        int duration = Toast.LENGTH_SHORT;
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
     }
 
 
