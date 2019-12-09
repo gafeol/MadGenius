@@ -3,6 +3,7 @@
     package="com.example.madgenius">
 
     <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_lab"
@@ -10,11 +11,13 @@
         android:roundIcon="@mipmap/ic_lab_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".GameplayAgility"></activity>
+        <activity android:name=".ScoreChart"
+            android:parentActivityName=".Scoreboard"/>
+        <activity android:name=".GameplayAgility" />
         <activity android:name=".GameplayMemory" />
         <activity
             android:name=".Scoreboard"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".Menu" />
         <activity android:name=".Menu">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,7 +25,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

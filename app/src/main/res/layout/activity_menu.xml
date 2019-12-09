@@ -20,36 +20,62 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btn_agility"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/agility_mode"
-        android:onClick="agility_onClick"
-        app:layout_constraintBottom_toTopOf="@+id/btn_scoreboards"
+        android:orientation="horizontal"
+        android:layout_marginTop="32dp"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_memory"
-        />
+        app:layout_constraintBottom_toTopOf="@+id/btn_scoreboards"
+        android:gravity="center"
+        >
+
+        <Button
+            android:id="@+id/btn_agility"
+            style="@style/styled_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/agility_mode"
+            android:onClick="agility_onClick"
+            android:layout_margin="8dp"
+            />
+
+        <Button
+            android:id="@+id/btn_memory"
+            style="@style/styled_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="memory_onClick"
+            android:text="@string/memory_mode"
+            android:layout_margin="8dp"
+            />
+    </LinearLayout>
+
 
     <Button
         android:id="@+id/btn_scoreboards"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/scoreboard"
+        android:layout_marginBottom="32dp"
         android:onClick="scoreboard_onClick"
+        android:text="@string/scoreboard"
+        style="@style/styled_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/btn_memory"
+    <ImageView
+        android:id="@+id/imageView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/memory_mode"
-        android:onClick="memory_onClick"
+        android:layout_height="200dp"
+        android:layout_marginStart="105dp"
+        android:layout_marginEnd="106dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_logo" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_logo"
+        app:layout_constraintVertical_bias="0.2"
+        app:srcCompat="@drawable/chemistry" />
 </androidx.constraintlayout.widget.ConstraintLayout>

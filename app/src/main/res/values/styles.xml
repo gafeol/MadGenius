@@ -17,4 +17,10 @@
         <item name="android:textAppearance">@android:style/TextAppearance.DeviceDefault.Large</item>
     </style>
 
+    <style name="styled_button">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:background">@drawable/ripple</item>
+        <item name="android:padding">4dp</item>
+    </style>
+
 </resources>

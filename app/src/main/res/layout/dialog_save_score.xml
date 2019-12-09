@@ -5,7 +5,7 @@
 
     <TextView
         android:id="@+id/titleTextView"
-        android:text="Save result?"
+        android:text="@string/save_result_message"
         android:layout_gravity="center"
         android:textSize="24dp"
         android:layout_marginTop="8dp"
@@ -19,7 +19,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="You scored 4 points!"
         android:padding="8dp"
         android:textSize="18sp" />
 
@@ -27,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Write your username to save your result:"
+        android:text="@string/write_username"
         android:padding="8dp"
         android:textSize="18sp" />
 
@@ -45,19 +44,17 @@
         <Button
             android:id="@+id/saveButton"
             android:layout_weight="1"
-            android:text="Save"
+            android:text="@string/save_button"
             android:layout_margin="8dp"
-            android:textColor="@color/colorPrimary"
-            android:background="@color/colorAccent"
+            style="@style/styled_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <Button
             android:id="@+id/cancelButton"
             android:layout_weight="1"
-            android:text="Cancel"
+            android:text="@string/cancel_button"
             android:layout_margin="8dp"
-            android:textColor="@color/colorPrimary"
-            android:background="@color/colorAccent"
+            style="@style/styled_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>
