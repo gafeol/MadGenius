@@ -51,6 +51,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center">
+            <FrameLayout
+                android:id="@+id/fragment_container_7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -62,6 +72,16 @@
             <FrameLayout
                 android:id="@+id/fragment_container_2"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+            <FrameLayout
+                android:id="@+id/fragment_container_6"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
 
@@ -85,8 +105,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_margin="8dp">
+            android:gravity="center">
             <FrameLayout
                 android:id="@+id/fragment_container_5"
                 android:layout_width="match_parent"

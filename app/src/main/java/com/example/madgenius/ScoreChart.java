@@ -34,7 +34,7 @@ public class ScoreChart extends AppCompatActivity {
         String username = intent.getStringExtra(Scoreboard.EXTRA_MESSAGE);
 
         TextView title = findViewById(R.id.title_chartScoreboard);
-        title.setText(username + " 's Score Chart");
+        title.setText(username + "'s score Chart");
 
         scoreViewModel = ViewModelProviders.of(this).get(ScoreViewModel.class);
 
@@ -67,8 +67,6 @@ public class ScoreChart extends AppCompatActivity {
         lineData.setValueTextSize(20f);
         lineData.setLineWidth(2f);
 
-
-
         /* X axis settings */
         XAxis Xaxis = scoreChart.getXAxis();
         Xaxis.setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -78,8 +76,6 @@ public class ScoreChart extends AppCompatActivity {
         Xaxis.setAxisMaximum(scoreList.size()+1);
         Xaxis.setTextSize(20f);
         Xaxis.setLabelCount(scoreList.size()+2, true);
-
-
 
         /* Y axis settings (right not used) */
         YAxis rightAxis = scoreChart.getAxisRight();
@@ -94,9 +90,6 @@ public class ScoreChart extends AppCompatActivity {
 
         Description description = scoreChart.getDescription();
         description.setEnabled(false);
-
-
-
 
         List<ILineDataSet> dataSets = new ArrayList<>();
         dataSets.add(lineData);

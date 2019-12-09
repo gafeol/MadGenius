@@ -57,6 +57,9 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
         }
         if (!fragmentsDisplayed) {
             shuffle(fragLayouts, fragLayouts.length-1);
+            int[] longFragLayouts = new int[] {R.id.fragment_container_5, R.id.fragment_container_6, R.id.fragment_container_7};
+            Random rand = new Random();
+            fragLayouts[fragLayouts.length-1] = longFragLayouts[rand.nextInt(longFragLayouts.length)];
             displayFragments();
         }
         setProximity();
