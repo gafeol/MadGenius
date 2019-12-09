@@ -12,4 +12,5 @@
     <string name="agility_text">Agility</string>
     <string name="best_memory">Best of Memory Mode:</string>
     <string name="best_agility">Best of Agility Mode:</string>
+    <string name="button_details_text">Details</string>
 </resources>
