@@ -18,6 +18,10 @@ public class Score {
     @NonNull
     @ColumnInfo(name = "points")
     private double points;
+    /**
+     * gameType false -> Agility game
+     * gameType true -> Memory game
+     */
     @NonNull
     @ColumnInfo(name="gameType")
     private boolean gameType;

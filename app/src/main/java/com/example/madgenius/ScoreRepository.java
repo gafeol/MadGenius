@@ -22,6 +22,8 @@ public class ScoreRepository {
     LiveData<List<Score>> getAllScoresOrdered() { return scoreDao.getOrderedScores(); }
     LiveData<List<Score>> getAllScores(String username){ return scoreDao.getScores(username); }
     LiveData<List<Score>> getAllScoresOrdered(String username){ return scoreDao.getOrderedScores(username); }
+    LiveData<List<Score>> getAllScores(boolean gameType) { return scoreDao.getScores(gameType);}
+    LiveData<List<Score>> getAllScoresOrdered(boolean gameType) { return scoreDao.getOrderedScores(gameType);}
     LiveData<List<Double>> getAllScores(String username, boolean gameType) { return scoreDao.getScores(username, gameType);}
     LiveData<List<Double>> getAllScoresOrdered(String username, boolean gameType) { return scoreDao.getOrderedScores(username, gameType);}
 

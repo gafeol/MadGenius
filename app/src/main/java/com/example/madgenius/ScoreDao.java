@@ -28,6 +28,12 @@ public interface ScoreDao {
     @Query("SELECT * FROM score_table WHERE username = :username ORDER BY points DESC")
     LiveData<List<Score>> getOrderedScores(String username);
 
+    @Query("SELECT * FROM score_table WHERE gameType = :gameType")
+    LiveData<List<Score>> getScores(boolean gameType);
+
+    @Query("SELECT * FROM score_table WHERE gameType = :gameType ORDER BY points DESC")
+    LiveData<List<Score>> getOrderedScores(boolean gameType);
+
     @Query("SELECT points FROM score_table WHERE username = :username AND gameType = :gameType")
     LiveData<List<Double>> getScores(String username, boolean gameType);
 

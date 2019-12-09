@@ -65,7 +65,7 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
         setUpsideDown();
         steps = findViewById(R.id.pgbSteps);
         steps.setMax(numActions);
-        steps.setProgress(numActions);
+        steps.setProgress(0);
         getNewCommands(); // Talvez isso tambem tenha que ser verificado no saveInstanceState
     }
 
@@ -113,13 +113,13 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
 
     private void teachCommands() {
         isUserRepeating = true;
-        steps.setProgress(numActions);
+        steps.setProgress(0);
         trainActions.addAll(requiredActions);
         stepLearn();
     }
 
     private void stepLearn() {
-        steps.setProgress(trainActions.size());
+        steps.setProgress(numActions - trainActions.size());
         TextView commandDisplay = findViewById(R.id.txtCommands);
         commandDisplay.setText(trainMessages.peek());
 
@@ -131,11 +131,11 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
         commandDisplay.setText("Now repeat");
         isUserRepeating = false;
         steps.setMax(numActions);
-        steps.setProgress(numActions);
+        steps.setProgress(0);
     }
 
     private void stepGame() {
-        steps.setProgress(requiredActions.size());
+        steps.setProgress(numActions - requiredActions.size());
     }
 
     private void getNewCommands() {
