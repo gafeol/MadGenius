@@ -66,6 +66,7 @@
         android:layout_marginBottom="8dp"
         android:onClick="scoreChartRequest"
         android:text="@string/button_details_text"
+        style="@style/styled_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

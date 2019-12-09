@@ -8,6 +8,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:textColor="@color/colorAccent"
+        android:background="@color/colorPrimaryDark"
         android:gravity="center"
         android:padding="8dp"
         android:text="Detailed Score Chart"
@@ -20,7 +22,7 @@
         android:layout_marginTop="8dp"
         android:gravity="center"
         android:padding="8dp"
-        android:text="Enter name to see detailed score chart"
+        android:text="Enter your username to see detailed score charts"
         android:textSize="18sp" />
 
     <EditText
