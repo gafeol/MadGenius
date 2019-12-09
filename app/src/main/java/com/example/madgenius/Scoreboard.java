@@ -29,7 +29,7 @@ public class Scoreboard extends AppCompatActivity {
     @Override
     protected  void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_newscoreboard);
+        setContentView(R.layout.activity_scoreboard);
         final TextView text = (TextView)findViewById(R.id.bestof);
         final ToggleButton toggle = (ToggleButton)findViewById(R.id.toggleButton);
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
