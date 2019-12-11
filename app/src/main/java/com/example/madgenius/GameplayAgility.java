@@ -65,7 +65,7 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
             fragLayouts[fragLayouts.length-1] = longFragLayouts[rand.nextInt(longFragLayouts.length)];
             displayFragments();
         }
-        //setProximity();
+        setProximity();
         setShaker();
         setUpsideDown();
         getNewCommand();

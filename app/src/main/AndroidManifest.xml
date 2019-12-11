@@ -13,8 +13,10 @@
         android:theme="@style/AppTheme">
         <activity android:name=".ScoreChart"
             android:parentActivityName=".Scoreboard"/>
-        <activity android:name=".GameplayAgility" />
-        <activity android:name=".GameplayMemory" />
+        <activity android:name=".GameplayAgility"
+            android:parentActivityName=".Menu"/>
+        <activity android:name=".GameplayMemory"
+            android:parentActivityName=".Menu"/>
         <activity
             android:name=".Scoreboard"
             android:parentActivityName=".Menu" />
