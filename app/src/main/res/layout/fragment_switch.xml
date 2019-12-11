@@ -3,12 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
     android:layout_margin="12dp"
     tools:context=".SwitchFragment">
 
     <Switch
         android:id="@+id/mSwitch"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:gravity="center" />
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:scaleX="1"
+        android:scaleY="1"
+        android:switchMinWidth="60dp" />
 </FrameLayout>
