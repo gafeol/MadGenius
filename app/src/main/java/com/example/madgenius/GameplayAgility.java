@@ -32,6 +32,7 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
         SeekBarFragment.OnFragmentInteractionListener {
     private CountDownTimer countdown;
     private ProgressBar time;
+    private TextView pointTextView;
     private boolean fragmentsDisplayed = false;
     private final String FRAG_DISPLAY_TAG = "fragments_displayed";
     private final String POINTS_TAG = "points";
@@ -47,13 +48,15 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gameplay_agility);
+        pointTextView = findViewById(R.id.pointTextView);
         time = findViewById(R.id.pgbTime);
 
-        points = 0;
+        setPoints(0);
         fragmentsDisplayed = false;
         if(savedInstanceState != null){
             fragmentsDisplayed = savedInstanceState.getBoolean(FRAG_DISPLAY_TAG);
             points = savedInstanceState.getInt(POINTS_TAG);
+            setPoints(points);
         }
         if (!fragmentsDisplayed) {
             shuffle(fragLayouts, fragLayouts.length-1);
@@ -62,12 +65,19 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
             fragLayouts[fragLayouts.length-1] = longFragLayouts[rand.nextInt(longFragLayouts.length)];
             displayFragments();
         }
-        setProximity();
+        //setProximity();
         setShaker();
         setUpsideDown();
         getNewCommand();
     }
 
+    private void setPoints(int p) {
+        points = p;
+        if(p == 1)
+            pointTextView.setText("Point: "+p);
+        else
+            pointTextView.setText("Points: "+p);
+    }
 
     private void onTimeIncrement() {
         time.setProgress(time.getProgress() - 1);
@@ -103,14 +113,13 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
         commandDisplay.setText(actionMessage);
 
         int maxTime = 4;
-        time.setMax(maxTime);
-        time.setProgress(maxTime);
+        time.setMax(maxTime*10);
+        time.setProgress(maxTime*10);
 
-        countdown = new CountDownTimer(maxTime * 1000, 1000) {
+        countdown = new CountDownTimer((maxTime*1000)+150, 100) {
             public void onTick(long millisUntilFinished) {
                 onTimeIncrement();
             }
-
             public void onFinish() {
                 onTimeUp();
             }
@@ -232,7 +241,7 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
             return;
         Log.d("ACTION", "required " + requiredAction + " action executed " + code);
         if(code.equals(requiredAction)){
-            points++;
+            setPoints(points+1);
             getNewCommand();
         }
         else{

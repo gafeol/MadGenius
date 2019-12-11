@@ -32,8 +32,9 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
                                                                     SwitchFragment.OnFragmentInteractionListener,
                                                                     BlueButtonFragment.OnFragmentInteractionListener,
                                                                     SeekBarFragment.OnFragmentInteractionListener {
+    private TextView pointTextView;
     private int numActions = 1;
-    private final String FRAG_DISPLAY_TAG = "fragments_displayed";
+    private final String FRAG_DISPLAY_TAG = "fragments_displayed", NUM_ACTIONS_TAG= "num_actions";
     private boolean fragmentsDisplayed;
     private Boolean isUserRepeating = false;
     private ProgressBar steps;
@@ -48,6 +49,7 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gameplay_memory);
+        pointTextView = findViewById(R.id.pointTextView);
         fragmentsDisplayed = false;
         requiredActions = new ArrayDeque<String>();
         trainActions = new ArrayDeque<String>();
@@ -55,8 +57,11 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
 
         if(savedInstanceState != null){
             fragmentsDisplayed = savedInstanceState.getBoolean(FRAG_DISPLAY_TAG);
+            numActions = savedInstanceState.getInt(NUM_ACTIONS_TAG);
         }
         if(!fragmentsDisplayed) {
+            numActions = 1;
+            setPoints(0);
             shuffle(fragLayouts, fragLayouts.length-1);
             int[] longFragLayouts = new int[] {R.id.fragment_container_5, R.id.fragment_container_6, R.id.fragment_container_7};
             Random rand = new Random();
@@ -70,6 +75,13 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
         steps.setMax(numActions);
         steps.setProgress(0);
         getNewCommands(); // Talvez isso tambem tenha que ser verificado no saveInstanceState
+    }
+
+    private void setPoints(int p) {
+        if(p == 1)
+            pointTextView.setText("Point: "+p);
+        else
+            pointTextView.setText("Points: "+p);
     }
 
 
@@ -233,6 +245,7 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
             if (code.equals(requiredActions.peek())) {
                 requiredActions.remove();
                 if (requiredActions.isEmpty()) {
+                    setPoints(numActions);
                     numActions++;
                     nextEpisodeFragment dialog = new nextEpisodeFragment();
                     dialog.setNumActions(numActions);
