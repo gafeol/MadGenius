@@ -34,6 +34,7 @@ public class YellowButtonFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_yellow_button, container, false);
         button = rootView.findViewById(R.id.yellowButton);
+        button.setOnClickListener(view -> mListener.onYellowButtonClick());
         return rootView;
     }
 

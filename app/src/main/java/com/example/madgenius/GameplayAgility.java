@@ -28,7 +28,9 @@ import java.util.Random;
 public class GameplayAgility extends AppCompatActivity implements RedButtonFragment.OnFragmentInteractionListener,
         SwitchFragment.OnFragmentInteractionListener,
         BlueButtonFragment.OnFragmentInteractionListener,
-        SeekBarFragment.OnFragmentInteractionListener {
+        SeekBarFragment.OnFragmentInteractionListener,
+        YellowButtonFragment.OnFragmentInteractionListener,
+        GreenButtonFragment.OnFragmentInteractionListener {
     private CountDownTimer countdown;
     private ProgressBar time;
     private TextView pointTextView, speedTextView;
@@ -36,10 +38,11 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
     private boolean fragmentsDisplayed = false;
     private final String FRAG_DISPLAY_TAG = "fragments_displayed";
     private final String POINTS_TAG = "points";
-    private String[] commands = {"Press the red button", "Press the blue button", "Shake the phone", "Turn your phone upside down", "Tap the front of your phone", "Set bar to ", "Switch the toggle"};
-    private String[] codes = {"RED", "BLUE", "SENSOR_SHAKE", "SENSOR_UPSIDE", "SENSOR_PROXIMITY", "SEEK", "SWITCH"};
-    String[] fragClasses = new String[]{"RedButtonFragment", "SwitchFragment", "BlueButtonFragment", "SeekBarFragment"};
-    int[] fragLayouts = new int[]{R.id.fragment_container_1, R.id.fragment_container_2, R.id.fragment_container_3, R.id.fragment_container_5};
+    private String[] commands = {"Press the red button", "Press the blue button", "Press the yellow button", "Press the green button", "Shake the phone", "Turn your phone upside down", "Tap the front of your phone", "Set bar to ", "Switch the toggle"};
+    private String[] codes = {"RED", "BLUE", "YELLOW", "GREEN", "SENSOR_SHAKE", "SENSOR_UPSIDE", "SENSOR_PROXIMITY", "SEEK", "SWITCH"};
+
+    String[] fragClasses = new String[]{"RedButtonFragment", "SwitchFragment", "BlueButtonFragment", "GreenButtonFragment", "YellowButtonFragment", "SeekBarFragment"};
+    int[] fragLayouts = new int[]{R.id.fragment_container_1, R.id.fragment_container_2, R.id.fragment_container_3, R.id.fragment_container_4, R.id.fragment_container_8,  R.id.fragment_container_5};
     private String requiredAction;
     private int points;
 
@@ -193,6 +196,20 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
     }
 
     @Override
+    public void onGreenButtonClick() {
+        final MediaPlayer mp = MediaPlayer.create(this, R.raw.click);
+        mp.start();
+        executeAction("GREEN");
+    }
+
+    @Override
+    public void onYellowButtonClick() {
+        final MediaPlayer mp = MediaPlayer.create(this, R.raw.click);
+        mp.start();
+        executeAction("YELLOW");
+    }
+
+    @Override
     public void onSeekBarUpdate(int val) {
         final MediaPlayer mp = MediaPlayer.create(this, R.raw.click);
         mp.start();
@@ -289,4 +306,5 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
         });
         dialog.show();
     }
+
 }
