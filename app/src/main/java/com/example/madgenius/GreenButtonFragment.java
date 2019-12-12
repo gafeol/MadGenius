@@ -1,6 +1,7 @@
 package com.example.madgenius;
 
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -14,15 +15,15 @@ import android.widget.Button;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link BlueButtonFragment.OnFragmentInteractionListener} interface
+ * {@link GreenButtonFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
  */
-public class BlueButtonFragment extends Fragment {
+public class GreenButtonFragment extends Fragment {
 
     private Button button;
     private OnFragmentInteractionListener mListener;
 
-    public BlueButtonFragment() {
+    public GreenButtonFragment() {
         // Required empty public constructor
     }
 
@@ -31,14 +32,14 @@ public class BlueButtonFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View rootView = inflater.inflate(R.layout.fragment_blue_button, container, false);
-        button = rootView.findViewById(R.id.blueButton);
-        button.setOnClickListener(view -> mListener.onBlueButtonClick());
+        final View rootView = inflater.inflate(R.layout.fragment_green_button, container, false);
+        button = rootView.findViewById(R.id.greenButton);
+        button.setOnClickListener(view -> mListener.onGreenButtonClick());
         return rootView;
     }
 
-   interface OnFragmentInteractionListener {
-        void onBlueButtonClick();
+    public interface OnFragmentInteractionListener {
+        void onGreenButtonClick();
     }
 
     @Override
@@ -58,6 +59,6 @@ public class BlueButtonFragment extends Fragment {
         mListener = null;
     }
 
+    public static GreenButtonFragment newInstance() { return new GreenButtonFragment(); }
 
-    public static BlueButtonFragment newInstance() { return new BlueButtonFragment(); }
 }

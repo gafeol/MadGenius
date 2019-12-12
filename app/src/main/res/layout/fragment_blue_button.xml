@@ -9,7 +9,7 @@
 
     <Button
         android:id="@+id/blueButton"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:background="#00BCD4" />
+        android:layout_width="@dimen/fragment_dimension"
+        android:layout_height="@dimen/fragment_dimension"
+        android:background="#2196F3" />
 </FrameLayout>

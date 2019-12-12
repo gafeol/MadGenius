@@ -3,13 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="12dp"
-    tools:context=".RedButtonFragment">
+    tools:context=".GreenButtonFragment">
 
     <Button
-        android:id="@+id/redButton"
+        android:id="@+id/greenButton"
+        android:background="@android:color/holo_green_dark"
         android:layout_width="@dimen/fragment_dimension"
-        android:layout_height="@dimen/fragment_dimension"
-        android:background="@android:color/holo_red_dark" />
-
+        android:layout_height="@dimen/fragment_dimension"/>
 </FrameLayout>
