@@ -14,9 +14,11 @@
         <activity android:name=".ScoreChart"
             android:parentActivityName=".Scoreboard"/>
         <activity android:name=".GameplayAgility"
-            android:parentActivityName=".Menu"/>
+            android:parentActivityName=".Menu"
+            android:screenOrientation="portrait"/>
         <activity android:name=".GameplayMemory"
-            android:parentActivityName=".Menu"/>
+            android:parentActivityName=".Menu"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Scoreboard"
             android:parentActivityName=".Menu" />

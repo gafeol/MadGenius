@@ -251,6 +251,8 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
             return;
         Log.d("ACTION", "required " + requiredAction + " action executed " + code);
         if(code.equals(requiredAction)){
+            if(code.contains("SENSOR"))
+                MediaPlayer.create(this, R.raw.correct).start();
             this.countdown.cancel();
             setPoints(points+1);
             getNewCommand();

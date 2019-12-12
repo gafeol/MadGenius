@@ -224,6 +224,8 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
             if (code.equals(trainActions.peek())) {
                 trainActions.remove();
                 trainMessages.remove();
+                if(code.contains("SENSOR"))
+                    MediaPlayer.create(this, R.raw.correct).start();
                 if(trainActions.isEmpty())
                     startGame();
                 else
@@ -243,6 +245,8 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
                 return;
             if (code.equals(requiredActions.peek())) {
                 requiredActions.remove();
+                if(code.contains("SENSOR"))
+                    MediaPlayer.create(this, R.raw.correct).start();
                 if (requiredActions.isEmpty()) {
                     setPoints(numActions);
                     numActions++;
