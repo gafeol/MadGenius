@@ -116,7 +116,7 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
         TextView commandDisplay = findViewById(R.id.txtCommands);
         commandDisplay.setText(actionMessage);
 
-        double maxTime = 4 - speed + 1;
+        double maxTime = 5 - speed + 1;
         time.setMax((int)(maxTime*10));
         time.setProgress((int)(maxTime*10));
 

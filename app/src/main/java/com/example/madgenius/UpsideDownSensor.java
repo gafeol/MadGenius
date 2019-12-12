@@ -55,7 +55,7 @@ public class UpsideDownSensor implements SensorEventListener {
     @Override
     public void onSensorChanged(SensorEvent event) {
         long curTime = System.currentTimeMillis();
-        if ((curTime - lstUpdate) > 500) {
+        if ((curTime - lstUpdate) > 200) {
             float x = event.values[0]/SensorManager.GRAVITY_EARTH;
             float y = event.values[1]/SensorManager.GRAVITY_EARTH;
             float z = event.values[2]/SensorManager.GRAVITY_EARTH;
