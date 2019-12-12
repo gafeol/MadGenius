@@ -28,17 +28,19 @@ import java.util.Random;
 public class GameplayMemory extends AppCompatActivity implements  RedButtonFragment.OnFragmentInteractionListener,
                                                                     SwitchFragment.OnFragmentInteractionListener,
                                                                     BlueButtonFragment.OnFragmentInteractionListener,
-                                                                    SeekBarFragment.OnFragmentInteractionListener {
+                                                                    SeekBarFragment.OnFragmentInteractionListener,
+                                                                    YellowButtonFragment.OnFragmentInteractionListener,
+                                                                    GreenButtonFragment.OnFragmentInteractionListener {
     private TextView pointTextView;
     private int numActions = 1;
     private final String FRAG_DISPLAY_TAG = "fragments_displayed", NUM_ACTIONS_TAG= "num_actions";
     private boolean fragmentsDisplayed;
     private Boolean isUserRepeating = false;
     private ProgressBar steps;
-    private String[] commands = {"Press the red button", "Press the blue button", "Shake the phone", "Turn your phone upside down", "Tap the front of your phone", "Set bar to ", "Switch the toggle"};
-    private String[] codes = {"RED", "BLUE", "SENSOR_SHAKE", "SENSOR_UPSIDE", "SENSOR_PROXIMITY", "SEEK", "SWITCH"};
-    String[] fragClasses = new String[]{"RedButtonFragment", "SwitchFragment", "BlueButtonFragment", "SeekBarFragment"};
-    int[] fragLayouts = new int[]{R.id.fragment_container_1, R.id.fragment_container_2, R.id.fragment_container_3, R.id.fragment_container_5};
+    private String[] commands = {"Press the red button", "Press the blue button", "Press the yellow button", "Press the green button", "Shake the phone", "Turn your phone upside down", "Tap the front of your phone", "Set bar to ", "Switch the toggle"};
+    private String[] codes = {"RED", "BLUE", "YELLOW", "GREEN", "SENSOR_SHAKE", "SENSOR_UPSIDE", "SENSOR_PROXIMITY", "SEEK", "SWITCH"};
+    String[] fragClasses = new String[]{"GreenButtonFragment", "YellowButtonFragment", "RedButtonFragment", "SwitchFragment", "BlueButtonFragment", "SeekBarFragment"};
+    int[] fragLayouts = new int[]{R.id.fragment_container_1, R.id.fragment_container_2, R.id.fragment_container_3, R.id.fragment_container_4, R.id.fragment_container_8, R.id.fragment_container_5};
     private Queue<String> requiredActions, trainActions;
     private Queue<String> trainMessages;
 
@@ -310,6 +312,21 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
         mp.start();
         executeAction("RED");
     }
+
+    @Override
+    public void onGreenButtonClick() {
+        final MediaPlayer mp = MediaPlayer.create(this, R.raw.click);
+        mp.start();
+        executeAction("GREEN");
+    }
+
+    @Override
+    public void onYellowButtonClick() {
+        final MediaPlayer mp = MediaPlayer.create(this, R.raw.click);
+        mp.start();
+        executeAction("YELLOW");
+    }
+
     @Override
     public void onSeekBarUpdate(int val) {
         final MediaPlayer mp = MediaPlayer.create(this, R.raw.click);
