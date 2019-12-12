@@ -32,7 +32,8 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
         SeekBarFragment.OnFragmentInteractionListener {
     private CountDownTimer countdown;
     private ProgressBar time;
-    private TextView pointTextView;
+    private TextView pointTextView, speedTextView;
+    private double speed = 0.9;
     private boolean fragmentsDisplayed = false;
     private final String FRAG_DISPLAY_TAG = "fragments_displayed";
     private final String POINTS_TAG = "points";
@@ -50,6 +51,7 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
         setContentView(R.layout.activity_gameplay_agility);
         pointTextView = findViewById(R.id.pointTextView);
         time = findViewById(R.id.pgbTime);
+        speedTextView = findViewById(R.id.speedTextView);
 
         setPoints(0);
         fragmentsDisplayed = false;
@@ -94,6 +96,8 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
     }
 
     public void getNewCommand() {
+        speed += 0.1;
+        speedTextView.setText(String.format("Speed: %.1f", speed));
         Random rand = new Random();
         int randomNum = rand.nextInt(this.commands.length);
         requiredAction = this.codes[randomNum];
@@ -101,7 +105,7 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
         if (requiredAction == "SEEK") {
             SeekBarFragment sbFrag = new SeekBarFragment();
             int previousValue = sbFrag.seekBarValue;
-            int randomVal = 0;
+            int randomVal;
             final int SEEKBAR_MAX = 10;
             do {
                 randomVal = rand.nextInt(SEEKBAR_MAX + 1);
@@ -112,11 +116,11 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
         TextView commandDisplay = findViewById(R.id.txtCommands);
         commandDisplay.setText(actionMessage);
 
-        int maxTime = 4;
-        time.setMax(maxTime*10);
-        time.setProgress(maxTime*10);
+        double maxTime = 4 - speed + 1;
+        time.setMax((int)(maxTime*10));
+        time.setProgress((int)(maxTime*10));
 
-        countdown = new CountDownTimer((maxTime*1000)+150, 100) {
+        countdown = new CountDownTimer((int)(maxTime*1000)+100, 100) {
             public void onTick(long millisUntilFinished) {
                 onTimeIncrement();
             }
@@ -155,15 +159,6 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
     public void onSaveInstanceState(@NonNull Bundle outState) {
         outState.putBoolean(FRAG_DISPLAY_TAG, fragmentsDisplayed);
         super.onSaveInstanceState(outState);
-    }
-
-    private void display(String className, int frameLayout) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-        String fullClassName = "com.example.madgenius." + className;
-        Class fragClass = Class.forName(fullClassName);
-        Object fragment = fragClass.newInstance();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(frameLayout, (Fragment) fragment).commit();
     }
 
     public void display(String[] className, int[] frameLayouts) throws ClassNotFoundException, InstantiationException, IllegalAccessException {

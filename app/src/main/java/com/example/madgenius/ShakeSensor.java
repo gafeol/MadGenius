@@ -15,7 +15,7 @@ public class ShakeSensor implements SensorEventListener {
     private Sensor sensor;
     private long lstUpdate;
     private float[] lstAcc = new float[3];
-    private static final float SHAKE_THRESHOLD_GRAVITY = 4.0F;
+    private static final float SHAKE_THRESHOLD_GRAVITY = 3.5F;
     private Context context = null;
     public boolean isShaking = false;
 
