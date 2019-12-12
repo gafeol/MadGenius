@@ -7,9 +7,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
-import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Color;
 import android.hardware.SensorManager;
 import android.media.MediaPlayer;
 import android.os.Build;
@@ -22,7 +20,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayDeque;
 import java.util.Queue;
@@ -39,7 +36,7 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
     private Boolean isUserRepeating = false;
     private ProgressBar steps;
     private String[] commands = {"Press the red button", "Press the blue button", "Shake the phone", "Turn your phone upside down", "Tap the front of your phone", "Set bar to ", "Switch the toggle"};
-    private String[] codes = {"RED", "BLUE", "SHAKE", "UPSIDE", "PROXIMITY", "SEEK", "SWITCH"};
+    private String[] codes = {"RED", "BLUE", "SENSOR_SHAKE", "SENSOR_UPSIDE", "SENSOR_PROXIMITY", "SEEK", "SWITCH"};
     String[] fragClasses = new String[]{"RedButtonFragment", "SwitchFragment", "BlueButtonFragment", "SeekBarFragment"};
     int[] fragLayouts = new int[]{R.id.fragment_container_1, R.id.fragment_container_2, R.id.fragment_container_3, R.id.fragment_container_5};
     private Queue<String> requiredActions, trainActions;
@@ -200,7 +197,7 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
         saveButton.setOnClickListener(view -> {
             String username = usernameEditText.getText().toString();
             if(username.isEmpty()){
-                Toast.makeText(GameplayMemory.this, "Please fill your username", Toast.LENGTH_SHORT).show();
+                usernameEditText.setError("Please fill your username");
             }
             else {
                 ScoreViewModel scoreViewModel = ViewModelProviders.of(this).get(ScoreViewModel.class);
@@ -272,7 +269,7 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
         ProximitySensor proximitySensor = new ProximitySensor(sensorManager);
         proximitySensor.setVariableChangeListener(isClose -> {
             if(isClose)
-                executeAction("PROXIMITY");
+                executeAction("SENSOR_PROXIMITY");
         });
     }
 
@@ -281,7 +278,7 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
         UpsideDownSensor upsideDownSensor = new UpsideDownSensor(sensorManager);
         upsideDownSensor.setVariableChangeListener(isUpsideDown -> {
             if(isUpsideDown)
-                executeAction("UPSIDE");
+                executeAction("SENSOR_UPSIDE");
         });
     }
 
@@ -290,7 +287,7 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
         ShakeSensor shake = new ShakeSensor(sensorManager);
         shake.setVariableChangeListener(isShaking -> {
             if(isShaking)
-                executeAction("SHAKE");
+                executeAction("SENSOR_SHAKE");
         });
     }
 
