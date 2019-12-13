@@ -43,20 +43,26 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toggleButton"
+        app:layout_constraintBottom_toTopOf="@id/scrollView"
         android:text="@string/best_memory" />
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview"
+    <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_alignParentEnd="true"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bestof"
-        app:layout_constraintVertical_bias="0.0"
-        tools:listitem="@layout/recyclerview_item" />
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/scoreDetails"
+        app:layout_constraintTop_toBottomOf="@+id/bestof">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            tools:listitem="@layout/recyclerview_item" />
+    </ScrollView>
 
     <Button
         android:id="@+id/scoreDetails"
@@ -67,6 +73,7 @@
         android:onClick="scoreChartRequest"
         android:text="@string/button_details_text"
         style="@style/styled_button"
+        app:layout_constraintTop_toBottomOf="@id/scrollView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
