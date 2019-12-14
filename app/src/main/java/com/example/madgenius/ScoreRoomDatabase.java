@@ -37,6 +37,7 @@ public abstract class ScoreRoomDatabase extends RoomDatabase {
     private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
 
         private final ScoreDao mDao;
+
         /*
         String[] usernames = {"cobra","dolphin", "crocodile", "cobra", "cobra", "asdlaksj", "asd", "12lkj"};
         double[] points = {3,0.12, 13, 4, 2, 4.1, 1, 1};

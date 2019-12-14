@@ -70,7 +70,7 @@ public class ScoreChart extends AppCompatActivity {
         }
 
         /* Line data settings */
-        LineDataSet lineData = new LineDataSet(entries, "Variable");
+        LineDataSet lineData = new LineDataSet(entries, "Points");
         lineData.setAxisDependency(YAxis.AxisDependency.LEFT); //default
         lineData.setCircleColor(getResources().getColor(R.color.colorAccent));
         lineData.setColor(getResources().getColor(R.color.colorAccent));
@@ -78,6 +78,10 @@ public class ScoreChart extends AppCompatActivity {
         lineData.setCircleRadius(10f);
         lineData.setValueTextSize(20f);
         lineData.setLineWidth(2f);
+
+
+
+
 
         /* X axis settings */
         XAxis Xaxis = scoreChart.getXAxis();

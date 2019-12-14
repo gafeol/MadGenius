@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/ic_lab_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".ScoreChart"
             android:parentActivityName=".Scoreboard"/>
         <activity android:name=".GameplayAgility"
@@ -19,6 +20,7 @@
         <activity android:name=".GameplayMemory"
             android:parentActivityName=".Menu"
             android:screenOrientation="portrait"/>
+
         <activity
             android:name=".Scoreboard"
             android:parentActivityName=".Menu" />
@@ -34,4 +36,5 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
+
 </manifest>
