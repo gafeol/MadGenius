@@ -9,6 +9,7 @@
     <Button
         android:id="@+id/greenButton"
         android:background="@android:color/holo_green_dark"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
         android:layout_width="@dimen/fragment_dimension"
         android:layout_height="@dimen/fragment_dimension"/>
 </FrameLayout>

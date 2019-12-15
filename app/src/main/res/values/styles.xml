@@ -23,4 +23,9 @@
         <item name="android:padding">4dp</item>
     </style>
 
+    <style name="ripple_button">
+        <item name="android:background">@drawable/ripple</item>
+        <item name="android:padding">4dp</item>
+    </style>
+
 </resources>

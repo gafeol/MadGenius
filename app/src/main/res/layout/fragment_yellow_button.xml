@@ -10,6 +10,7 @@
         android:id="@+id/yellowButton"
         android:layout_width="@dimen/fragment_dimension"
         android:layout_height="@dimen/fragment_dimension"
-        android:background="#FFEB3B"/>
+        android:background="#FFEB3B"
+        android:foreground="?attr/selectableItemBackgroundBorderless" />
 
 </FrameLayout>

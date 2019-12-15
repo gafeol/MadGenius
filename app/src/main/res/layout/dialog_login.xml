@@ -39,21 +39,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <Button
-            android:id="@+id/saveButton"
-            android:layout_weight="1"
-            android:text="@string/save_button"
-            android:layout_margin="8dp"
-            style="@style/styled_button"
-            android:drawableStart="@drawable/ic_save"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <Button
             android:id="@+id/cancelButton"
             android:layout_weight="1"
             android:text="@string/cancel_button"
             android:layout_margin="8dp"
             style="@style/styled_button"
             android:drawableStart="@drawable/ic_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/saveButton"
+            android:layout_weight="1"
+            android:text="@string/save_button"
+            android:layout_margin="8dp"
+            style="@style/styled_button"
+            android:drawableStart="@drawable/ic_save"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>

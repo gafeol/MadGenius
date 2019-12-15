@@ -10,6 +10,7 @@
         android:id="@+id/redButton"
         android:layout_width="@dimen/fragment_dimension"
         android:layout_height="@dimen/fragment_dimension"
-        android:background="@android:color/holo_red_dark" />
+        android:background="@android:color/holo_red_dark"
+        android:foreground="?attr/selectableItemBackgroundBorderless"/>
 
 </FrameLayout>

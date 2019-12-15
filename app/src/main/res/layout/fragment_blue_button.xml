@@ -11,5 +11,7 @@
         android:id="@+id/blueButton"
         android:layout_width="@dimen/fragment_dimension"
         android:layout_height="@dimen/fragment_dimension"
-        android:background="#2196F3" />
+        android:background="#2196F3"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        />
 </FrameLayout>
