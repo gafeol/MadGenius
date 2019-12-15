@@ -16,4 +16,18 @@
     <string name="save_button">Save</string>
     <string name="write_username">Write your username to save your result:</string>
     <string name="save_result_message">Save result?</string>
+    <string name="menu_image_desc">Lab glassware with liquids of different colors.</string>
+    <string name="score_chart_title">Score Chart</string>
+    <string name="score_chart_message_title">Detailed Score Chart</string>
+    <string name="find_chart">Find Chart</string>
+    <string name="save_username_checkbox">Save username?</string>
+    <string name="username_hint">username...</string>
+    <string name="score_chart_explanation">Enter your username to see detailed score charts of your performance</string>
+    <string name="cancel">Cancel</string>
+    <string name="username_checkbox">Save username for next games?</string>
+    <string name="action_message">LET\'S DO IT!</string>
+    <string name="placeholder_number_actions">Now you\'ll play with</string>
+    <string name="congratulations_message">Congratulations! Right sequence!</string>
+    <string name="clicking_image_desc">Person clicking button on their phone.</string>
+    <string name="trophy_image_desc">Trophy might be displayed on this position.</string>
 </resources>

@@ -12,8 +12,8 @@
         android:background="@color/colorPrimaryDark"
         android:gravity="center"
         android:padding="8dp"
-        android:text="Detailed Score Chart"
-        android:textSize="24dp" />
+        android:text="@string/score_chart_message_title"
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/DialogChartSubTitle"
@@ -22,7 +22,7 @@
         android:layout_marginTop="8dp"
         android:gravity="center"
         android:padding="8dp"
-        android:text="Enter your username to see detailed score charts of your performance"
+        android:text="@string/score_chart_explanation"
         android:textSize="18sp" />
 
     <EditText
@@ -31,8 +31,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="username..."
-        android:inputType="textPersonName" />
+        android:hint="@string/username_hint"
+        android:inputType="textPersonName"
+        android:importantForAutofill="no" />
 
     <CheckBox
         android:id="@+id/saveUsernameCheckBox"
@@ -40,7 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:checked="true"
-        android:text="Save username?" />
+        android:text="@string/save_username_checkbox" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -49,24 +50,25 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/ButtonFind"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:layout_weight="1"
-            style="@style/styled_button"
-            android:drawableLeft="@drawable/ic_search"
-            android:text="Find Chart" />
-
-        <Button
             android:id="@+id/ButtonCancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:layout_weight="1"
             style="@style/styled_button"
-            android:drawableLeft="@drawable/ic_cancel"
-            android:text="Cancel" />
+            android:drawableStart="@drawable/ic_cancel"
+            android:text="@string/cancel" />
+
+        <Button
+            android:id="@+id/ButtonFind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_weight="1"
+            style="@style/styled_button"
+            android:drawableStart="@drawable/ic_search"
+            android:text="@string/find_chart" />
+
     </LinearLayout>
 
 </LinearLayout>

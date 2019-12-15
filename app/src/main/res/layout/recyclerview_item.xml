@@ -7,7 +7,8 @@
         android:id="@+id/imgView"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:layout_weight="0" />
+        android:layout_weight="0"
+        android:contentDescription="@string/trophy_image_desc" />
 
     <TextView
         android:id="@+id/usernameTextView"

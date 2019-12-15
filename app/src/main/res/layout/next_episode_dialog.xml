@@ -13,8 +13,9 @@
         android:layout_marginTop="8dp"
         android:layout_weight="1"
         android:fontFamily="@font/anton"
-        android:text="Congratulations! Right sequence!"
+        android:text="@string/congratulations_message"
         android:textAlignment="center"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,7 +27,8 @@
         android:layout_marginTop="16dp"
         android:layout_weight="1"
         android:fontFamily="@font/anton"
-        android:text=" Now you'll play with"
+        android:text="@string/placeholder_number_actions"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
@@ -36,6 +38,7 @@
         android:layout_width="150dp"
         android:layout_height="158dp"
         android:layout_marginTop="16dp"
+        android:contentDescription="@string/clicking_image_desc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt1"
@@ -49,13 +52,14 @@
         android:layout_marginBottom="16dp"
         android:clickable="true"
         android:fontFamily="@font/anton"
-        android:text="LET'S DO IT!"
+        android:text="@string/action_message"
         android:textAlignment="center"
         android:textColor="#fcbf4a"
         android:textStyle="bold"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtActionsNumber"
-        app:layout_constraintVertical_bias="0.50" />
+        android:focusable="true" />
 </androidx.constraintlayout.widget.ConstraintLayout>
