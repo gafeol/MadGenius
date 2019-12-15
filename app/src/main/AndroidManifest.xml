@@ -22,10 +22,10 @@
         <activity
             android:name=".Scoreboard"
             android:parentActivityName=".Menu" />
-        <activity android:name=".Menu">
+        <activity android:name=".Menu"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
