@@ -30,4 +30,6 @@
     <string name="congratulations_message">Congratulations! Right sequence!</string>
     <string name="clicking_image_desc">Person clicking button on their phone.</string>
     <string name="trophy_image_desc">Trophy might be displayed on this position.</string>
+    <string name="login_title">Login</string>
+    <string name="login_message">Create an username to save your game results</string>
 </resources>

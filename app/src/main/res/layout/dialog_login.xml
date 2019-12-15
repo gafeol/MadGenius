@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/titleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:background="@color/colorPrimaryDark"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="@string/login_title"
+        android:textColor="@color/colorAccent"
+        android:textSize="24sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:padding="8dp"
+        android:text="@string/login_message"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/usernameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/username_hint"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:padding="8dp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/saveButton"
+            android:layout_weight="1"
+            android:text="@string/save_button"
+            android:layout_margin="8dp"
+            style="@style/styled_button"
+            android:drawableStart="@drawable/ic_save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/cancelButton"
+            android:layout_weight="1"
+            android:text="@string/cancel_button"
+            android:layout_margin="8dp"
+            style="@style/styled_button"
+            android:drawableStart="@drawable/ic_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</LinearLayout>

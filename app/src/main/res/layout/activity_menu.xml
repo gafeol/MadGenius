@@ -31,6 +31,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_logo" />
 
+    <TextView
+        android:id="@+id/loginTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:fontFamily="@font/anton"
+        android:onClick="loginMessage"
+        android:textColor="@color/colorAccent"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/helloTextView" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -48,20 +62,20 @@
             style="@style/styled_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/agility_mode"
-            android:onClick="agility_onClick"
             android:layout_margin="8dp"
-            />
+            android:drawableStart="@drawable/ic_lightning"
+            android:onClick="agility_onClick"
+            android:text="@string/agility_mode" />
 
         <Button
             android:id="@+id/btn_memory"
             style="@style/styled_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="memory_onClick"
-            android:text="@string/memory_mode"
             android:layout_margin="8dp"
-            />
+            android:onClick="memory_onClick"
+            android:drawableStart="@drawable/ic_brain"
+            android:text="@string/memory_mode" />
     </LinearLayout>
 
 
@@ -87,7 +101,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/helloTextView"
+        app:layout_constraintTop_toBottomOf="@+id/loginTextView"
         app:layout_constraintVertical_bias="0.2"
         app:srcCompat="@drawable/chemistry" />
 </androidx.constraintlayout.widget.ConstraintLayout>
