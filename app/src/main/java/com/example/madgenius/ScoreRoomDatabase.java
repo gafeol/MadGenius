@@ -10,7 +10,7 @@ import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 // When you modify the database schema, you'll need to update the version number and define a migration strategy
-@Database(entities = {Score.class}, version=2, exportSchema = false)
+@Database(entities = {Score.class}, version=3, exportSchema = false)
 public abstract class ScoreRoomDatabase extends RoomDatabase {
     public abstract ScoreDao scoreDao();
 
@@ -53,7 +53,8 @@ public abstract class ScoreRoomDatabase extends RoomDatabase {
          */
         @Override
         protected Void doInBackground(final Void... params) {
-            /*mDao.deleteAll();
+            /*
+            mDao.deleteAll();
             if(mDao.getAnyScore().length == 0){
                 for (int i = 0; i <= usernames.length - 1; i++) {
                     Score score = new Score(usernames[i], points[i], gameTypes[i]);

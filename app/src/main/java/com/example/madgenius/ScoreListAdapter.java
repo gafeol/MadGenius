@@ -1,6 +1,5 @@
 package com.example.madgenius;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +40,7 @@ public class ScoreListAdapter extends RecyclerView.Adapter<ScoreListAdapter.Scor
         if (mScores != null) {
             Score current = mScores.get(position);
             holder.usernameTextView.setText(current.getUsername());
-            holder.scoreTextView.setText(Double.toString(current.getPoints()));
+            holder.scoreTextView.setText(Integer.toString(current.getPoints()));
             if(position== 0){
                 holder.imgView.setImageResource(R.drawable.first);
             }

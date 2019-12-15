@@ -24,13 +24,13 @@ public class ScoreRepository {
     LiveData<List<Score>> getAllScoresOrdered(String username){ return scoreDao.getOrderedScores(username); }
     LiveData<List<Score>> getAllScores(boolean gameType) { return scoreDao.getScores(gameType);}
     LiveData<List<Score>> getAllScoresOrdered(boolean gameType) { return scoreDao.getOrderedScores(gameType);}
-    LiveData<List<Double>> getAllScores(String username, boolean gameType) { return scoreDao.getScores(username, gameType);}
-    LiveData<List<Double>> getAllScoresOrdered(String username, boolean gameType) { return scoreDao.getOrderedScores(username, gameType);}
+    LiveData<List<Integer>> getAllScores(String username, boolean gameType) { return scoreDao.getScores(username, gameType);}
+    LiveData<List<Integer>> getAllScoresOrdered(String username, boolean gameType) { return scoreDao.getOrderedScores(username, gameType);}
 
 
     Score getHighestScore() { return scoreDao.getHighestScore(); }
     Score getHighestScore(String username){ return scoreDao.getHighestScore(username); }
-    Double getHighestScore(String username, boolean gameType) { return scoreDao.getHighestScore(username, gameType); }
+    Integer getHighestScore(String username, boolean gameType) { return scoreDao.getHighestScore(username, gameType); }
 
     private static class deleteAllAsyncTask extends AsyncTask<Void, Void, Void> {
         private ScoreDao mAsyncTaskDao;

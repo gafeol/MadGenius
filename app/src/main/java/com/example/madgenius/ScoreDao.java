@@ -35,10 +35,10 @@ public interface ScoreDao {
     LiveData<List<Score>> getOrderedScores(boolean gameType);
 
     @Query("SELECT points FROM score_table WHERE username = :username AND gameType = :gameType")
-    LiveData<List<Double>> getScores(String username, boolean gameType);
+    LiveData<List<Integer>> getScores(String username, boolean gameType);
 
     @Query("SELECT points FROM score_table WHERE username = :username AND gameType = :gameType ORDER BY points DESC")
-    LiveData<List<Double>> getOrderedScores(String username, boolean gameType);
+    LiveData<List<Integer>> getOrderedScores(String username, boolean gameType);
 
     @Query("SELECT * FROM score_table ORDER BY points DESC LIMIT 1")
     Score getHighestScore();
@@ -47,7 +47,7 @@ public interface ScoreDao {
     Score getHighestScore(String username);
 
     @Query("SELECT points FROM score_table WHERE username = :username AND gameType = :gameType ORDER BY points DESC LIMIT 1")
-    Double getHighestScore(String username, boolean gameType);
+    Integer getHighestScore(String username, boolean gameType);
 
     /** Used to check if there is any entry on the db
      * If length = 0, the db is empty, otherwise, it has entries

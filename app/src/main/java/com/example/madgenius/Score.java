@@ -17,7 +17,7 @@ public class Score {
     private String username;
     @NonNull
     @ColumnInfo(name = "points")
-    private double points;
+    private int points;
     /**
      * gameType false -> Agility game
      * gameType true -> Memory game
@@ -26,14 +26,14 @@ public class Score {
     @ColumnInfo(name="gameType")
     private boolean gameType;
 
-    public Score(@NonNull String username, @NonNull double points, @NonNull boolean gameType){
+    public Score(@NonNull String username, @NonNull int points, @NonNull boolean gameType){
         this.username = username;
         this.points = points;
         this.gameType = gameType;
     }
 
     @Ignore
-    public Score(int id, @NonNull String username, @NonNull double points, @NonNull boolean gameType){
+    public Score(int id, @NonNull String username, @NonNull int points, @NonNull boolean gameType){
         this.id = id;
         this.username = username;
         this.points = points;
@@ -47,7 +47,7 @@ public class Score {
         return this.username;
     }
 
-    public double getPoints() {
+    public int getPoints() {
         return this.points;
     }
 

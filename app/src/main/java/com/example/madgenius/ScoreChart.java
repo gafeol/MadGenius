@@ -38,7 +38,7 @@ public class ScoreChart extends AppCompatActivity {
         title.setText(username + "'s score Chart");
 
         scoreViewModel = ViewModelProviders.of(this).get(ScoreViewModel.class);
-        List<Double> listScores = new ArrayList<>();
+        List<Integer> listScores = new ArrayList<>();
         final ToggleButton toggle = (ToggleButton)findViewById(R.id.toggleButton2);
 
         toggle.setOnCheckedChangeListener((buttonView, isChecked) ->  {
@@ -59,7 +59,7 @@ public class ScoreChart extends AppCompatActivity {
 
     }
 
-    protected void plot(List<Double> scoreList){
+    protected void plot(List<Integer> scoreList){
         LineChart scoreChart = findViewById(R.id.chart);
         List<Entry> entries = new ArrayList<>();
 
