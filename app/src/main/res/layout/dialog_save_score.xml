@@ -6,16 +6,16 @@
 
     <TextView
         android:id="@+id/titleTextView"
-        android:text="@string/save_result_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textSize="24dp"
-        android:textColor="@color/colorAccent"
-        android:background="@color/colorPrimaryDark"
         android:layout_marginTop="8dp"
+        android:background="@color/colorPrimaryDark"
         android:gravity="center"
         android:padding="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:text="@string/save_result_message"
+        android:textColor="@color/colorAccent"
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/scoreTextView"
@@ -39,6 +39,14 @@
         android:layout_height="wrap_content"
         android:padding="8dp"
         android:hint="username..."/>
+
+    <CheckBox
+        android:id="@+id/saveUsernameCheckBox"
+        style="@android:style/Widget.DeviceDefault.Light.CompoundButton.CheckBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="Save username for next games?" />
 
     <LinearLayout
         android:orientation="horizontal"

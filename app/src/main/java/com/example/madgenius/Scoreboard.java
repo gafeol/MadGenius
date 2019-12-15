@@ -13,10 +13,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
 
@@ -24,14 +24,12 @@ public class Scoreboard extends AppCompatActivity {
 
     public static final String EXTRA_MESSAGE = "com.example.madgenius.username";
 
-
-
     @Override
     protected  void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scoreboard);
-        final TextView text = (TextView)findViewById(R.id.bestof);
-        final ToggleButton toggle = (ToggleButton)findViewById(R.id.toggleButton);
+        final TextView text = findViewById(R.id.bestof);
+        final ToggleButton toggle = findViewById(R.id.toggleButton);
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
         final ScoreListAdapter adapter = new ScoreListAdapter(this);
         recyclerView.setAdapter(adapter);
@@ -53,44 +51,33 @@ public class Scoreboard extends AppCompatActivity {
         });
     }
 
-
-
-
     public void scoreChartRequest(View view) {
             AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
             View messageView = getLayoutInflater().inflate(R.layout.dialog_chart_request, null);
             EditText usernameEditText = messageView.findViewById(R.id.usernameditText);
-
+            usernameEditText.setText(SavedInfo.getUsername(getApplicationContext()));
+            CheckBox saveUsernameCheckBox = messageView.findViewById(R.id.saveUsernameCheckBox);
             Button findChartButton = messageView.findViewById(R.id.ButtonFind);
             Button cancelButton = messageView.findViewById(R.id.ButtonCancel);
 
             mBuilder.setView(messageView);
             AlertDialog dialog = mBuilder.create();
 
-            findChartButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String username = usernameEditText.getText().toString();
-                    if(username.isEmpty()){
-                        Toast.makeText(getApplicationContext(), "Please enter username", Toast.LENGTH_SHORT).show();
-                    }
-                    else {
-                        Intent intent = new Intent(getApplicationContext(), ScoreChart.class);
-                        intent.putExtra(EXTRA_MESSAGE, username);
-                        startActivity(intent);
-                        dialog.dismiss();
-                    }
-                }
-
-
-            });
-
-            cancelButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+            findChartButton.setOnClickListener(v -> {
+                String username = usernameEditText.getText().toString();
+                if(username.isEmpty())
+                    usernameEditText.setError("Please fill your username");
+                else {
+                    if(saveUsernameCheckBox.isChecked())
+                        SavedInfo.saveUsername(getApplicationContext(), username);
+                    Intent intent = new Intent(getApplicationContext(), ScoreChart.class);
+                    intent.putExtra(EXTRA_MESSAGE, username);
+                    startActivity(intent);
                     dialog.dismiss();
                 }
             });
+
+            cancelButton.setOnClickListener(v -> dialog.dismiss());
             dialog.show();
         }
     }

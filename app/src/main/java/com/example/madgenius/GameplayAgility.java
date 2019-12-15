@@ -19,6 +19,7 @@ import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -279,24 +280,29 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
     private void scoreMessage(){
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(GameplayAgility.this);
         View messageView = getLayoutInflater().inflate(R.layout.dialog_save_score, null);
+
         EditText usernameEditText = messageView.findViewById(R.id.usernameEditText);
+        String savedUsername = SavedInfo.getUsername(getApplicationContext());
+        usernameEditText.setText(savedUsername);
+
         TextView pointsMessage = messageView.findViewById(R.id.scoreTextView);
         pointsMessage.setText("You solved " + points + " actions!");
 
+        CheckBox saveUsernameCheckBox = messageView.findViewById(R.id.saveUsernameCheckBox);
         Button saveButton = messageView.findViewById(R.id.saveButton);
         Button cancelButton = messageView.findViewById(R.id.cancelButton);
-
         mBuilder.setView(messageView);
         AlertDialog dialog = mBuilder.create();
 
         saveButton.setOnClickListener(view -> {
             String username = usernameEditText.getText().toString();
-            if(username.isEmpty()){
+            if(username.isEmpty())
                 usernameEditText.setError("Please fill your username");
-            }
             else {
                 ScoreViewModel scoreViewModel = ViewModelProviders.of(this).get(ScoreViewModel.class);
                 scoreViewModel.insert(new Score(username, points, false));
+                if(saveUsernameCheckBox.isChecked())
+                    SavedInfo.saveUsername(getApplicationContext(), username);
                 dialog.dismiss();
                 finish();
             }

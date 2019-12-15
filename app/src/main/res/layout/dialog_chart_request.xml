@@ -22,7 +22,7 @@
         android:layout_marginTop="8dp"
         android:gravity="center"
         android:padding="8dp"
-        android:text="Enter your username to see detailed score charts"
+        android:text="Enter your username to see detailed score charts of your performance"
         android:textSize="18sp" />
 
     <EditText
@@ -31,30 +31,41 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="Username"
+        android:hint="username..."
         android:inputType="textPersonName" />
+
+    <CheckBox
+        android:id="@+id/saveUsernameCheckBox"
+        style="@android:style/Widget.DeviceDefault.Light.CompoundButton.CheckBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="Save username?" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:orientation="horizontal"
-        android:padding="8dp">
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/ButtonFind"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_margin="8dp"
+            android:layout_weight="1"
+            style="@style/styled_button"
+            android:drawableLeft="@drawable/ic_search"
             android:text="Find Chart" />
 
         <Button
             android:id="@+id/ButtonCancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_margin="8dp"
+            android:layout_weight="1"
+            style="@style/styled_button"
+            android:drawableLeft="@drawable/ic_cancel"
             android:text="Cancel" />
     </LinearLayout>
 

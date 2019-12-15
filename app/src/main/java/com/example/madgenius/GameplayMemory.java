@@ -17,6 +17,7 @@ import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -186,7 +187,9 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(GameplayMemory.this);
         View messageView = getLayoutInflater().inflate(R.layout.dialog_save_score, null);
         EditText usernameEditText = messageView.findViewById(R.id.usernameEditText);
+        usernameEditText.setText(SavedInfo.getUsername(getApplicationContext()));
         TextView pointsMessage = messageView.findViewById(R.id.scoreTextView);
+        CheckBox saveUsernameCheckBox = messageView.findViewById(R.id.saveUsernameCheckBox);
         int points = numActions-1;
         pointsMessage.setText("You memorized up to " + points + " instructions!");
 
@@ -204,6 +207,8 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
             else {
                 ScoreViewModel scoreViewModel = ViewModelProviders.of(this).get(ScoreViewModel.class);
                 scoreViewModel.insert(new Score(username, points, true));
+                if(saveUsernameCheckBox.isChecked())
+                    SavedInfo.saveUsername(getApplicationContext(), username);
                 dialog.dismiss();
                 finish();
             }
