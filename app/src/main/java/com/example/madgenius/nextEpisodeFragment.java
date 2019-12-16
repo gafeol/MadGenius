@@ -2,8 +2,6 @@ package com.example.madgenius;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +9,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.fragment.app.DialogFragment;
-
-import org.w3c.dom.Text;
 
 public class nextEpisodeFragment extends DialogFragment {
     private int numActions;
@@ -25,7 +21,7 @@ public class nextEpisodeFragment extends DialogFragment {
 
         // Inflate and set the layout for the dialog
         // Pass null as the parent view because its going in the dialog layout
-        View view = inflater.inflate(R.layout.next_episode_dialog, null);
+        View view = inflater.inflate(R.layout.dialog_next_episode, null);
         builder.setView(view);
         TextView txt = view.findViewById(R.id.txtActionsNumber);
         txt.setText(txt.getText() +" " +  numActions + " actions.");
