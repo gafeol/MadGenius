@@ -16,6 +16,7 @@ import android.widget.Button;
  * Activities that contain this fragment must implement the
  * {@link BlueButtonFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
+ * Implements the logic behind the blue button fragment.
  */
 public class BlueButtonFragment extends Fragment {
 

@@ -26,12 +26,18 @@ import android.widget.TextView;
 
 import java.util.Random;
 
+/**
+ * Class that implements the main logic behind the Agility game mode.
+ * Implements the listeners for all fragments used in the game.
+ * On each step of the game a fixed speed is set.
+ * Every new step increases the speed of the game by 0.1.
+ */
 public class GameplayAgility extends AppCompatActivity implements RedButtonFragment.OnFragmentInteractionListener,
-        SwitchFragment.OnFragmentInteractionListener,
-        BlueButtonFragment.OnFragmentInteractionListener,
-        SeekBarFragment.OnFragmentInteractionListener,
-        YellowButtonFragment.OnFragmentInteractionListener,
-        GreenButtonFragment.OnFragmentInteractionListener {
+                                                                    SwitchFragment.OnFragmentInteractionListener,
+                                                                    BlueButtonFragment.OnFragmentInteractionListener,
+                                                                    SeekBarFragment.OnFragmentInteractionListener,
+                                                                    YellowButtonFragment.OnFragmentInteractionListener,
+                                                                    GreenButtonFragment.OnFragmentInteractionListener {
     private CountDownTimer countdown;
     private ProgressBar time;
     private TextView pointTextView, speedTextView;
@@ -76,6 +82,7 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
         getNewCommand();
     }
 
+    // Sets point value and message during game.
     private void setPoints(int p) {
         points = p;
         if(p == 1)
@@ -176,47 +183,50 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
         fragmentTransaction.commit();
     }
 
+
+    public void playSound(int soundID){
+        MediaPlayer.create(this, soundID).start();
+    }
+
     @Override
     public void onSwitch(Boolean val) {
-        final MediaPlayer mp = MediaPlayer.create(this, R.raw.click);
-        mp.start();
+        playSound(R.raw.click);
         executeAction("SWITCH");
     }
     @Override
     public void onBlueButtonClick() {
-        final MediaPlayer mp = MediaPlayer.create(this, R.raw.click);
-        mp.start();
+        playSound(R.raw.click);
         executeAction("BLUE");
     }
 
     @Override
     public void onRedButtonClick() {
-        final MediaPlayer mp = MediaPlayer.create(this, R.raw.click);
-        mp.start();
+        playSound(R.raw.click);
         executeAction("RED");
     }
 
     @Override
     public void onGreenButtonClick() {
-        final MediaPlayer mp = MediaPlayer.create(this, R.raw.click);
-        mp.start();
+        playSound(R.raw.click);
         executeAction("GREEN");
     }
 
     @Override
     public void onYellowButtonClick() {
-        final MediaPlayer mp = MediaPlayer.create(this, R.raw.click);
-        mp.start();
+        playSound(R.raw.click);
         executeAction("YELLOW");
     }
 
     @Override
     public void onSeekBarUpdate(int val) {
-        final MediaPlayer mp = MediaPlayer.create(this, R.raw.click);
-        mp.start();
+        playSound(R.raw.click);
         executeAction("SEEK" + val);
     }
 
+    /**
+     * Function that sets up the proximity listener.
+     * Implements the required variable change listener.
+     */
     private void setProximity() {
         SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         ProximitySensor proximitySensor = new ProximitySensor(sensorManager);
@@ -226,6 +236,10 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
         });
     }
 
+    /**
+     * Function that sets up the upside down listener.
+     * Implements the required variable change listener.
+     */
     private void setUpsideDown() {
         SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         UpsideDownSensor upsideDownSensor = new UpsideDownSensor(sensorManager);
@@ -237,6 +251,7 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
 
     /**
      * Function that sets up a shaker listener.
+     * Implements the required variable change listener.
      */
     private void setShaker() {
         SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
@@ -253,7 +268,7 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
         Log.d("ACTION", "required " + requiredAction + " action executed " + code);
         if(code.equals(requiredAction)){
             if(code.contains("SENSOR"))
-                MediaPlayer.create(this, R.raw.correct).start();
+                playSound(R.raw.correct);
             this.countdown.cancel();
             setPoints(points+1);
             getNewCommand();

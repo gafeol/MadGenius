@@ -26,6 +26,21 @@ import java.util.ArrayDeque;
 import java.util.Queue;
 import java.util.Random;
 
+/**
+ * Class that implements the main logic behind the Memory game mode.
+ * Implements the listeners for all fragments used in the game.
+ *
+ * Controls the actions required to be done using queue of Strings (requiredActions), containing the
+ *  codes of the actions that must be performed.
+ *
+ * Each step of this game has a fixed number of actions (numActions).
+ * In the beginning of each step the method getNewCommands is invoked.
+ *
+ * Every step of the game has two phases, starting with a repetition of the actions the user must
+ *  perform, followed by the testing phase, where the user must execute the learned actions.
+ * The phase of the game is kept by "isUserRepeating". If true, the game is in the repetition phase,
+ *  otherwise, the game is in the testing phase.
+ */
 public class GameplayMemory extends AppCompatActivity implements  RedButtonFragment.OnFragmentInteractionListener,
                                                                     SwitchFragment.OnFragmentInteractionListener,
                                                                     BlueButtonFragment.OnFragmentInteractionListener,
@@ -74,9 +89,12 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
         steps = findViewById(R.id.pgbSteps);
         steps.setMax(numActions);
         steps.setProgress(0);
-        getNewCommands(); // Talvez isso tambem tenha que ser verificado no saveInstanceState
+        getNewCommands();
     }
 
+    /**
+     * Sets the points message during the game
+      */
     private void setPoints(int p) {
         if(p == 1)
             pointTextView.setText("Point: "+p);
@@ -85,6 +103,11 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
     }
 
 
+    /**
+     * Shuffles a given array "values" from the position 0 until the position "maxPosition"
+     * @param values
+     * @param maxPosition
+     */
     private void shuffle(int[] values, int maxPosition){
         Random rnd = new Random();
         for(int i=0;i<maxPosition;i++){
@@ -109,6 +132,15 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
         }
     }
 
+    /**
+     * Function that displays a given array of classes "className", on given FrameLayouts "frameLayouts".
+     * Dinamically inserts each classe on its corresponding frame layout.
+     * @param className
+     * @param frameLayouts
+     * @throws ClassNotFoundException
+     * @throws InstantiationException
+     * @throws IllegalAccessException
+     */
     public void display(String[] className, int[] frameLayouts) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -121,6 +153,10 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
         fragmentTransaction.commit();
     }
 
+
+    /**
+     * Resets UI, reinserting fragments and clearing the step bar.
+     */
     private void resetUI() {
         displayFragments();
         steps.setMax(numActions);
@@ -161,14 +197,14 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
             int randNum = rand.nextInt(this.commands.length);
             String requiredAction = codes[randNum];
             String actionMessage = commands[randNum];
-            if(requiredAction == "SEEK"){
+            if(requiredAction == "SEEK"){ // Generating random number to set the seekbar.
                 SeekBarFragment sbFrag = new SeekBarFragment();
                 int previousValue = sbFrag.seekBarValue;
                 final int SEEKBAR_MAX = 10;
-                int randomVal = 0;
+                int randomVal;
                 do {
                     randomVal = rand.nextInt(SEEKBAR_MAX + 1);
-                } while (previousValue == randomVal);
+                } while (previousValue == randomVal); // Doesn't repeat the same seekbar value two times in a row.
                 requiredAction += randomVal;
                 actionMessage += randomVal;
             }
@@ -233,7 +269,7 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
                 trainActions.remove();
                 trainMessages.remove();
                 if(code.contains("SENSOR"))
-                    MediaPlayer.create(this, R.raw.correct).start();
+                    playSound(R.raw.correct);
                 if(trainActions.isEmpty())
                     startGame();
                 else
@@ -254,7 +290,7 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
             if (code.equals(requiredActions.peek())) {
                 requiredActions.remove();
                 if(code.contains("SENSOR"))
-                    MediaPlayer.create(this, R.raw.correct).start();
+                    playSound(R.raw.correct);
                 if (requiredActions.isEmpty()) {
                     setPoints(numActions);
                     numActions++;
@@ -306,43 +342,41 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
     }
 
 
+    public void playSound(int soundID){
+        MediaPlayer.create(this, soundID).start();
+    }
+
     @Override
     public void onSwitch(Boolean val) {
-        final MediaPlayer mp = MediaPlayer.create(this, R.raw.click);
-        mp.start();
+        playSound(R.raw.click);
         executeAction("SWITCH");
     }
     @Override
     public void onBlueButtonClick() {
-        final MediaPlayer mp = MediaPlayer.create(this, R.raw.click);
-        mp.start();
+        playSound(R.raw.click);
         executeAction("BLUE");
     }
     @Override
     public void onRedButtonClick() {
-        final MediaPlayer mp = MediaPlayer.create(this, R.raw.click);
-        mp.start();
+        playSound(R.raw.click);
         executeAction("RED");
     }
 
     @Override
     public void onGreenButtonClick() {
-        final MediaPlayer mp = MediaPlayer.create(this, R.raw.click);
-        mp.start();
+        playSound(R.raw.click);
         executeAction("GREEN");
     }
 
     @Override
     public void onYellowButtonClick() {
-        final MediaPlayer mp = MediaPlayer.create(this, R.raw.click);
-        mp.start();
+        playSound(R.raw.click);
         executeAction("YELLOW");
     }
 
     @Override
     public void onSeekBarUpdate(int val) {
-        final MediaPlayer mp = MediaPlayer.create(this, R.raw.click);
-        mp.start();
+        playSound(R.raw.click);
         executeAction("SEEK"+val);
     }
 

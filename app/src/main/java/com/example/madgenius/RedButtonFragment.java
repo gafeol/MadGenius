@@ -14,6 +14,7 @@ import android.widget.Button;
 
 /**
  * A simple {@link Fragment} subclass.
+ * Implements the logic behind the red button fragment.
  */
 public class RedButtonFragment extends Fragment {
 

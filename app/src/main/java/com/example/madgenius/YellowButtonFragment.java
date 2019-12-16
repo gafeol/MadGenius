@@ -17,6 +17,7 @@ import android.widget.Button;
  * Activities that contain this fragment must implement the
  * {@link YellowButtonFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
+ * Implements the logic behind the yellow button fragment.
  */
 public class YellowButtonFragment extends Fragment {
 
