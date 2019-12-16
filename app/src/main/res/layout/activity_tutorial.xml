@@ -405,6 +405,27 @@
                 android:text="@string/tutorial_personal_scores"
                 android:textColor="@color/white"
                 android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/credits_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:background="#fcbf4a"
+                android:fontFamily="@font/anton"
+                android:paddingStart="8dp"
+                android:text="@string/credits_label"
+                android:textAlignment="center"
+                android:textSize="18sp" />
+            <TextView
+                android:id="@+id/credits_body"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/anton"
+                android:text="@string/credits_body"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
         </LinearLayout>
     </ScrollView>
 
