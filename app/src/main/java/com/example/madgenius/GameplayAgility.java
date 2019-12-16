@@ -265,7 +265,7 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
     private void executeAction(String code) {
         if(requiredAction == null || requiredAction.isEmpty())
             return;
-        Log.d("ACTION", "required " + requiredAction + " action executed " + code);
+        //Log.d("ACTION", "required " + requiredAction + " action executed " + code);
         if(code.equals(requiredAction)){
             if(code.contains("SENSOR"))
                 playSound(R.raw.correct);
