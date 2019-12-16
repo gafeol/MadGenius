@@ -54,4 +54,5 @@
     <string name="tutorial_scoreboard">From the main menu you can click on SCOREBOARD to check rankings for both memory and agility game modes.</string>
     <string name="tutorial_personal_scores_title">5. Personal Scores</string>
     <string name="tutorial_personal_scores">After checking the top scores on the SCOREBOARD you can also dive deeper in the game statistics and see your own detailed performance on a graph by clicking DETAILS and entering your username.</string>
+    <string name="check_the_scoreboard">Check the scoreboard</string>
 </resources>
