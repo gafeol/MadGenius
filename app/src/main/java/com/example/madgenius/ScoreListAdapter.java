@@ -1,5 +1,6 @@
 package com.example.madgenius;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,14 +42,20 @@ public class ScoreListAdapter extends RecyclerView.Adapter<ScoreListAdapter.Scor
             Score current = mScores.get(position);
             holder.usernameTextView.setText(current.getUsername());
             holder.scoreTextView.setText(Integer.toString(current.getPoints()));
-            if(position== 0){
+            if(position == 0){
+                holder.imgView.setVisibility(View.VISIBLE);
                 holder.imgView.setImageResource(R.drawable.first);
             }
             else if(position == 1){
+                holder.imgView.setVisibility(View.VISIBLE);
                 holder.imgView.setImageResource(R.drawable.second);
             }
             else if(position == 2){
+                holder.imgView.setVisibility(View.VISIBLE);
                 holder.imgView.setImageResource(R.drawable.third);
+            }
+            else{
+                holder.imgView.setVisibility(View.INVISIBLE);
             }
         } else {
             // Covers the case of data not being ready yet.
