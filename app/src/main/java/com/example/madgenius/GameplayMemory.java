@@ -284,7 +284,7 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
             }
         }
         else {
-            Log.d("ACTION", "required " + requiredActions.peek() + " action executed " + code);
+            //Log.d("ACTION", "required " + requiredActions.peek() + " action executed " + code);
             if(requiredActions.isEmpty())
                 return;
             if (code.equals(requiredActions.peek())) {

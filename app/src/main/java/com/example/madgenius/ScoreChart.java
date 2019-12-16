@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -55,20 +54,15 @@ public class ScoreChart extends AppCompatActivity {
             plot(listScores);
 
         });
-
-
     }
 
     protected void plot(List<Integer> scoreList){
         LineChart scoreChart = findViewById(R.id.chart);
         List<Entry> entries = new ArrayList<>();
-
         for(int i=0; i < scoreList.size(); i++){
             Entry entry = new Entry((float)i+1 ,scoreList.get(i).floatValue());
-            Log.d("X AXIS", String.valueOf((float)i+1));
             entries.add(entry);
         }
-
         /* Line data settings */
         LineDataSet lineData = new LineDataSet(entries, "Points");
         lineData.setAxisDependency(YAxis.AxisDependency.LEFT); //default
@@ -78,10 +72,6 @@ public class ScoreChart extends AppCompatActivity {
         lineData.setCircleRadius(10f);
         lineData.setValueTextSize(20f);
         lineData.setLineWidth(2f);
-
-
-
-
 
         /* X axis settings */
         XAxis Xaxis = scoreChart.getXAxis();
