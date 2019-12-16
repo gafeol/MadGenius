@@ -199,6 +199,9 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
         mBuilder.setView(messageView);
         AlertDialog dialog = mBuilder.create();
 
+        //Makes user unable to click out of the alert dialog
+        dialog.setCanceledOnTouchOutside(false);
+
         saveButton.setOnClickListener(view -> {
             String username = usernameEditText.getText().toString();
             if(username.isEmpty()){

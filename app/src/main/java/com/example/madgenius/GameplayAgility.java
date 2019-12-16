@@ -293,6 +293,8 @@ public class GameplayAgility extends AppCompatActivity implements RedButtonFragm
         Button cancelButton = messageView.findViewById(R.id.cancelButton);
         mBuilder.setView(messageView);
         AlertDialog dialog = mBuilder.create();
+        //Makes user unable to click out of the alert dialog
+        dialog.setCanceledOnTouchOutside(false);
 
         saveButton.setOnClickListener(view -> {
             String username = usernameEditText.getText().toString();
