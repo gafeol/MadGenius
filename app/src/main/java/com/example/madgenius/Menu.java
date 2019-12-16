@@ -20,6 +20,9 @@ public class Menu extends AppCompatActivity {
         setHelloMessage();
     }
 
+    /**
+     * Sets the message to greet user at the Menu
+     */
     private void setHelloMessage(){
         helloTextView = findViewById(R.id.helloTextView);
         loginTextView = findViewById(R.id.loginTextView);
@@ -33,6 +36,11 @@ public class Menu extends AppCompatActivity {
         }
     }
 
+
+    /**
+     * Dialog allowing user to login in the application.
+     * Works as an onClick function for loginTextView
+     */
     public void loginMessage(View v){
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
         View messageView = getLayoutInflater().inflate(R.layout.dialog_login, null);
@@ -51,18 +59,20 @@ public class Menu extends AppCompatActivity {
             if(username.isEmpty())
                 usernameEditText.setError("Please fill your username");
             else {
+                // Saves username for future use in the application
                 SavedInfo.saveUsername(getApplicationContext(), username);
                 setHelloMessage();
                 dialog.dismiss();
             }
         });
-
-        cancelButton.setOnClickListener(view -> {
-            dialog.dismiss();
-        });
+        cancelButton.setOnClickListener(view -> dialog.dismiss());
         dialog.show();
     }
 
+
+    /**
+     * On resume it is necessary to reset the Hello Message, since the username saved may have changed.
+     */
     @Override
     public void onResume() {
         super.onResume();

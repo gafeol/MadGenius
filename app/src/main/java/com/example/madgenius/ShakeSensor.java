@@ -1,28 +1,28 @@
 package com.example.madgenius;
 
-import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.widget.Toast;
 
-/** Class that retrieves shaking events.
- *
+/**
+ * Sensor class to check for the shake event.
+ * The sensor analysed here is the accelerometer.
+ * The "shake event" was defined as detecting a resulting acceleration of more than 3.5 the gravity of earth.
+ * This threshold was defined empirically.
+ * A VariableChangeListener interface was created so that other classes can implement any action
+ *  desired when the sensor value "isShaking" is changed.
  */
 public class ShakeSensor implements SensorEventListener {
     private SensorManager sensorManager;
     private Sensor sensor;
     private long lstUpdate;
-    private float[] lstAcc = new float[3];
     private static final float SHAKE_THRESHOLD_GRAVITY = 3.5F;
     public boolean isShaking = false;
 
 
     public ShakeSensor(SensorManager systemService){
         lstUpdate = 0;
-        for(int i=0;i<3;i++)
-            lstAcc[i] = 0;
         sensorManager = systemService;
         if (sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null){
             sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -66,8 +66,6 @@ public class ShakeSensor implements SensorEventListener {
             }
             else
                 setValue(false);
-            for(int axis=0;axis<3;axis++)
-                lstAcc[axis] = acc[axis];
             lstUpdate = curTime;
         }
     }
