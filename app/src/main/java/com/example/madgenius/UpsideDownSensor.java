@@ -6,6 +6,16 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import static java.lang.Math.abs;
 
+/**
+ * Sensor class to check for the Upside Down event.
+ * The sensor analysed here is the accelerometer.
+ * The "upside down event" was defined as detecting an acceleration on the y axis of less than -0.8
+ *  of the gravity acceleration, and absolute accelerations of less than 0.7 on the x and z axis.
+ *
+ * These thresholds were defined empirically.
+ * A VariableChangeListener interface was created so that other classes can implement any action
+ *  desired when the sensor value "isUpsideDown "isClose"" is changed.
+ */
 public class UpsideDownSensor implements SensorEventListener {
     private SensorManager sensorManager;
     private Sensor sensor;
