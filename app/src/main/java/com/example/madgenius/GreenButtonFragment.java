@@ -17,6 +17,7 @@ import android.widget.Button;
  * Activities that contain this fragment must implement the
  * {@link GreenButtonFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
+ * Implements the logic behind the green button fragment.
  */
 public class GreenButtonFragment extends Fragment {
 
