@@ -48,15 +48,25 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
                                                                     YellowButtonFragment.OnFragmentInteractionListener,
                                                                     GreenButtonFragment.OnFragmentInteractionListener {
     private TextView pointTextView;
+    private ProgressBar steps;
+
+    // The game starts with the memorization of a single action.
     private int numActions = 1;
+
     private final String FRAG_DISPLAY_TAG = "fragments_displayed", NUM_ACTIONS_TAG= "num_actions";
     private boolean fragmentsDisplayed;
+
+    //Variable that determines if user is learning the commands or playing.
     private Boolean isUserRepeating = false;
-    private ProgressBar steps;
+
+    // Each command has a message for the user ("commands") and a code ("codes").
     private String[] commands = {"Press the red button", "Press the blue button", "Press the yellow button", "Press the green button", "Shake the phone", "Turn your phone upside down", "Tap the front of your phone", "Set bar to ", "Switch the toggle"};
     private String[] codes = {"RED", "BLUE", "YELLOW", "GREEN", "SENSOR_SHAKE", "SENSOR_UPSIDE", "SENSOR_PROXIMITY", "SEEK", "SWITCH"};
+
     String[] fragClasses = new String[]{"GreenButtonFragment", "YellowButtonFragment", "RedButtonFragment", "SwitchFragment", "BlueButtonFragment", "SeekBarFragment"};
     int[] fragLayouts = new int[]{R.id.fragment_container_1, R.id.fragment_container_2, R.id.fragment_container_3, R.id.fragment_container_4, R.id.fragment_container_8, R.id.fragment_container_5};
+
+    // The required actions' codes are stored in the Queue requiredAction.
     private Queue<String> requiredActions, trainActions;
     private Queue<String> trainMessages;
 
