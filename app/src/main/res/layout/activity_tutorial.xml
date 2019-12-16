@@ -45,49 +45,10 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/chemistry" />
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/textView4"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/anton"
-                        android:text="@string/agility_mode"
-                        android:textColor="@color/white"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/textView5"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/anton"
-                        android:text="Test your ability to respond quickly at tasks provided interacting with the components, one point per per correct action. The time increases at each next cycle."
-                        android:textColor="@color/white"
-                        android:textSize="12sp" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_marginRight="4dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
@@ -106,17 +67,41 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="@font/anton"
-                        android:text="Test you memory skills, you receive instructions, repeat them and then do it on tour own, points per each sequence, at each cycle you receive new actions and these are increased by one."
+                        android:text="Test you memory skills, you receive a series of instructions to perform,
+                                        and then you have to repeat the whole sequence on your own, starting to one
+                                        and incremented at each cycle.
+                                        X points per correct sequence."
                         android:textColor="@color/white"
                         android:textSize="12sp" />
                 </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/imageView3"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/chemistry" />
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/anton"
+                        android:text="@string/agility_mode"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textView5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/anton"
+                        android:text="Test your responsiveness by quickly executing single tasks with time constraint, the time available decreases at each new instruction.
+                        X points per right execution. "
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -127,127 +112,234 @@
                 android:layout_marginTop="32dp"
                 android:background="#fcbf4a"
                 android:fontFamily="@font/anton"
-                android:text=" 2. Components"
+                android:text=" 2. Interface and components"
                 android:textSize="18sp" />
 
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/anton"
+                android:text="The game interface"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:background="#242323"
+                app:srcCompat="@drawable/tutorial_screen" />
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/chemistry" />
-
-                <LinearLayout
+                <TextView
+                    android:id="@+id/textView8"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:fontFamily="@font/anton"
+                    android:text="TASK BAR"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/textView8"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/anton"
-                        android:text="TASK BAR"
-                        android:textColor="@color/white"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/textView9"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/anton"
-                        android:text="The Task bar displays the commands to execute, these commands could be to interact with one of the element of the interface or involving physical operations on your device."
-                        android:textColor="@color/white"
-                        android:textSize="12sp" />
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:fontFamily="@font/anton"
+                    android:text="The Task bar displays the instruction to execute, these ask you to interact with one of the elements in the interface or a physical operation on your device (described in the next section)."
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/textView10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:fontFamily="@font/anton"
+                    android:text="TIME BAR"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/textView10"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/anton"
-                        android:text="TIME BAR"
-                        android:textColor="@color/white"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/textView11"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/anton"
-                        android:text="In AGILITY MODE the bar show the time remaining to execute the task, instead in MEMORY MODE the bar indicate the number of operations remaining. "
-                        android:textColor="@color/white"
-                        android:textSize="12sp" />
-                </LinearLayout>
-
-                <ImageView
-                    android:id="@+id/imageView12"
+                <TextView
+                    android:id="@+id/textView11"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/chemistry" />
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:fontFamily="@font/anton"
+                    android:text="In AGILITY MODE the bar displays the time remaining for executing the task, instead in MEMORY MODE it indicates the number of operations remaining."
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/chemistry" />
-
-                <LinearLayout
+                <TextView
+                    android:id="@+id/textView12"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:fontFamily="@font/anton"
+                    android:text="POINTS"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/textView13"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/anton"
-                        android:text="BUTTONS"
-                        android:textColor="@color/white"
-                        android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:fontFamily="@font/anton"
+                    android:text="Shows the collected points."
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
 
-                    <TextView
-                        android:id="@+id/textView14"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/anton"
-                        android:text="The Task bar displays the commands to execute, these commands could be to interact with one of the element of the interface or involving physical operations on your device."
-                        android:textColor="@color/white"
-                        android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView16"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/anton"
+                    android:text="COMPONENTS"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <Button
+                        android:id="@+id/greenButton"
+                        android:layout_width="@dimen/fragment_dimension"
+                        android:layout_height="@dimen/fragment_dimension"
+                        android:background="@android:color/holo_green_dark" />
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="26dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_weight="0.5"
+                    android:fontFamily="@font/anton"
+                    android:text="Press BUTTON defined by color."
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <Switch
+                        android:id="@+id/mSwitch"
+                        android:layout_width="@dimen/fragment_dimension"
+                        android:layout_height="@dimen/fragment_dimension"
+                        android:scaleX="1"
+                        android:scaleY="1"
+                        android:switchMinWidth="60dp" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textView18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="26dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_weight="0.5"
+                    android:fontFamily="@font/anton"
+                    android:text="SWITCH button, click to toggle."
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <SeekBar
+                        android:id="@+id/seekBar"
+                        style="@style/Widget.AppCompat.SeekBar.Discrete"
+                        android:layout_width="@dimen/fragment_dimension"
+                        android:layout_height="@dimen/fragment_dimension"
+                        android:layout_gravity="center_vertical"
+                        android:max="3" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textView19"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="26dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_weight="0.5"
+                    android:fontFamily="@font/anton"
+                    android:text="SEEK bar, click or slide into number position,
+                    from 0 to 10."
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
@@ -257,8 +349,24 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:background="#fcbf4a"
-                android:text=" 3. Scores"
+                android:text=" 3. Physical actions "
                 android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/anton"
+                android:text="This a dynamic game, as previously said it require you to perform also physical actions on your phone. You can be asked to: turn your phone upside down, shake your phone or to tap in front of your phone. The last involves the proximity sensor located on the top of your phone, since every device is different the image below shows how to successfully achieve this action."
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                app:srcCompat="@drawable/proximity" />
 
             <TextView
                 android:id="@+id/tutorial_sub4"
@@ -266,8 +374,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:background="#fcbf4a"
-                android:text=" 4. Leaderboard"
+                android:text=" 4. Scoreboard"
                 android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/anton"
+                android:text="If you click SCOREBOARD from the main menu you can check the your results and these of your friend. "
+                android:textColor="@color/white"
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/tutorial_sub5"
@@ -277,6 +395,15 @@
                 android:background="#fcbf4a"
                 android:text=" 5. Personal Scores"
                 android:textSize="18sp" />
+            <TextView
+                android:id="@+id/textView25"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/anton"
+                android:text="After checking the top scores on the SCOREBOARD you can also dive deeper and see your detailed performance by clicking DETAILS and enter your username."
+                android:textColor="@color/white"
+                android:textSize="12sp" />
 
         </LinearLayout>
     </ScrollView>

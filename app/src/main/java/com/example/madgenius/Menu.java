@@ -83,4 +83,9 @@ public class Menu extends AppCompatActivity {
         Intent intent = new Intent(Menu.this, Scoreboard.class);
         startActivity(intent);
     }
+
+    public void tutorial_onClick(View view) {
+        Intent intent = new Intent(Menu.this, Tutorial.class);
+        startActivity(intent);
+    }
 }
