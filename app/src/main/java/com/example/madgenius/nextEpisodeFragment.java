@@ -36,6 +36,10 @@ public class nextEpisodeFragment extends DialogFragment {
         return  builder.create();
     }
 
+    /**
+    * Sets number of actions in order to display it correctly on the dialog.
+    */
+
     public void setNumActions(int numActions){
         this.numActions = numActions;
     }

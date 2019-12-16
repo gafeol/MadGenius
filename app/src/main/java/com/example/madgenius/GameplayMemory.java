@@ -29,31 +29,31 @@ import java.util.Random;
 /**
  * Class that implements the main logic behind the Memory game mode.
  * Implements the listeners for all fragments used in the game.
- *
+ * <p>
  * Controls the actions required to be done using queue of Strings (requiredActions), containing the
- *  codes of the actions that must be performed.
- *
+ * codes of the actions that must be performed.
+ * <p>
  * Each step of this game has a fixed number of actions (numActions).
  * In the beginning of each step the method getNewCommands is invoked.
- *
+ * <p>
  * Every step of the game has two phases, starting with a repetition of the actions the user must
- *  perform, followed by the testing phase, where the user must execute the learned actions.
+ * perform, followed by the testing phase, where the user must execute the learned actions.
  * The phase of the game is kept by "isUserRepeating". If true, the game is in the repetition phase,
- *  otherwise, the game is in the testing phase.
+ * otherwise, the game is in the testing phase.
  */
-public class GameplayMemory extends AppCompatActivity implements  RedButtonFragment.OnFragmentInteractionListener,
-                                                                    SwitchFragment.OnFragmentInteractionListener,
-                                                                    BlueButtonFragment.OnFragmentInteractionListener,
-                                                                    SeekBarFragment.OnFragmentInteractionListener,
-                                                                    YellowButtonFragment.OnFragmentInteractionListener,
-                                                                    GreenButtonFragment.OnFragmentInteractionListener {
+public class GameplayMemory extends AppCompatActivity implements RedButtonFragment.OnFragmentInteractionListener,
+        SwitchFragment.OnFragmentInteractionListener,
+        BlueButtonFragment.OnFragmentInteractionListener,
+        SeekBarFragment.OnFragmentInteractionListener,
+        YellowButtonFragment.OnFragmentInteractionListener,
+        GreenButtonFragment.OnFragmentInteractionListener {
     private TextView pointTextView;
     private ProgressBar steps;
 
     // The game starts with the memorization of a single action.
     private int numActions = 1;
 
-    private final String FRAG_DISPLAY_TAG = "fragments_displayed", NUM_ACTIONS_TAG= "num_actions";
+    private final String FRAG_DISPLAY_TAG = "fragments_displayed", NUM_ACTIONS_TAG = "num_actions";
     private boolean fragmentsDisplayed;
 
     //Variable that determines if user is learning the commands or playing.
@@ -80,17 +80,17 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
         trainActions = new ArrayDeque<String>();
         trainMessages = new ArrayDeque<String>();
 
-        if(savedInstanceState != null){
+        if (savedInstanceState != null) {
             fragmentsDisplayed = savedInstanceState.getBoolean(FRAG_DISPLAY_TAG);
             numActions = savedInstanceState.getInt(NUM_ACTIONS_TAG);
         }
-        if(!fragmentsDisplayed) {
+        if (!fragmentsDisplayed) {
             numActions = 1;
             setPoints(0);
-            shuffle(fragLayouts, fragLayouts.length-1);
-            int[] longFragLayouts = new int[] {R.id.fragment_container_5, R.id.fragment_container_6, R.id.fragment_container_7};
+            shuffle(fragLayouts, fragLayouts.length - 1);
+            int[] longFragLayouts = new int[]{R.id.fragment_container_5, R.id.fragment_container_6, R.id.fragment_container_7};
             Random rand = new Random();
-            fragLayouts[fragLayouts.length-1] = longFragLayouts[rand.nextInt(longFragLayouts.length)];
+            fragLayouts[fragLayouts.length - 1] = longFragLayouts[rand.nextInt(longFragLayouts.length)];
             displayFragments();
         }
         setProximity();
@@ -104,24 +104,25 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
 
     /**
      * Sets the points message during the game
-      */
+     */
     private void setPoints(int p) {
-        if(p == 1)
-            pointTextView.setText("Point: "+p);
+        if (p == 1)
+            pointTextView.setText("Point: " + p);
         else
-            pointTextView.setText("Points: "+p);
+            pointTextView.setText("Points: " + p);
     }
 
 
     /**
      * Shuffles a given array "values" from the position 0 until the position "maxPosition"
+     *
      * @param values
      * @param maxPosition
      */
-    private void shuffle(int[] values, int maxPosition){
+    private void shuffle(int[] values, int maxPosition) {
         Random rnd = new Random();
-        for(int i=0;i<maxPosition;i++){
-            int index = rnd.nextInt(i+1);
+        for (int i = 0; i < maxPosition; i++) {
+            int index = rnd.nextInt(i + 1);
             int aux = values[i];
             values[i] = values[index];
             values[index] = aux;
@@ -129,7 +130,7 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
     }
 
 
-    private void displayFragments(){
+    private void displayFragments() {
         try {
             display(fragClasses, fragLayouts);
             fragmentsDisplayed = true;
@@ -145,6 +146,7 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
     /**
      * Function that displays a given array of classes "className", on given FrameLayouts "frameLayouts".
      * Dinamically inserts each classe on its corresponding frame layout.
+     *
      * @param className
      * @param frameLayouts
      * @throws ClassNotFoundException
@@ -154,11 +156,11 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
     public void display(String[] className, int[] frameLayouts) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        for(int i=0;i<className.length;i++){
-            String fullClassName = "com.example.madgenius."+className[i];
+        for (int i = 0; i < className.length; i++) {
+            String fullClassName = "com.example.madgenius." + className[i];
             Class fragClass = Class.forName(fullClassName);
             Object fragment = fragClass.newInstance();
-            fragmentTransaction.replace(frameLayouts[i], (Fragment)fragment);
+            fragmentTransaction.replace(frameLayouts[i], (Fragment) fragment);
         }
         fragmentTransaction.commit();
     }
@@ -172,6 +174,12 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
         steps.setMax(numActions);
     }
 
+
+    /**
+     * Resets the progress bar. Switches the app to "listener" mode,
+     * in the sense that the application is waiting for the user to
+     * repeat the commands that are being taught.
+     */
     private void teachCommands() {
         isUserRepeating = true;
         steps.setProgress(0);
@@ -179,6 +187,11 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
         stepLearn();
     }
 
+    /**
+     * Updates the progressbar as the user repates the commands that
+     * are being taught and also updates the UI to display the next
+     * command that was popped from the commands stack.
+     */
     private void stepLearn() {
         steps.setProgress(numActions - trainActions.size());
         TextView commandDisplay = findViewById(R.id.txtCommands);
@@ -186,6 +199,10 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
 
     }
 
+    /**
+     * Resets the UI to initial mode. Also, sets up the private
+     * flags to their right values.
+     * */
     private void startGame() {
         resetUI();
         TextView commandDisplay = findViewById(R.id.txtCommands);
@@ -195,19 +212,28 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
         steps.setProgress(0);
     }
 
+    /**
+     * Updates the progress bar.
+     */
     private void stepGame() {
         steps.setProgress(numActions - requiredActions.size());
     }
 
+    /**
+     * Generates a stack of random commands and calls a function
+     * to set the app to "teacher mode", in the sense that the app
+     * is asking for the user to repeat the commands without the
+     * need to memorize.
+     */
     private void getNewCommands() {
         Random rand = new Random();
         requiredActions.clear();
         trainMessages.clear();
-        for(int i=0;i<numActions;i++){
+        for (int i = 0; i < numActions; i++) {
             int randNum = rand.nextInt(this.commands.length);
             String requiredAction = codes[randNum];
             String actionMessage = commands[randNum];
-            if(requiredAction == "SEEK"){ // Generating random number to set the seekbar.
+            if (requiredAction == "SEEK") { // Generating random number to set the seekbar.
                 SeekBarFragment sbFrag = new SeekBarFragment();
                 int previousValue = sbFrag.seekBarValue;
                 final int SEEKBAR_MAX = 10;
@@ -224,19 +250,26 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
         teachCommands();
     }
 
-    private void finishGame(){
+    /**
+     * Clears the commands stack and calls a function to display the score
+     */
+
+    private void finishGame() {
         requiredActions.clear();
         scoreMessage();
     }
 
-    private void scoreMessage(){
+    /**
+     * Shows a dialog with the score and prompts the user to save the performance
+     */
+    private void scoreMessage() {
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(GameplayMemory.this);
         View messageView = getLayoutInflater().inflate(R.layout.dialog_save_score, null);
         EditText usernameEditText = messageView.findViewById(R.id.usernameEditText);
         usernameEditText.setText(SavedInfo.getUsername(getApplicationContext()));
         TextView pointsMessage = messageView.findViewById(R.id.scoreTextView);
         CheckBox saveUsernameCheckBox = messageView.findViewById(R.id.saveUsernameCheckBox);
-        int points = numActions-1;
+        int points = numActions - 1;
         pointsMessage.setText("You memorized up to " + points + " instructions!");
 
         Button saveButton = messageView.findViewById(R.id.saveButton);
@@ -250,13 +283,12 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
 
         saveButton.setOnClickListener(view -> {
             String username = usernameEditText.getText().toString();
-            if(username.isEmpty()){
+            if (username.isEmpty()) {
                 usernameEditText.setError("Please fill your username");
-            }
-            else {
+            } else {
                 ScoreViewModel scoreViewModel = ViewModelProviders.of(this).get(ScoreViewModel.class);
                 scoreViewModel.insert(new Score(username, points, true));
-                if(saveUsernameCheckBox.isChecked())
+                if (saveUsernameCheckBox.isChecked())
                     SavedInfo.saveUsername(getApplicationContext(), username);
                 dialog.dismiss();
                 finish();
@@ -271,16 +303,22 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
         dialog.show();
     }
 
-    private void executeAction(String code){
-        if(isUserRepeating){
-            if(trainActions.isEmpty())
+
+    /**
+     * Receives the code of the action performed and check if it was correct.
+     * If not, it will vibrate the device.
+     *  @param code
+     */
+    private void executeAction(String code) {
+        if (isUserRepeating) {
+            if (trainActions.isEmpty())
                 return;
             if (code.equals(trainActions.peek())) {
                 trainActions.remove();
                 trainMessages.remove();
-                if(code.contains("SENSOR"))
+                if (code.contains("SENSOR"))
                     playSound(R.raw.correct);
-                if(trainActions.isEmpty())
+                if (trainActions.isEmpty())
                     startGame();
                 else
                     stepLearn();
@@ -292,14 +330,13 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
                     v.vibrate(200);
                 }
             }
-        }
-        else {
+        } else {
             //Log.d("ACTION", "required " + requiredActions.peek() + " action executed " + code);
-            if(requiredActions.isEmpty())
+            if (requiredActions.isEmpty())
                 return;
             if (code.equals(requiredActions.peek())) {
                 requiredActions.remove();
-                if(code.contains("SENSOR"))
+                if (code.contains("SENSOR"))
                     playSound(R.raw.correct);
                 if (requiredActions.isEmpty()) {
                     setPoints(numActions);
@@ -309,8 +346,7 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
                     dialog.show(getSupportFragmentManager(), "test");
                     resetUI();
                     getNewCommands();
-                }
-                else
+                } else
                     stepGame();
             } else {
                 Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
@@ -328,7 +364,7 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
         SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         ProximitySensor proximitySensor = new ProximitySensor(sensorManager);
         proximitySensor.setVariableChangeListener(isClose -> {
-            if(isClose)
+            if (isClose)
                 executeAction("SENSOR_PROXIMITY");
         });
     }
@@ -337,7 +373,7 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
         SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         UpsideDownSensor upsideDownSensor = new UpsideDownSensor(sensorManager);
         upsideDownSensor.setVariableChangeListener(isUpsideDown -> {
-            if(isUpsideDown)
+            if (isUpsideDown)
                 executeAction("SENSOR_UPSIDE");
         });
     }
@@ -346,13 +382,13 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
         SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         ShakeSensor shake = new ShakeSensor(sensorManager);
         shake.setVariableChangeListener(isShaking -> {
-            if(isShaking)
+            if (isShaking)
                 executeAction("SENSOR_SHAKE");
         });
     }
 
 
-    public void playSound(int soundID){
+    public void playSound(int soundID) {
         MediaPlayer.create(this, soundID).start();
     }
 
@@ -361,11 +397,13 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
         playSound(R.raw.click);
         executeAction("SWITCH");
     }
+
     @Override
     public void onBlueButtonClick() {
         playSound(R.raw.click);
         executeAction("BLUE");
     }
+
     @Override
     public void onRedButtonClick() {
         playSound(R.raw.click);
@@ -387,7 +425,7 @@ public class GameplayMemory extends AppCompatActivity implements  RedButtonFragm
     @Override
     public void onSeekBarUpdate(int val) {
         playSound(R.raw.click);
-        executeAction("SEEK"+val);
+        executeAction("SEEK" + val);
     }
 
 }
