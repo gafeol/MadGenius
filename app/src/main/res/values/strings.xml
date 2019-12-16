@@ -33,4 +33,25 @@
     <string name="login_title">Login</string>
     <string name="login_message">Create an username to save your game results</string>
     <string name="golden_trophy">Golden trophy</string>
+    <string name="tutorial_scoreboard_title">4. Scoreboard</string>
+    <string name="tutorial_physical_action_title">3. Physical actions</string>
+    <string name="tutorial_seek_bar">SEEK bar, click or slide to the desired number position, its values go from 0 to 10.</string>
+    <string name="tutorial_switch_button">SWITCH button, click it to change its value.</string>
+    <string name="tutorial_button">An action may ask you to press a BUTTON of a specific color (Green, Yellow, Blue or Red).</string>
+    <string name="tutorial_components_title">COMPONENTS</string>
+    <string name="tutorial_points">Shows the collected points.</string>
+    <string name="tutorial_points_title">POINTS</string>
+    <string name="tutorial_time_bar">In the AGILITY MODE the time bar displays the time remaining for executing a task. In in MEMORY MODE it indicates the remaining amount of operations to be executed.</string>
+    <string name="tutorial_time_bar_title">TIME BAR</string>
+    <string name="tutorial_task_bar">The task bar displays the instruction to be executed, it may ask you to interact with one of the elements in the interface or to perform a physical action with your device.</string>
+    <string name="tutorial_task_bar_title">TASK BAR</string>
+    <string name="tutorial_interface_title">2. Interface and components</string>
+    <string name="tutorial_agility_mode">Test your reflexes by quickly executing tasks with a time constraint. Each correct action performed gives you one point, but also increases the speed of the game. How many actions can you perform before making a mistake or running out of time?</string>
+    <string name="tutorial_memory">Test you memory skills with this game mode! You will receive a series of instructions to memorize and repeat. As you progress, the series of instruction get longer, how many actions can you remember at the same time?</string>
+    <string name="tutorial_title">MadGenius Tutorial</string>
+    <string name="tutorial_game_modes_title">1. Game Modes</string>
+    <string name="tutorial_physical_action">This a dynamic game, as previously said it may require you to perform physical actions with your phone. While playing you may be requested to: turn your phone upside down, shake your phone or to tap the front of your phone. The last action, \'tap the front of your phone\' involves the proximity sensor located on the top of your phone, the image below shows how to successfully perform this action.</string>
+    <string name="tutorial_scoreboard">From the main menu you can click on SCOREBOARD to check rankings for both memory and agility game modes.</string>
+    <string name="tutorial_personal_scores_title">5. Personal Scores</string>
+    <string name="tutorial_personal_scores">After checking the top scores on the SCOREBOARD you can also dive deeper in the game statistics and see your own detailed performance on a graph by clicking DETAILS and entering your username.</string>
 </resources>

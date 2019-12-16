@@ -23,10 +23,10 @@
                 android:id="@+id/title_tutorial"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="18dp"
                 android:fontFamily="@font/anton"
                 android:gravity="center"
-                android:text="MadGenius Tutorial"
+                android:text="@string/tutorial_title"
                 android:textColor="#fcbf4a"
                 android:textSize="42sp" />
 
@@ -37,7 +37,8 @@
                 android:layout_marginTop="32dp"
                 android:background="#fcbf4a"
                 android:fontFamily="@font/anton"
-                android:text=" 1. Game Modes"
+                android:paddingStart="8dp"
+                android:text="@string/tutorial_game_modes_title"
                 android:textSize="18sp" />
 
             <LinearLayout
@@ -45,7 +46,7 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <LinearLayout
+                    <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="4dp"
@@ -58,7 +59,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/anton"
                         android:text="@string/memory_mode"
-                        android:textColor="@color/white"
+                        android:textColor="@color/colorAccent"
                         android:textStyle="bold" />
 
                     <TextView
@@ -67,10 +68,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="@font/anton"
-                        android:text="Test you memory skills, you receive a series of instructions to perform,
-                                        and then you have to repeat the whole sequence on your own, starting to one
-                                        and incremented at each cycle.
-                                        X points per correct sequence."
+                        android:text="@string/tutorial_memory"
                         android:textColor="@color/white"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -88,7 +86,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/anton"
                         android:text="@string/agility_mode"
-                        android:textColor="@color/white"
+                        android:textColor="@color/colorAccent"
                         android:textStyle="bold" />
 
                     <TextView
@@ -97,8 +95,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="@font/anton"
-                        android:text="Test your responsiveness by quickly executing single tasks with time constraint, the time available decreases at each new instruction.
-                        X points per right execution. "
+                        android:text="@string/tutorial_agility_mode"
                         android:textColor="@color/white"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -112,17 +109,9 @@
                 android:layout_marginTop="32dp"
                 android:background="#fcbf4a"
                 android:fontFamily="@font/anton"
-                android:text=" 2. Interface and components"
+                android:paddingStart="8dp"
+                android:text="@string/tutorial_interface_title"
                 android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/anton"
-                android:text="The game interface"
-                android:textColor="@color/white"
-                android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/imageView2"
@@ -143,8 +132,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/anton"
-                    android:text="TASK BAR"
-                    android:textColor="@color/white"
+                    android:text="@string/tutorial_task_bar_title"
+                    android:gravity="right"
+                    android:layout_marginRight="8dp"
+                    android:textColor="@color/colorAccent"
                     android:textStyle="bold" />
 
                 <TextView
@@ -153,7 +144,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
                     android:fontFamily="@font/anton"
-                    android:text="The Task bar displays the instruction to execute, these ask you to interact with one of the elements in the interface or a physical operation on your device (described in the next section)."
+                    android:text="@string/tutorial_task_bar"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
 
@@ -172,8 +163,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/anton"
-                    android:text="TIME BAR"
-                    android:textColor="@color/white"
+                    android:text="@string/tutorial_time_bar_title"
+                    android:gravity="right"
+                    android:layout_marginRight="8dp"
+                    android:textColor="@color/colorAccent"
                     android:textStyle="bold" />
 
                 <TextView
@@ -182,7 +175,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
                     android:fontFamily="@font/anton"
-                    android:text="In AGILITY MODE the bar displays the time remaining for executing the task, instead in MEMORY MODE it indicates the number of operations remaining."
+                    android:text="@string/tutorial_time_bar"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
 
@@ -201,8 +194,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/anton"
-                    android:text="POINTS"
-                    android:textColor="@color/white"
+                    android:text="@string/tutorial_points_title"
+                    android:gravity="right"
+                    android:layout_marginRight="8dp"
+                    android:textColor="@color/colorAccent"
                     android:textStyle="bold" />
 
                 <TextView
@@ -211,7 +206,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
                     android:fontFamily="@font/anton"
-                    android:text="Shows the collected points."
+                    android:text="@string/tutorial_points"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
 
@@ -230,8 +225,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/anton"
-                    android:text="COMPONENTS"
-                    android:textColor="@color/white"
+                    android:text="@string/tutorial_components_title"
+                    android:textColor="@color/colorAccent"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -251,6 +246,7 @@
 
                     <Button
                         android:id="@+id/greenButton"
+                        android:foreground="?attr/selectableItemBackgroundBorderless"
                         android:layout_width="@dimen/fragment_dimension"
                         android:layout_height="@dimen/fragment_dimension"
                         android:background="@android:color/holo_green_dark" />
@@ -264,7 +260,7 @@
                     android:layout_marginTop="40dp"
                     android:layout_weight="0.5"
                     android:fontFamily="@font/anton"
-                    android:text="Press BUTTON defined by color."
+                    android:text="@string/tutorial_button"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
 
@@ -300,7 +296,7 @@
                     android:layout_marginTop="40dp"
                     android:layout_weight="0.5"
                     android:fontFamily="@font/anton"
-                    android:text="SWITCH button, click to toggle."
+                    android:text="@string/tutorial_switch_button"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
 
@@ -336,8 +332,7 @@
                     android:layout_marginTop="40dp"
                     android:layout_weight="0.5"
                     android:fontFamily="@font/anton"
-                    android:text="SEEK bar, click or slide into number position,
-                    from 0 to 10."
+                    android:text="@string/tutorial_seek_bar"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
 
@@ -349,7 +344,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:background="#fcbf4a"
-                android:text=" 3. Physical actions "
+                android:fontFamily="@font/anton"
+                android:paddingStart="8dp"
+                android:text="@string/tutorial_physical_action_title"
                 android:textSize="18sp" />
 
             <TextView
@@ -358,7 +355,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/anton"
-                android:text="This a dynamic game, as previously said it require you to perform also physical actions on your phone. You can be asked to: turn your phone upside down, shake your phone or to tap in front of your phone. The last involves the proximity sensor located on the top of your phone, since every device is different the image below shows how to successfully achieve this action."
+                android:text="@string/tutorial_physical_action"
                 android:textColor="@color/white"
                 android:textSize="12sp" />
 
@@ -374,7 +371,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:background="#fcbf4a"
-                android:text=" 4. Scoreboard"
+                android:fontFamily="@font/anton"
+                android:paddingStart="8dp"
+                android:text="@string/tutorial_scoreboard_title"
                 android:textSize="18sp" />
 
             <TextView
@@ -383,7 +382,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/anton"
-                android:text="If you click SCOREBOARD from the main menu you can check the your results and these of your friend. "
+                android:text="@string/tutorial_scoreboard"
                 android:textColor="@color/white"
                 android:textSize="12sp" />
 
@@ -393,7 +392,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:background="#fcbf4a"
-                android:text=" 5. Personal Scores"
+                android:paddingStart="8dp"
+                android:fontFamily="@font/anton"
+                android:text="@string/tutorial_personal_scores_title"
                 android:textSize="18sp" />
             <TextView
                 android:id="@+id/textView25"
@@ -401,10 +402,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/anton"
-                android:text="After checking the top scores on the SCOREBOARD you can also dive deeper and see your detailed performance by clicking DETAILS and enter your username."
+                android:text="@string/tutorial_personal_scores"
                 android:textColor="@color/white"
                 android:textSize="12sp" />
-
         </LinearLayout>
     </ScrollView>
 
