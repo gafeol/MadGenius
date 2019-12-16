@@ -112,6 +112,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/anton"
+        android:onClick="scoreboard_onClick"
         android:text="@string/check_the_scoreboard"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@color/colorAccent"
