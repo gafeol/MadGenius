@@ -2,10 +2,14 @@ package com.example.madgenius;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -25,29 +29,48 @@ import java.util.List;
 public class ScoreChart extends AppCompatActivity {
 
     private ScoreViewModel scoreViewModel;
+    private RadioButton agilityButton, memoryButton;
+    private String username;
+    private List<Integer> listScores;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score_chart);
         Intent intent = getIntent();
-        String username = intent.getStringExtra(Scoreboard.EXTRA_MESSAGE);
+        username = intent.getStringExtra(Scoreboard.EXTRA_MESSAGE);
         TextView title = findViewById(R.id.title_chartScoreboard);
 
         title.setText(username + "'s score Chart");
 
         scoreViewModel = ViewModelProviders.of(this).get(ScoreViewModel.class);
-        List<Integer> listScores = new ArrayList<>();
-        final ToggleButton toggle = findViewById(R.id.toggleButton2);
+        listScores = new ArrayList<>();
 
-        toggle.setOnCheckedChangeListener((buttonView, isChecked) ->  {
-                    scoreViewModel.getAllScores(username, isChecked).observe(ScoreChart.this, scores -> {
-                        listScores.clear();
-                        listScores.addAll(scores);
-                        plot(listScores);
-                    });
+        scoreViewModel.getAllScores(username, true).observe(ScoreChart.this, scores -> {
+            listScores.clear();
+            listScores.addAll(scores);
+            plot(listScores);
         });
+    }
 
+    public void agilityClick(View view){
+        agilityButton = findViewById(R.id.agility);
+        memoryButton = findViewById(R.id.memory);
+        agilityButton.setTextColor(getResources().getColor(R.color.colorPrimary));
+        memoryButton.setTextColor(getResources().getColor(R.color.colorAccent));
+
+        scoreViewModel.getAllScores(username, false).observe(ScoreChart.this, scores -> {
+            listScores.clear();
+            listScores.addAll(scores);
+            plot(listScores);
+        });
+    }
+
+    public void memoryClick(View view){
+        agilityButton = findViewById(R.id.agility);
+        memoryButton = findViewById(R.id.memory);
+        agilityButton.setTextColor(getResources().getColor(R.color.colorAccent));
+        memoryButton.setTextColor(getResources().getColor(R.color.colorPrimary));
         scoreViewModel.getAllScores(username, true).observe(ScoreChart.this, scores -> {
             listScores.clear();
             listScores.addAll(scores);
