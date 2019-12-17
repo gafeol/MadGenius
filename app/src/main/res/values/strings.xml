@@ -57,4 +57,6 @@
     <string name="check_the_scoreboard">Check the scoreboard</string>
     <string name="credits_label">CREDITS</string>
     <string name="credits_body">Developers: \n Gabriel Feranandes de Oliveira \n Ivan Fontana \n Pedro Henrique Barbosa de Almeida \n\n\n chemistry icon by surang, from flaticon.com \n trophy icon by freepik, from flaticon.com \n mind icon by Smashicons, from flaticon.com</string>
+    <string name="tutorial_button_desc">Tutorial button.</string>
+    <string name="menu_ranking_desc">Ranking button</string>
 </resources>

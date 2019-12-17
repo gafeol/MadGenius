@@ -38,7 +38,7 @@ public class ScoreChart extends AppCompatActivity {
 
         scoreViewModel = ViewModelProviders.of(this).get(ScoreViewModel.class);
         List<Integer> listScores = new ArrayList<>();
-        final ToggleButton toggle = (ToggleButton)findViewById(R.id.toggleButton2);
+        final ToggleButton toggle = findViewById(R.id.toggleButton2);
 
         toggle.setOnCheckedChangeListener((buttonView, isChecked) ->  {
                     scoreViewModel.getAllScores(username, isChecked).observe(ScoreChart.this, scores -> {
