@@ -29,7 +29,7 @@ public class Menu extends AppCompatActivity {
         String username = SavedInfo.getUsername(getApplicationContext());
         if(!username.isEmpty()) {
             helloTextView.setText("Hello " + username + "!");
-            loginTextView.setText("Not you?");
+            loginTextView.setText("Not you? Click here!");
         }
         else{
             loginTextView.setText("Click here to login");
