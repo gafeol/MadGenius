@@ -15,7 +15,7 @@
         android:fontFamily="@font/anton"
         android:text="@string/logo"
         android:textColor="#fcbf4a"
-        android:textSize="40sp"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -48,12 +48,10 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="100dp"
-        android:layout_marginStart="105dp"
-        android:layout_marginEnd="106dp"
         android:contentDescription="@string/menu_image_desc"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginTextView"
@@ -77,20 +75,22 @@
             style="@style/styled_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_margin="4dp"
             android:drawableStart="@drawable/ic_lightning"
             android:onClick="agility_onClick"
-            android:text="@string/agility_mode" />
+            android:text="@string/agility_mode"
+            android:textSize="12sp" />
 
         <Button
             android:id="@+id/btn_memory"
             style="@style/styled_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_margin="4dp"
             android:drawableStart="@drawable/ic_brain"
             android:onClick="memory_onClick"
-            android:text="@string/memory_mode" />
+            android:text="@string/memory_mode"
+            android:textSize="12sp" />
     </LinearLayout>
 
 
@@ -108,8 +108,8 @@
 
         <ImageButton
             android:id="@+id/imageButton"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_margin="8dp"
             android:background="@drawable/ripple"
             android:contentDescription="@string/menu_image_desc"
@@ -118,13 +118,13 @@
 
         <ImageButton
             android:id="@+id/scoreboardButton"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_margin="8dp"
             android:background="@drawable/ripple"
             android:contentDescription="@string/menu_ranking_desc"
             android:onClick="scoreboard_onClick"
-            android:padding="8dp"
+            android:padding="4dp"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/cup" />
     </LinearLayout>

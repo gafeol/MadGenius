@@ -38,12 +38,9 @@ public abstract class ScoreRoomDatabase extends RoomDatabase {
 
         private final ScoreDao mDao;
 
-        /*
-        String[] usernames = {"cobra","dolphin", "crocodile", "cobra", "cobra", "asdlaksj", "asd", "12lkj"};
-        double[] points = {3,0.12, 13, 4, 2, 4.1, 1, 1};
-        boolean[] gameTypes = {false,false, false, true, true, true, true, true};
-         */
-
+        String[] usernames = {"Gabriel", "Gabriel", "Gabriel", "Pedro", "Pedro", "Pedro", "Pedro", "Ivan", "Ivan", "Ivan"};
+        int[] points = {1, 5, 21, 25, 10, 4, 5, 10, 8, 8};
+        boolean[] gameTypes = {false, true, false, false, true, true, false, false, false, true};
 
         PopulateDbAsync(ScoreRoomDatabase db) {
             mDao = db.scoreDao();
@@ -54,14 +51,12 @@ public abstract class ScoreRoomDatabase extends RoomDatabase {
          */
         @Override
         protected Void doInBackground(final Void... params) {
-            /*
-            mDao.deleteAll();
             if(mDao.getAnyScore().length == 0){
                 for (int i = 0; i <= usernames.length - 1; i++) {
                     Score score = new Score(usernames[i], points[i], gameTypes[i]);
                     mDao.insert(score);
                 }
-            }*/
+            }
             return null;
         }
     }
