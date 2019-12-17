@@ -52,11 +52,12 @@ public class ScoreChart extends AppCompatActivity {
             listScores.clear();
             listScores.addAll(scores);
             plot(listScores);
-
         });
     }
 
     protected void plot(List<Integer> scoreList){
+        if(scoreList.isEmpty())
+            return;
         LineChart scoreChart = findViewById(R.id.chart);
         List<Entry> entries = new ArrayList<>();
         for(int i=0; i < scoreList.size(); i++){
