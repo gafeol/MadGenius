@@ -73,18 +73,17 @@
             tools:listitem="@layout/recyclerview_item" />
     </ScrollView>
 
-    <Button
-        android:id="@+id/scoreDetails"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:clickable="true"
         android:onClick="scoreChartRequest"
-        android:text="@string/button_details_text"
-        style="@style/styled_button"
-        app:layout_constraintTop_toBottomOf="@id/scrollView"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:srcCompat="@drawable/ic_graph" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
