@@ -28,6 +28,7 @@
 
         <activity
             android:name=".Scoreboard"
+            android:label="Scoreboard"
             android:parentActivityName=".Menu" />
         <activity android:name=".Menu"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">

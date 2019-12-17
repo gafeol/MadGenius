@@ -29,19 +29,6 @@
         app:layout_constraintTop_toBottomOf="@id/title_scoreboard"
         app:srcCompat="@drawable/trophy" />
 
-    <ToggleButton
-        android:id="@+id/toggleButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:checked="true"
-        android:textOff="@string/memory_text"
-        android:textOn="@string/agility_text"
-        style="@style/styled_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/trophyImageView" />
-
     <TextView
         android:id="@+id/bestof"
         android:layout_width="wrap_content"
@@ -52,7 +39,7 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toggleButton"
+        app:layout_constraintTop_toBottomOf="@+id/trophyImageView"
         app:layout_constraintBottom_toTopOf="@id/scrollView"
         android:text="@string/best_memory" />
 
@@ -72,6 +59,52 @@
             android:layout_height="wrap_content"
             tools:listitem="@layout/recyclerview_item" />
     </ScrollView>
+
+
+    <RadioGroup
+        android:checkedButton="@+id/memory"
+        android:id="@+id/toggle"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scrollView"
+        android:background="@drawable/outline"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
+            android:layout_marginLeft="1dp"
+            android:id="@+id/memory"
+            android:background="@drawable/toggle_widget_background"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:text="Memory"
+            android:onClick="memoryClick"
+            android:textColor="@color/colorPrimary" />
+
+        <RadioButton
+            android:layout_marginRight="1dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
+            android:id="@+id/agility"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/toggle_widget_background"
+            android:button="@null"
+            android:gravity="center"
+            android:text="Agility"
+            android:onClick="agilityClick"
+            android:textColor="@color/colorAccent" />
+    </RadioGroup>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"

@@ -10,45 +10,73 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.ToggleButton;
 
 
 public class Scoreboard extends AppCompatActivity {
 
     public static final String EXTRA_MESSAGE = "com.example.madgenius.username";
 
+    RadioButton agilityButton, memoryButton;
+
     @Override
     protected  void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        agilityButton = findViewById(R.id.agility);
+        memoryButton = findViewById(R.id.memory);
+
         setContentView(R.layout.activity_scoreboard);
-        final TextView text = findViewById(R.id.bestof);
-        final ToggleButton toggle = findViewById(R.id.toggleButton);
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
         final ScoreListAdapter adapter = new ScoreListAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         ScoreViewModel scoreViewModel = ViewModelProviders.of(this).get(ScoreViewModel.class);
-        toggle.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            scoreViewModel.getAllScoresOrdered(isChecked).observe(Scoreboard.this, scores -> {
-                adapter.setScores(scores);
-            });
-            if (isChecked) {
-                text.setText(R.string.best_memory);
-            } else {
-                text.setText(R.string.best_agility);
-            }
-        });
-
         scoreViewModel.getAllScoresOrdered(true).observe(Scoreboard.this, scores -> {
             adapter.setScores(scores);
         });
+    }
+
+    public void agilityClick(View view){
+        agilityButton = findViewById(R.id.agility);
+        memoryButton = findViewById(R.id.memory);
+        agilityButton.setTextColor(getResources().getColor(R.color.colorPrimary));
+        memoryButton.setTextColor(getResources().getColor(R.color.colorAccent));
+        final TextView text = findViewById(R.id.bestof);
+        RecyclerView recyclerView = findViewById(R.id.recyclerview);
+        final ScoreListAdapter adapter = new ScoreListAdapter(this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        ScoreViewModel scoreViewModel = ViewModelProviders.of(this).get(ScoreViewModel.class);
+        scoreViewModel.getAllScoresOrdered(false).observe(Scoreboard.this, scores -> {
+            adapter.setScores(scores);
+        });
+        text.setText(R.string.best_agility);
+    }
+
+    public void memoryClick(View view){
+        agilityButton = findViewById(R.id.agility);
+        memoryButton = findViewById(R.id.memory);
+        agilityButton.setTextColor(getResources().getColor(R.color.colorAccent));
+        memoryButton.setTextColor(getResources().getColor(R.color.colorPrimary));
+        final TextView text = findViewById(R.id.bestof);
+        RecyclerView recyclerView = findViewById(R.id.recyclerview);
+        final ScoreListAdapter adapter = new ScoreListAdapter(this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        ScoreViewModel scoreViewModel = ViewModelProviders.of(this).get(ScoreViewModel.class);
+        scoreViewModel.getAllScoresOrdered(true).observe(Scoreboard.this, scores -> {
+            adapter.setScores(scores);
+        });
+        text.setText(R.string.best_memory);
     }
 
     public void scoreChartRequest(View view) {
