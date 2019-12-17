@@ -50,8 +50,15 @@ Ivan Fontana <br/>
 Pedro Henrique Barbosa de Almeida <br/>
 
 ## CREDITS
+
+MadGenius is an open source game inspired in SpaceTeam.
+
+### Images
 chemistry icon by surang, from flaticon.com <br/>
 trophy icon by freepik, from flaticon.com <br/>
 mind icon by Smashicons, from flaticon.com <br/>
 
+### Sounds
+
+The sound effects used on the game were taken from https://opengameart.org
 

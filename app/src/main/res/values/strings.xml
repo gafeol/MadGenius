@@ -56,7 +56,7 @@
     <string name="tutorial_personal_scores">After checking the top scores on the SCOREBOARD you can also dive deeper in the game statistics and see your own detailed performance on a graph by clicking DETAILS and entering your username.</string>
     <string name="check_the_scoreboard">Check the scoreboard</string>
     <string name="credits_label">CREDITS</string>
-    <string name="credits_body">Developers: \n Gabriel Feranandes de Oliveira \n Ivan Fontana \n Pedro Henrique Barbosa de Almeida \n\n\n MadGenius is a game inspired in SpaceTeam. \n\n chemistry icon by surang, from flaticon.com \n trophy icon by freepik, from flaticon.com \n mind icon by Smashicons, from flaticon.com \n The sound effects used on the game were taken from https://opengameart.org</string>
+    <string name="credits_body">Developers: \n Gabriel Feranandes de Oliveira \n Ivan Fontana \n Pedro Henrique Barbosa de Almeida \n\n\n MadGenius is an open source game inspired in SpaceTeam. \n\n chemistry icon by surang, from flaticon.com \n trophy icon by freepik, from flaticon.com \n mind icon by Smashicons, from flaticon.com \n The sound effects used on the game were taken from https://opengameart.org</string>
     <string name="tutorial_button_desc">Tutorial button.</string>
     <string name="menu_ranking_desc">Ranking button</string>
 </resources>
