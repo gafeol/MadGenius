@@ -83,7 +83,8 @@
         android:onClick="scoreChartRequest"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:srcCompat="@drawable/ic_graph" />
+        app:srcCompat="@drawable/ic_graph"
+        android:focusable="true" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
